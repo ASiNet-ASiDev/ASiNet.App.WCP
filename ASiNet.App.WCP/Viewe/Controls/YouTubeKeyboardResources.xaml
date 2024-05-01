@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:ASiNet.App.WCP.Models"
+             x:Class="ASiNet.App.WCP.Viewe.Controls.YouTubeKeyboardResources">
+
+    <model:KeyboardKeyResult x:Key="Mute" Name="" ShiftName="" AltName="" AltShiftName=""
+                             KeyCode="M" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Captions" Name="" ShiftName="" AltName="" AltShiftName=""
+                             KeyCode="C" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="FullScreen" Name="" ShiftName="" AltName="" AltShiftName=""
+                             KeyCode="F" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="CinemaMode" Name="" ShiftName="" AltName="" AltShiftName=""
+                             KeyCode="T" Mode="Default"/>
+
+    <model:KeyboardKeyResult x:Key="Pause" Name="" ShiftName="" AltName="" AltShiftName=""
+                             KeyCode="Space" Mode="Default"/>
+
+    <model:KeyboardKeyResult x:Key="SkipBack10s" Name="" ShiftName="" AltName="" AltShiftName=""
+                             KeyCode="J" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="SkipForward10s" Name="" ShiftName="" AltName="" AltShiftName=""
+                             KeyCode="L" Mode="Default"/>
+
+    <model:KeyboardKeyResult x:Key="NextVideo" Name="" ShiftName="" AltName="" AltShiftName=""
+                             KeyCode="YouTubeNextVideo" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="PrevVideo" Name="" ShiftName="" AltName="" AltShiftName=""
+                             KeyCode="YouTubePrevVideo" Mode="Default"/>
+
+    <model:KeyboardKeyResult x:Key="SlowDown" Name="" ShiftName="" AltName="" AltShiftName=""
+                             KeyCode="YouTubeSlowDown" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="SpeedUp" Name="" ShiftName="" AltName="" AltShiftName=""
+                             KeyCode="YouTubeSpeedUp" Mode="Default"/>
+
+    <model:KeyboardKeyResult x:Key="NextEpisode" Name="" ShiftName="" AltName="" AltShiftName=""
+                             KeyCode="YouTubeNextEpisode" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="PrevEpisode" Name="" ShiftName="" AltName="" AltShiftName=""
+                             KeyCode="YouTubePrevEpisode" Mode="Default"/>
+</ResourceDictionary>

@@ -4,7 +4,14 @@ public enum KeyCode
 {
     None,
 
-    SwitchLanguage = 0xFFFFFF,
+    YouTubeNextEpisode = 0xFFFFFE,
+    YouTubePrevEpisode = 0xFFFFFD,
+
+    YouTubeNextVideo = 0xFFFFFA,
+    YouTubePrevVideo = 0xFFFFFB,
+
+    YouTubeSlowDown = 0xFFFFAF,
+    YouTubeSpeedUp = 0xFFFFBF,
 
     Alt = 0x12,
     Shift = 0x10,

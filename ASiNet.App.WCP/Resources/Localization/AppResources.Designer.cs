@@ -142,6 +142,33 @@ namespace ASiNet.App.WCP.Resources.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на DifolderyXXL.
+        /// </summary>
+        internal static string cmp_default_youtube_keyboard_author {
+            get {
+                return ResourceManager.GetString("cmp_default_youtube_keyboard_author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Youtube control keyboard.
+        /// </summary>
+        internal static string cmp_default_youtube_keyboard_description {
+            get {
+                return ResourceManager.GetString("cmp_default_youtube_keyboard_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на YouTube keyboard.
+        /// </summary>
+        internal static string cmp_default_youtube_keyboard_title {
+            get {
+                return ResourceManager.GetString("cmp_default_youtube_keyboard_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Address: {0}.
         /// </summary>
         internal static string cn_address_label {

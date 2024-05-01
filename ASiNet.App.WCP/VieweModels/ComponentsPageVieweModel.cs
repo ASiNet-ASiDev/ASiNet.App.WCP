@@ -11,6 +11,7 @@ public partial class ComponentsPageVieweModel : ObservableObject
         _client = ((ShellVieweModel)Shell.Current.BindingContext).WcpClient;
 
         KeyboardVM = new(_client);
+        YouTubeKeyboardVM = new(_client);
         MouseVM = new(_client);
 
         var enruKeyboard = new KeyboardItemVieweModel<RuEnKeyboard>(_keyboardVM)
@@ -20,6 +21,15 @@ public partial class ComponentsPageVieweModel : ObservableObject
             Author = Resources.Localization.AppResources.cmp_default_ruen_keyboard_author,
         };
         Components.Add(enruKeyboard);
+
+        var youTubeKeyboard = new KeyboardItemVieweModel<YouTubeKeyboard>(_youTubeKeyboardVM)
+        {
+            Title = Resources.Localization.AppResources.cmp_default_youtube_keyboard_title,
+            Description = Resources.Localization.AppResources.cmp_default_youtube_keyboard_description,
+            Author = Resources.Localization.AppResources.cmp_default_youtube_keyboard_author,
+        };
+        Components.Add(youTubeKeyboard);
+
         var joymouseKeyboard = new MouseItemVieweModel<MouseControl>(_mouseVM)
         {
             Title = Resources.Localization.AppResources.cmp_default_mouse_title,
@@ -33,6 +43,8 @@ public partial class ComponentsPageVieweModel : ObservableObject
 
     [ObservableProperty]
     private KeyboardVieweModel _keyboardVM;
+    [ObservableProperty]
+    private KeyboardVieweModel _youTubeKeyboardVM;
     [ObservableProperty]
     private MouseVieweModel _mouseVM;
 

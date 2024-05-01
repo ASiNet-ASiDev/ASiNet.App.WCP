@@ -141,6 +141,15 @@
   <data name="cmp_default_ruen_keyboard_title" xml:space="preserve">
     <value>Russian QWERTY keyboard</value>
   </data>
+  <data name="cmp_default_youtube_keyboard_author" xml:space="preserve">
+    <value>DifolderyXXL</value>
+  </data>
+  <data name="cmp_default_youtube_keyboard_description" xml:space="preserve">
+    <value>Youtube control keyboard</value>
+  </data>
+  <data name="cmp_default_youtube_keyboard_title" xml:space="preserve">
+    <value>YouTube keyboard</value>
+  </data>
   <data name="cm_title_label" xml:space="preserve">
     <value>Components</value>
   </data>

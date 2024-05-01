@@ -5,8 +5,7 @@
              x:Class="ASiNet.App.WCP.Viewe.Controls.KeysSrc">
     <model:KeyboardKeyResult x:Key="SwitchLanguage" ShiftName="&#xf11c;" Name="&#xf11c;" AltName="&#xf11c;" AltShiftName="&#xf11c;" KeyCode="None" Mode="Default"/>
     <model:KeyboardKeyResult x:Key="Reverse" ShiftName="" Name="" AltName="" AltShiftName="" KeyCode="None" Mode="Default"/>
-    
-    
+
     <model:KeyboardKeyResult x:Key="Num1" ShiftName="!" Name="1" AltName="1" AltShiftName="!" KeyCode="Num1" Mode="Default"/>
     <model:KeyboardKeyResult x:Key="Num2" ShiftName="@" Name="2" AltName="2" AltShiftName="&quot;" KeyCode="Num2" Mode="Default"/>
     <model:KeyboardKeyResult x:Key="Num3" ShiftName="#" Name="3" AltName="3" AltShiftName="№" KeyCode="Num3" Mode="Default"/>

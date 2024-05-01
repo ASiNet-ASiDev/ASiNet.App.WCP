@@ -162,6 +162,12 @@
 	  <MauiXaml Update="Viewe\Controls\Key.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Viewe\Controls\YouTubeKeyboard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Viewe\Controls\YouTubeKeyboardResources.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Viewe\MacrosBuilder.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

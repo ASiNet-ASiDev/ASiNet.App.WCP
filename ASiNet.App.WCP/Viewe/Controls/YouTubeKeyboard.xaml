@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ASiNet.App.WCP.Viewe.Controls"
+             xmlns:model="clr-namespace:ASiNet.App.WCP.Models"
+             xmlns:vm="clr-namespace:ASiNet.App.WCP.VieweModels"
+             x:Class="ASiNet.App.WCP.Viewe.Controls.YouTubeKeyboard"
+             x:DataType="{x:Type vm:YouTubeKeyboardViewModel}">
+    <ContentPage.Resources>
+        <ResourceDictionary Source="YouTubeKeyboardResources.xaml"/>
+    </ContentPage.Resources>
+    <Grid RowSpacing="10" ColumnSpacing="3" HorizontalOptions="Center" VerticalOptions="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource SlowDown}" FontFamily="A6_S"/>
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="3" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource SpeedUp}" FontFamily="A6_S"/>
+
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="5" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource PrevEpisode}" FontFamily="A6_S"/>
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="7" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource NextEpisode}" FontFamily="A6_S"/>
+
+        
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource PrevVideo}" FontFamily="A6_S"/>
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="2" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource SkipBack10s}" FontFamily="A6_S"/>
+        
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="4" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Pause}" FontFamily="A6_S"/>
+        
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="6" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource SkipForward10s}" FontFamily="A6_S"/>
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="8" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource NextVideo}" FontFamily="A6_S"/>
+
+
+        <controls:Key Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="1" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Mute}" FontFamily="A6_S"/>
+        <controls:Key Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="3" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Captions}" FontFamily="A6_S"/>
+
+        <controls:Key Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="5" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource FullScreen}" FontFamily="A6_S"/>
+        <controls:Key Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="7" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource CinemaMode}" FontFamily="A6_S"/>
+    </Grid>
+</ContentPage>
