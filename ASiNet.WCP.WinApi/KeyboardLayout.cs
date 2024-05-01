@@ -1,9 +1,10 @@
 ﻿using System.Text;
 using ASiNet.WCP.Common.Enums;
+using ASiNet.WCP.Common.Interfaces;
 using ASiNet.WCP.WinApi;
 
 namespace ASiNet.WCP.Core;
-public class KeyboardLayout
+public class KeyboardLayout : IVirtualKeyboardLayout
 {
     private const uint KLF_ACTIVATE = 0x00000001;
     private const int WM_INPUTLANGCHANGEREQUEST = 0x50;

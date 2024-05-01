@@ -44,7 +44,7 @@ public partial class ComponentsPageVieweModel : ObservableObject
     [ObservableProperty]
     private KeyboardVieweModel _keyboardVM;
     [ObservableProperty]
-    private KeyboardVieweModel _youTubeKeyboardVM;
+    private YouTubeKeyboardViewModel _youTubeKeyboardVM;
     [ObservableProperty]
     private MouseVieweModel _mouseVM;
 

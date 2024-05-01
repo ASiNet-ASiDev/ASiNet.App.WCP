@@ -18,27 +18,28 @@ public partial class YouTubeKeyboardViewModel : ObservableObject
     {
         _ = Task.Run(() =>
         {
+
             switch(keyResult.Code)
             {
                 case KeyCode.YouTubePrevEpisode:
-                    SendWithPresssed(KeyCode.LeftCtrl, KeyCode.ArrowLeft);
+                    SendWithPresssed(KeyCode.Ctrl, KeyCode.ArrowLeft);
                     break;
                 case KeyCode.YouTubeNextEpisode:
-                    SendWithPresssed(KeyCode.LeftCtrl, KeyCode.ArrowRight);
+                    SendWithPresssed(KeyCode.Ctrl, KeyCode.ArrowRight);
                     break;
 
                 case KeyCode.YouTubePrevVideo:
-                    SendWithPresssed(KeyCode.LeftShift, KeyCode.P);
+                    SendWithPresssed(KeyCode.Shift, KeyCode.P);
                     break;
                 case KeyCode.YouTubeNextVideo:
-                    SendWithPresssed(KeyCode.LeftShift, KeyCode.N);
+                    SendWithPresssed(KeyCode.Shift, KeyCode.N);
                     break;
 
                 case KeyCode.YouTubeSlowDown:
-                    SendWithPresssed(KeyCode.LeftShift, KeyCode.OemComma);
+                    SendWithPresssed(KeyCode.Shift, KeyCode.OemComma);
                     break;
                 case KeyCode.YouTubeSpeedUp:
-                    SendWithPresssed(KeyCode.LeftShift, KeyCode.Separator);
+                    SendWithPresssed(KeyCode.Shift, KeyCode.OemPeriod);
                     break;
 
                 default:

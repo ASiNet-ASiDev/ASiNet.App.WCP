@@ -18,7 +18,7 @@ public class WcpNetworkServer
     
     private TcpListener _listener;
 
-    private KeyboardLayout _keyboardLayout = new();
+    private IVirtualKeyboardLayout _keyboardLayout = new KeyboardLayout();
     private IVirtualKeyboard _virtualKeyboard = new WindowsKeyboard();
     private IVirtualMouse _virtualMouse = new WindowsMouse();
 

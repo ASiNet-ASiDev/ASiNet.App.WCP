@@ -1,7 +1,7 @@
 ﻿namespace ASiNet.App.WCP.VieweModels;
-public partial class KeyboardItemVieweModel<T>(KeyboardVieweModel keyboardVieweModel) : ComponentVieweModel where T : Page, new()
+public partial class KeyboardItemVieweModel<T>(object? keyboardVieweModel) : ComponentVieweModel where T : Page, new()
 {
-    private KeyboardVieweModel _keyboardVieweModel = keyboardVieweModel;
+    private object? _keyboardVieweModel = keyboardVieweModel;
 
     public override async Task Hide()
     {
