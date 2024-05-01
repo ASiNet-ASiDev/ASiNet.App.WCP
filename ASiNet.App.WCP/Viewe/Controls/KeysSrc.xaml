@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:ASiNet.App.WCP.Models"
+             x:Class="ASiNet.App.WCP.Viewe.Controls.KeysSrc">
+    <model:KeyboardKeyResult x:Key="SwitchLanguage" ShiftName="&#xf11c;" Name="&#xf11c;" AltName="&#xf11c;" AltShiftName="&#xf11c;" KeyCode="None" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Reverse" ShiftName="" Name="" AltName="" AltShiftName="" KeyCode="None" Mode="Default"/>
+    
+    
+    <model:KeyboardKeyResult x:Key="Num1" ShiftName="!" Name="1" AltName="1" AltShiftName="!" KeyCode="Num1" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Num2" ShiftName="@" Name="2" AltName="2" AltShiftName="&quot;" KeyCode="Num2" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Num3" ShiftName="#" Name="3" AltName="3" AltShiftName="№" KeyCode="Num3" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Num4" ShiftName="$" Name="4" AltName="4" AltShiftName=";" KeyCode="Num4" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Num5" ShiftName="%" Name="5" AltName="5" AltShiftName="%" KeyCode="Num5" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Num6" ShiftName="^" Name="6" AltName="6" KeyCode="Num6" AltShiftName=":" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Num7" ShiftName="&amp;" Name="7" AltName="7" KeyCode="Num7" AltShiftName="?" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Num8" ShiftName="*" Name="8" AltName="8" KeyCode="Num8" AltShiftName="*" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Num9" ShiftName="(" Name="9" AltName="9" KeyCode="Num9" AltShiftName="(" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Num0" ShiftName=")" Name="0" AltName="0" KeyCode="Num0" AltShiftName=")" Mode="Default"/>
+
+    <model:KeyboardKeyResult x:Key="Alt" Name="Alt" ShiftName="Alt" AltName="Alt" AltShiftName="Alt" KeyCode="Alt" Mode="Hold"/>
+    <model:KeyboardKeyResult x:Key="Shift" Name="Shift" ShiftName="Shift" AltName="Shift" AltShiftName="Shift" KeyCode="Shift" Mode="Hold"/>
+    <model:KeyboardKeyResult x:Key="Ctrl" Name="Ctrl" ShiftName="Ctrl" AltName="Ctrl" AltShiftName="Ctrl" KeyCode="Ctrl" Mode="Hold"/>
+
+    <model:KeyboardKeyResult x:Key="Win" Name="Win" ShiftName="Win" AltName="Win" AltShiftName="Win" KeyCode="LeftWin" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="CapsLock" Name="Caps Lock" ShiftName="Caps Lock" AltName="Caps Lock" AltShiftName="Caps Lock" KeyCode="CapsLock" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Tab" Name="Tab" ShiftName="Tab" AltName="Tab" AltShiftName="Tab" KeyCode="Tab" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Enter" Name="Enter" ShiftName="Enter" AltName="Enter" AltShiftName="Enter" KeyCode="Enter" Mode="Default"/>
+
+    <model:KeyboardKeyResult x:Key="Space" Name=" " ShiftName=" " AltName=" " AltShiftName=" " KeyCode="Space" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Del" Name="Del" ShiftName="Del" AltName="Del" AltShiftName="Del" KeyCode="Delete" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Backspace" Name="Back" ShiftName="Back" AltName="Back" AltShiftName="Back" KeyCode="Backspace" Mode="Default"/>
+
+
+    <model:KeyboardKeyResult x:Key="UpArrow" Name="Up" ShiftName="Up" AltName="Up" AltShiftName="Up" KeyCode="ArrowUp" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="DownArrow" Name="Down" ShiftName="Down" AltName="Down" AltShiftName="Down" KeyCode="ArrowDown" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="LeftArrow" Name="Left" ShiftName="Left" AltName="Left" AltShiftName="Left" KeyCode="ArrowLeft" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="RightArrow" Name="Right" ShiftName="Right" AltName="Right" AltShiftName="Right" KeyCode="ArrowRight" Mode="Default"/>
+    
+    
+    <model:KeyboardKeyResult x:Key="Q" Name="q" ShiftName="Q" AltName="й" AltShiftName="Й" KeyCode="Q" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="W" Name="w" ShiftName="W" AltName="ц" AltShiftName="Ц" KeyCode="W" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="E" Name="e" ShiftName="E" AltName="у" AltShiftName="У" KeyCode="E" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="R" Name="r" ShiftName="R" AltName="к" AltShiftName="К" KeyCode="R" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="T" Name="t" ShiftName="T" AltName="е" AltShiftName="Е" KeyCode="T" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Y" Name="y" ShiftName="Y" AltName="н" AltShiftName="Н" KeyCode="Y" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="U" Name="u" ShiftName="U" AltName="г" AltShiftName="Г" KeyCode="U" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="I" Name="i" ShiftName="I" AltName="ш" AltShiftName="Ш" KeyCode="I" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="O" Name="o" ShiftName="O" AltName="щ" AltShiftName="Щ" KeyCode="O" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="P" Name="p" ShiftName="P" AltName="з" AltShiftName="З" KeyCode="P" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="A" Name="a" ShiftName="A" AltName="ф" AltShiftName="Ф" KeyCode="A" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="S" Name="s" ShiftName="S" AltName="ы" AltShiftName="Ы" KeyCode="S" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="D" Name="d" ShiftName="D" AltName="в" AltShiftName="В" KeyCode="D" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="F" Name="f" ShiftName="F" AltName="а" AltShiftName="А" KeyCode="F" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="G" Name="g" ShiftName="G" AltName="п" AltShiftName="П" KeyCode="G" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="H" Name="h" ShiftName="H" AltName="р" AltShiftName="Р" KeyCode="H" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="J" Name="j" ShiftName="J" AltName="о" AltShiftName="О" KeyCode="J" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="K" Name="k" ShiftName="K" AltName="л" AltShiftName="Л" KeyCode="K" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="L" Name="l" ShiftName="L" AltName="д" AltShiftName="Д" KeyCode="L" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Z" Name="z" ShiftName="Z" AltName="я" AltShiftName="Я" KeyCode="Z" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="X" Name="x" ShiftName="X" AltName="ч" AltShiftName="Ч" KeyCode="X" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="C" Name="c" ShiftName="C" AltName="с" AltShiftName="С" KeyCode="C" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="V" Name="v" ShiftName="V" AltName="м" AltShiftName="М" KeyCode="V" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="B" Name="b" ShiftName="B" AltName="и" AltShiftName="И" KeyCode="B" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="N" Name="n" ShiftName="N" AltName="т" AltShiftName="Т" KeyCode="N" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="M" Name="m" ShiftName="M" AltName="ь" AltShiftName="Ь" KeyCode="M" Mode="Default"/>
+
+    <model:KeyboardKeyResult x:Key="Oem1" Name=";" ShiftName=":" AltName="ж" AltShiftName="Ж" KeyCode="Oem1" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Oem2" Name="/" ShiftName="?" AltName="." AltShiftName="," KeyCode="Oem2" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Oem3" Name="`" ShiftName="~" AltName="ё" AltShiftName="Ё" KeyCode="Oem3" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Oem4" Name="[" AltName="х" AltShiftName="Х" KeyCode="Oem4" Mode="Default">
+        <model:KeyboardKeyResult.ShiftName>{</model:KeyboardKeyResult.ShiftName>
+    </model:KeyboardKeyResult>
+    <model:KeyboardKeyResult x:Key="Oem5" Name="\" ShiftName="|" AltName="\" AltShiftName="/" KeyCode="Oem5" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Oem6" Name="]" ShiftName="}" AltName="Ъ" AltShiftName="Ъ" KeyCode="Oem6" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Oem7" Name="&apos;" ShiftName="&quot;" AltName="э" AltShiftName="Э" KeyCode="Oem7" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="Oem8" Name="Oem8" ShiftName="Oem8" AltName="Oem8" AltShiftName="Oem8" KeyCode="Oem8" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="OemPlus" Name="=" ShiftName="+" AltName="=" AltShiftName="+" KeyCode="OemPlus" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="OemComma" Name="," ShiftName="&lt;" AltName="б" AltShiftName="Б" KeyCode="OemComma" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="OemMinus" Name="-" ShiftName="_" AltName="-" AltShiftName="_" KeyCode="OemMinus" Mode="Default"/>
+    <model:KeyboardKeyResult x:Key="OemPeriod" Name="." ShiftName=">" AltName="ю" AltShiftName="Ю" KeyCode="OemPeriod" Mode="Default"/>
+</ResourceDictionary>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ASiNet.App.WCP.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ASiNet.App.WCP.Viewe"
+    xmlns:str="clr-namespace:ASiNet.App.WCP.Resources.Localization"
+    xmlns:vm="clr-namespace:ASiNet.App.WCP.VieweModels"
+    Shell.FlyoutBehavior="Disabled"
+    x:DataType="vm:ShellVieweModel">
+
+    <TabBar>
+        <Tab Title="{x:Static str:AppResources.shell_connection_title}"
+             Icon="connection.png">
+            <ShellContent ContentTemplate="{DataTemplate local:ConnectionPage}"/>
+        </Tab>
+        <Tab Title="{x:Static str:AppResources.shell_components_title}"
+             Icon="components.png">
+            <ShellContent ContentTemplate="{DataTemplate local:ComponentsPage}"/>
+        </Tab>
+        <Tab Title="{x:Static str:AppResources.shell_send_label}"
+             Icon="send.png">
+            <ShellContent ContentTemplate="{DataTemplate local:SendDataPage}"/>
+        </Tab>
+        <Tab Title="{x:Static str:AppResources.shell_accept_label}"
+             Icon="accept.png">
+            <ShellContent ContentTemplate="{DataTemplate local:AcceptDataPage}"/>
+        </Tab>
+        <Tab Title="{x:Static str:AppResources.shell_macros_title}"
+             Icon="macros.png">
+            <ShellContent ContentTemplate="{DataTemplate local:MacrosesPage}"/>
+        </Tab>
+        <Tab Title="{x:Static str:AppResources.shell_settings_title}"
+             Icon="settings.png">
+            <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}"/>
+        </Tab>
+    </TabBar>
+
+</Shell>

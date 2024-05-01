@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ASiNet.Data.Serialization" Version="0.4.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ASiNet.WCP.Common\ASiNet.WCP.Common.csproj" />
+    <ProjectReference Include="..\ASiNet.WCP.WinApi\ASiNet.WCP.WinApi.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:str="clr-namespace:ASiNet.App.WCP.Resources.Localization"
+             xmlns:local="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+             xmlns:vm="clr-namespace:ASiNet.App.WCP.VieweModels"
+             xmlns:tk="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ASiNet.App.WCP.Viewe.ConnectionPage"
+             x:DataType="vm:ConnectionPageVieweModel">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <tk:InvertedBoolConverter x:Key="InvertConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <vm:ConnectionPageVieweModel/>
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" MinimumWidthRequest="200" Spacing="5">
+        <HorizontalStackLayout Spacing="5">
+            <Path Fill="Red"
+                  WidthRequest="10" 
+                  HeightRequest="10" 
+                  IsVisible="{Binding IsConnected, Converter={StaticResource Key=InvertConverter}}">
+                <Path.Data>
+                    <EllipseGeometry RadiusX="5" RadiusY="5" Center="5, 5"/>
+                </Path.Data>
+            </Path>
+            <Path Fill="LightGreen" 
+                  WidthRequest="10"
+                  HeightRequest="10" 
+                  IsVisible="{Binding IsConnected}">
+                <Path.Data>
+                    <EllipseGeometry RadiusX="5" RadiusY="5" Center="5, 5"/>
+                </Path.Data>
+            </Path>
+            <Label Text="{x:Static str:AppResources.cn_connection_status_label}"/>
+        </HorizontalStackLayout>
+
+        <VerticalStackLayout Spacing="5" IsVisible="{Binding AutoConnect}">
+            <Label Text="{local:TranslateBinding AutoConnectAddress, TranslateFormat=cn_address_label}"/>
+            <Label Text="{local:TranslateBinding AutoConnectPort, TranslateFormat=cn_port_label}"/>
+            <ActivityIndicator IsRunning="{Binding AutoConnect}"/>
+            <Label Text="{x:Static str:AppResources.cn_connecting_label}"/>
+            <Label Text="{x:Static str:AppResources.cn_failed_label}" IsVisible="{Binding AutoConnectError}"/>
+        </VerticalStackLayout>
+
+        <HorizontalStackLayout Spacing="5" IsVisible="{Binding AutoConnect, Converter={StaticResource Key=InvertConverter}}">
+            <Button Text="{x:Static str:AppResources.cn_connect_button}" Command="{Binding ConnectCommand}" IsEnabled="{Binding IsConnected, Converter={StaticResource Key=InvertConverter}}"/>
+
+            <Button Text="{x:Static str:AppResources.cn_disconnect_button}" Command="{Binding DisconnectCommand}" IsEnabled="{Binding IsConnected}"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

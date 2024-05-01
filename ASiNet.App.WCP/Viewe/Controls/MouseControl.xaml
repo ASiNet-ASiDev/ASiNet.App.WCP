@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Border xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ASiNet.App.WCP.Viewe.Controls.MouseControl"
+        WidthRequest="400" HeightRequest="400" Background="{StaticResource WCPBacground}">
+    <Border.StrokeShape>
+        <RoundRectangle CornerRadius="50"/>
+    </Border.StrokeShape>
+    <Border.GestureRecognizers>
+        <PointerGestureRecognizer PointerMoved="PointerGestureRecognizer_PointerMoved" 
+                                  PointerPressed="PointerGestureRecognizer_PointerPressed"
+                                  PointerReleased="PointerGestureRecognizer_PointerReleased"
+                                  PointerExited="PointerGestureRecognizer_PointerExited"/>
+    </Border.GestureRecognizers>
+    <Path x:Name="PointerHandler" Fill="{StaticResource WCPDefaultTextColor}" 
+      WidthRequest="40"
+      HeightRequest="40">
+        <Path.Data>
+            <EllipseGeometry RadiusX="20" RadiusY="20" Center="20, 20"/>
+        </Path.Data>
+    </Path>
+</Border>

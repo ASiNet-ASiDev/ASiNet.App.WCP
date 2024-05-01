@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:str="clr-namespace:ASiNet.App.WCP.Resources.Localization"
+             xmlns:local="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+             xmlns:cnt="clr-namespace:ASiNet.App.WCP.Viewe.Controls"
+             xmlns:vm="clr-namespace:ASiNet.App.WCP.VieweModels"
+             xmlns:controls="clr-namespace:ASiNet.App.WCP.Viewe.Controls"
+             x:Class="ASiNet.App.WCP.Viewe.ComponentsPage"
+             x:DataType="vm:ComponentsPageVieweModel">
+
+    <ContentPage.BindingContext>
+        <vm:ComponentsPageVieweModel/>
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Margin="5">
+        <Label Text="{x:Static str:AppResources.cm_title_label}" FontSize="Title" HorizontalOptions="Center" Margin="5"/>
+        <CollectionView ItemsSource="{Binding Components}" SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="5" Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:ComponentVieweModel">
+                    <controls:ComponentItem/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+
+</ContentPage>

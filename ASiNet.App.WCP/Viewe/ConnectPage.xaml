@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:str="clr-namespace:ASiNet.App.WCP.Resources.Localization"
+             xmlns:local="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+             xmlns:vm="clr-namespace:ASiNet.App.WCP.VieweModels"
+             x:Class="ASiNet.App.WCP.Viewe.ConnectPage"
+             x:DataType="vm:ConnectPageVieweModel"
+             Title="ConnectPage">
+
+    <VerticalStackLayout Spacing="5" 
+                         VerticalOptions="Center" 
+                         HorizontalOptions="Center" 
+                         WidthRequest="200">
+        <Entry Placeholder="{x:Static str:AppResources.cnt_address_entry_ph}" 
+               MaxLength="15"
+               Text="{Binding Address}"
+               IsEnabled="{Binding Interact}"/>
+        <Label Text="{x:Static str:AppResources.cnt_incorrect_address_label}"
+               IsVisible="{Binding IncorrectAddress}"/>
+
+        <Entry Placeholder="{x:Static str:AppResources.cnt_port_entry_ph}" 
+               MaxLength="5"
+               Text="{Binding Port}"
+               IsEnabled="{Binding Interact}"/>
+        <Label Text="{x:Static str:AppResources.cnt_incorrect_port_label}"
+               IsVisible="{Binding IncorectPort}"/>
+
+        <Button Text="{x:Static str:AppResources.cnt_continue_button}"
+                IsEnabled="{Binding Interact}"
+                Command="{Binding ContinueCommand}"/>
+        <Label Text="{x:Static str:AppResources.cnt_connect_failed_label}" 
+               IsVisible="{Binding ConnectionFailed}"/>
+
+        <HorizontalStackLayout Spacing="5">
+            <CheckBox IsChecked="{Binding RememberData}"/>
+            <Label Text="{x:Static str:AppResources.cnt_remember_data_check_box}"
+                   VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Spacing="5" IsVisible="{Binding RememberData}">
+            <CheckBox IsChecked="{Binding AutoConnect}"/>
+            <Label Text="{x:Static str:AppResources.cnt_auto_connect_check_box}"
+                   VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+
+        <ActivityIndicator IsVisible="{Binding Working}" 
+                           IsRunning="{Binding Working}"/>
+    </VerticalStackLayout>
+
+</ContentPage>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ASiNet.App.WCP.Viewe.Controls"
+             xmlns:model="clr-namespace:ASiNet.App.WCP.Models"
+             xmlns:vm="clr-namespace:ASiNet.App.WCP.VieweModels"
+             x:Class="ASiNet.App.WCP.Viewe.Controls.RuEnKeyboard"
+             x:DataType="vm:KeyboardVieweModel">
+    <ContentPage.Resources>
+        <ResourceDictionary Source="KeysSrc.xaml"/>
+    </ContentPage.Resources>
+    <Grid RowSpacing="3" ColumnSpacing="3" HorizontalOptions="Center" VerticalOptions="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Oem3}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="2" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Num1}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="4" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Num2}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="6" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Num3}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="8" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Num4}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="10" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Num5}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="12" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Num6}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="14" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Num7}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="16" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Num8}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="18" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Num9}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="20" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Num0}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="22" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource OemMinus}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="24" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource OemPlus}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="26" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Oem5}" KeyVisualStatus="{Binding KcStatus}"/>
+
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Tab}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="3" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Q}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="5" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource W}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="7" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource E}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="9" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource R}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="11" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource T}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="13" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Y}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="15" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource U}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="17" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource I}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="19" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource O}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="21" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource P}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="23" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Oem4}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="25" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Oem6}" KeyVisualStatus="{Binding KcStatus}"/>
+
+        <controls:Key Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="0" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource CapsLock}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="4" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource A}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="6" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource S}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="8" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource D}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="10" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource F}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="12" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource G}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="14" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource H}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="16" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource J}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="18" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource K}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="20" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource L}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="22" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Oem1}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="24" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Oem7}" KeyVisualStatus="{Binding KcStatus}"/>
+
+        <controls:Key Grid.Row="3" Grid.ColumnSpan="5" Grid.Column="0" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Shift}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="5" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Z}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="7" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource X}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="9" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource C}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="11" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource V}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="13" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource B}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="15" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource N}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="17" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource M}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="19" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource OemComma}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="21" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource OemPeriod}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="23" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Oem2}" KeyVisualStatus="{Binding KcStatus}"/>
+
+        <controls:Key Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="0" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Ctrl}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="4" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Win}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="6" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Alt}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="8" Command="{Binding SwitchLanguageCommand}" KeyResult="{StaticResource SwitchLanguage}" KeyVisualStatus="{Binding KcStatus}" FontFamily="A6_R"/>
+        <controls:Key Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="10" Command="{Binding ReverseCommand}" KeyResult="{StaticResource Reverse}" KeyVisualStatus="{Binding KcStatus}" FontFamily="A6_S"/>
+        <controls:Key Grid.Row="4" Grid.ColumnSpan="8" Grid.Column="12" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Space}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="20" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Backspace}" KeyVisualStatus="{Binding KcStatus}"/>
+        <controls:Key Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="22" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Enter}" KeyVisualStatus="{Binding KcStatus}"/>
+    </Grid>
+</ContentPage>
