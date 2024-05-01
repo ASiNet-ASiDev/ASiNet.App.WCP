@@ -104,6 +104,12 @@
 	  <Compile Update="Viewe\Controls\ComponentItem.xaml.cs">
 	    <DependentUpon>ComponentItem.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Viewe\Controls\Joystick.xaml.cs">
+	    <DependentUpon>Joystick.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Viewe\Controls\MouseControl.xaml.cs">
+	    <DependentUpon>MouseControl.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Viewe\Controls\Key.xaml.cs">
 	    <DependentUpon>Key.xaml</DependentUpon>
 	  </Compile>
@@ -141,10 +147,10 @@
 	  <MauiXaml Update="Viewe\Controls\ComponentItem.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Viewe\Controls\Joystick.xaml">
+	  <MauiXaml Update="Viewe\Controls\MouseControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Viewe\Controls\MouseControl.xaml">
+	  <MauiXaml Update="Viewe\Controls\Joystick.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Viewe\Controls\RuEnKeyboard.xaml">

@@ -20,7 +20,7 @@ public partial class ComponentsPageVieweModel : ObservableObject
             Author = Resources.Localization.AppResources.cmp_default_ruen_keyboard_author,
         };
         Components.Add(enruKeyboard);
-        var joymouseKeyboard = new MouseItemVieweModel<Joystick>(_mouseVM)
+        var joymouseKeyboard = new MouseItemVieweModel<MouseControl>(_mouseVM)
         {
             Title = Resources.Localization.AppResources.cmp_default_mouse_title,
             Description = Resources.Localization.AppResources.cmp_default_mouse_description,
