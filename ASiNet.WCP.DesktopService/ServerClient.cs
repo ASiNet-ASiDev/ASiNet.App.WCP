@@ -22,6 +22,8 @@ public class ServerClient(TcpClient client, IVirtualKeyboard keyboard, IVirtualM
 
     private NetworkStream _stream = client.GetStream();
 
+    private TransportEndPointsManadger _transportEndPointsManadger = new();
+
     public bool Update()
     {
         try
@@ -39,6 +41,8 @@ public class ServerClient(TcpClient client, IVirtualKeyboard keyboard, IVirtualM
                 SetLanguageCode(slr);
             else if (package is GetLanguageRequest glr)
                 GetLanguageCode(glr);
+            else if (package is TransportDataRequest tdr)
+                _transportEndPointsManadger?.Chandge(tdr);
             else if (package is DisconnectionRequest dc)
                 DisconectedRequest(dc);
 
@@ -81,7 +85,10 @@ public class ServerClient(TcpClient client, IVirtualKeyboard keyboard, IVirtualM
 
     private void KeyChandgedEvent(KeyChandgeEvent keyEvent)
     {
-        _keyboard.SendKeyEvent(keyEvent);
+        if(keyEvent.IsDirect)
+            _keyboard.SendKeyEventDirect(keyEvent);
+        else
+            _keyboard.SendKeyEvent(keyEvent);
     }
 
     private void MouseChandgedEvent(MouseChangedEvent mouseEvent)

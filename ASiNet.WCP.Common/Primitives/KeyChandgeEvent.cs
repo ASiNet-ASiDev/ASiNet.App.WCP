@@ -7,4 +7,6 @@ public class KeyChandgeEvent : Package
     public KeyCode Code { get; set; }
 
     public KeyState State { get; set; }
+
+    public bool IsDirect { get; set; }
 }

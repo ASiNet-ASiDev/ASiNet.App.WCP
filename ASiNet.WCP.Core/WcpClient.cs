@@ -123,6 +123,18 @@ public class WcpClient : IDisposable
         }
     }
 
+    internal bool SendTransportPackage(in TransportDataRequest input)
+    {
+        try
+        {
+            return Send(input);
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
     public bool SendMouseMoveEvent(in MouseChangedEvent input)
     {
         try
