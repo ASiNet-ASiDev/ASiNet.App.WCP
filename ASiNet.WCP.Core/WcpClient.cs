@@ -1,6 +1,4 @@
 ﻿using System.Net.Sockets;
-using System.Security.Cryptography;
-using System.Text;
 using ASiNet.Data.Serialization;
 using ASiNet.WCP.Common.Enums;
 using ASiNet.WCP.Common.Network;
@@ -10,13 +8,16 @@ using ASiNet.WCP.Core.Primitives;
 namespace ASiNet.WCP.Core;
 public class WcpClient : IDisposable
 {
-
     public event Action<bool>? ConnectedStatusChandged;
 
     public bool Connected => _client?.Connected ?? false;
 
     private TcpClient? _client;
     private NetworkStream? _stream;
+
+    private TransportEndPointsManadger? _transportEndPointsManadger;
+
+    private List<Package> _buffer = [];
 
     private readonly object _lock = new();
 
@@ -32,6 +33,10 @@ public class WcpClient : IDisposable
                     _stream = _client.GetStream();
 
                     ConnectedStatusChandged?.Invoke(_client?.Connected ?? false);
+                    if (_client?.Connected ?? false)
+                    {
+                        _transportEndPointsManadger = new(this);
+                    }
                     return _client?.Connected ?? false;
                 }
             }
@@ -68,6 +73,7 @@ public class WcpClient : IDisposable
             lock (_lock)
                 _client?.Dispose();
             _client = null;
+            _transportEndPointsManadger?.Dispose();
             ConnectedStatusChandged?.Invoke(false);
         }
         catch (Exception)
@@ -120,6 +126,21 @@ public class WcpClient : IDisposable
         catch
         {
             return false;
+        }
+    }
+
+    public async Task<(string[]? Dirs, GetDirectiryStatus Status)> GetDirectories(string? root)
+    {
+        try
+        {
+            var response = await SendAndAccept<GetRemoteDirectoryRequest, GetRemoteDirectoryResponse>(new GetRemoteDirectoryRequest() { RootPath = root });
+            if(response is null)
+                return (null, GetDirectiryStatus.Failed);
+            return (response.Directories, response.Status);
+        }
+        catch
+        {
+            return (null, GetDirectiryStatus.Failed);
         }
     }
 
@@ -188,9 +209,22 @@ public class WcpClient : IDisposable
                 var attempts = 100;
                 do
                 {
+                    if(_buffer.Count > 0)
+                    {
+                        var package = _buffer.FirstOrDefault(x => x is T) as T;
+                        if(package is not null)
+                        {
+                            _buffer.Remove(package);
+                            return package;
+                        }
+                    }
                     if (_stream!.DataAvailable)
                     {
                         var package = BinarySerializer.Deserialize<Package>(_stream!);
+                        if (package is TransportDataResponse transport)
+                        {
+                            _transportEndPointsManadger?.Chandge(transport);
+                        }
                         return package as T;
                     }
                     Task.Delay(50).Wait();
@@ -205,8 +239,33 @@ public class WcpClient : IDisposable
         }
     }
 
+    internal async Task TransportUpdater(CancellationToken token)
+    {
+        await Task.Run(() =>
+        {
+            while (!token.IsCancellationRequested)
+            {
+                lock (_lock)
+                {
+                    if (_stream!.DataAvailable)
+                    {
+                        var package = BinarySerializer.Deserialize<Package>(_stream!);
+                        if (package is TransportDataResponse transport)
+                        {
+                            _transportEndPointsManadger?.Chandge(transport);
+                        }
+                        if (package is not null)
+                            _buffer.Add(package);
+                    }
+                }
+                Task.Delay(50).Wait();
+            }
+        });
+    }
+
     public void Dispose()
     {
+        _transportEndPointsManadger?.Dispose();
         _client?.Dispose();
     }
 }

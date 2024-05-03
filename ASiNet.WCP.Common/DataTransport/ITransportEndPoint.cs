@@ -10,5 +10,7 @@ public interface ITransportEndPoint : IDisposable
 {
     public Guid Id { get; }
 
-    public TransportDataResponse Chandge(TransportDataRequest request);
+    public bool IsDisposed { get; }
+
+    public TransportDataResponse? Chandge(TransportDataRequest request);
 }

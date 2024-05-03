@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ASiNet.App.WCP.VieweModels"
+             x:Class="ASiNet.App.WCP.Viewe.RDAPage"
+             x:DataType="{x:Type vm:RDAPageVieweModel}"
+             x:Name="Root"
+             ChildCommand="{Binding GetDirectoriesCommand}">
+    <ContentPage.BindingContext>
+        <vm:RDAPageVieweModel/>
+    </ContentPage.BindingContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <HorizontalStackLayout>
+            <Button Text="Refresh"/>
+        </HorizontalStackLayout>
+        <CollectionView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type x:String}">
+                    <Label Text="{Binding .}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Path=ChildCommand, Source={x:Reference Root}}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

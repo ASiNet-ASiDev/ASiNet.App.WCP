@@ -1,5 +1,5 @@
 ﻿namespace ASiNet.WCP.Common.Enums;
-public enum TransportEndPoint : byte
+public enum TransportDataEndPoint : byte
 {
     Clipboard,
     File,

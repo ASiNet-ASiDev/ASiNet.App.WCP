@@ -3,10 +3,11 @@ using ASiNet.WCP.Common.Enums;
 using ASiNet.WCP.Common.Primitives;
 
 namespace ASiNet.WCP.DesktopService;
-internal class TransportEndPoint(Guid id) : ITransportEndPoint
+internal class TransportEndPointServer(Guid id) : ITransportEndPoint
 {
     public Guid Id { get; } = id;
 
+    public bool IsDisposed { get; private set; }
 
     private FileStream? _endPointFile;
 
@@ -18,31 +19,39 @@ internal class TransportEndPoint(Guid id) : ITransportEndPoint
 
     private byte[]? _buffer;
 
-    public TransportDataResponse Chandge(TransportDataRequest request)
+    public TransportDataResponse? Chandge(TransportDataRequest request)
     {
-        if (request.Action.HasFlag(TransportAction.Post))
+        if(request.Status == TransportDataStatus.Ok)
         {
-            switch (request.EndPoint)
+            if (request.Action.HasFlag(TransportAction.Post))
             {
-                case Common.Enums.TransportEndPoint.Clipboard:
-                    return new() { OperationId = request.OperationId, Status = TransportDataStatus.OperationNotSupported };
-                    break;
-                case Common.Enums.TransportEndPoint.File:
-                    return FileDataPost(request);
+                switch (request.EndPoint)
+                {
+                    case Common.Enums.TransportDataEndPoint.Clipboard:
+                        return new() { OperationId = request.OperationId, Status = TransportDataStatus.OperationNotSupported };
+                        break;
+                    case Common.Enums.TransportDataEndPoint.File:
+                        return FileDataPost(request);
+                }
             }
+            else if (request.Action.HasFlag(TransportAction.Get))
+            {
+                switch (request.EndPoint)
+                {
+                    case Common.Enums.TransportDataEndPoint.Clipboard:
+                        return new() { OperationId = request.OperationId, Status = TransportDataStatus.OperationNotSupported };
+                        break;
+                    case Common.Enums.TransportDataEndPoint.File:
+                        return FileDataGet(request);
+                }
+            }
+            return new() { OperationId = request.OperationId, Status = TransportDataStatus.OperationNotSupported };
         }
-        else if (request.Action.HasFlag(TransportAction.Get))
+        else
         {
-            switch (request.EndPoint)
-            {
-                case Common.Enums.TransportEndPoint.Clipboard:
-                    return new() { OperationId = request.OperationId, Status = TransportDataStatus.OperationNotSupported };
-                break;
-                case Common.Enums.TransportEndPoint.File:
-                    return FileDataGet(request);
-            }
+            Dispose();
+            return null;
         }
-        return new() { OperationId = request.OperationId, Status = TransportDataStatus.OperationNotSupported };
     }
 
     private TransportDataResponse FileDataPost(TransportDataRequest request)
@@ -117,6 +126,7 @@ internal class TransportEndPoint(Guid id) : ITransportEndPoint
 
     public void Dispose()
     {
+        IsDisposed = true;
         _endPointFile?.Dispose();
     }
 }

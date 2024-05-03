@@ -1,4 +1,5 @@
-﻿using System.Net.Sockets;
+﻿using System.Diagnostics.Eventing.Reader;
+using System.Net.Sockets;
 using ASiNet.Data.Serialization;
 using ASiNet.WCP.Common.Enums;
 using ASiNet.WCP.Common.Interfaces;
@@ -22,7 +23,9 @@ public class ServerClient(TcpClient client, IVirtualKeyboard keyboard, IVirtualM
 
     private NetworkStream _stream = client.GetStream();
 
-    private TransportEndPointsManadger _transportEndPointsManadger = new();
+    private TransportEndPointsManadgerServer _transportEndPointsManadger = new();
+
+    private RemoteDirectoryAccess _directoryAccess = new();
 
     public bool Update()
     {
@@ -41,8 +44,11 @@ public class ServerClient(TcpClient client, IVirtualKeyboard keyboard, IVirtualM
                 SetLanguageCode(slr);
             else if (package is GetLanguageRequest glr)
                 GetLanguageCode(glr);
+            else if(package is GetRemoteDirectoryRequest grd)
+                BinarySerializer.Serialize<Package>(_directoryAccess.GetDirectory(grd), _stream);
             else if (package is TransportDataRequest tdr)
-                _transportEndPointsManadger?.Chandge(tdr);
+                if(_transportEndPointsManadger?.Chandge(tdr) is TransportDataResponse tdrres)
+                    BinarySerializer.Serialize<Package>(tdr, _stream);
             else if (package is DisconnectionRequest dc)
                 DisconectedRequest(dc);
 

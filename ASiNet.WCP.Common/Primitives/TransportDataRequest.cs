@@ -8,10 +8,11 @@ public class TransportDataRequest : Package
 
     public TransportDataType DataType { get; set; }
 
-    public TransportEndPoint EndPoint { get; set; }
+    public TransportDataEndPoint EndPoint { get; set; }
 
     public TransportAction Action { get; set; }
 
+    public TransportDataStatus Status { get; set; }
 
     public string? EndpointFilePath { get; set; }
 

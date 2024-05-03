@@ -1,12 +1,64 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:tk="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:e="clr-namespace:ASiNet.App.WCP.Models.Enums"
+             xmlns:vm="clr-namespace:ASiNet.App.WCP.VieweModels"
+             xmlns:model="clr-namespace:ASiNet.App.WCP.Models"
              x:Class="ASiNet.App.WCP.Viewe.SendDataPage"
-             Title="SendDataPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:DataType="{x:Type vm:SendDataPageVieweModel}">
+    <ContentPage.BindingContext>
+        <vm:SendDataPageVieweModel/>
+    </ContentPage.BindingContext>
+    <ScrollView Orientation="Vertical" Padding="5">
+        <VerticalStackLayout>
+            <tk:Expander>
+                <tk:Expander.Header>
+                    <Border StrokeThickness="0" 
+                            StrokeShape="{StaticResource UIElementsStrokeShape}" 
+                            HeightRequest="50" 
+                            BackgroundColor="{StaticResource WCPForeground1Color}" Padding="5">
+                        <Label Text="Send Text" FontSize="Title" VerticalOptions="Center" Margin="5, 0"/>
+                    </Border>
+                </tk:Expander.Header>
+                <VerticalStackLayout Spacing="5" Margin="0,5">
+                    <Editor HeightRequest="250" Placeholder="Enter your text:" VerticalOptions="StartAndExpand"/>
+                    <HorizontalStackLayout>
+                        <RadioButton Content="File" IsChecked="True"/>
+                        <RadioButton Content="Clipboard" IsEnabled="False"/>
+                    </HorizontalStackLayout>
+                    <VerticalStackLayout >
+                        <Entry Placeholder="Desktop File path:"/>
+                    </VerticalStackLayout>
+                    <Button Text="Send"/>
+                </VerticalStackLayout>
+            </tk:Expander>
+            <tk:Expander>
+                <tk:Expander.Header>
+                    <Border StrokeThickness="0" 
+                StrokeShape="{StaticResource UIElementsStrokeShape}" 
+                HeightRequest="50" 
+                BackgroundColor="{StaticResource WCPForeground1Color}" Padding="5">
+                        <Label Text="Send Image" FontSize="Title" VerticalOptions="Center" Margin="5, 0"/>
+                    </Border>
+                </tk:Expander.Header>
+                <VerticalStackLayout Spacing="5">
+
+                </VerticalStackLayout>
+            </tk:Expander>
+            <tk:Expander>
+                <tk:Expander.Header>
+                    <Border StrokeThickness="0" 
+                StrokeShape="{StaticResource UIElementsStrokeShape}" 
+                HeightRequest="50" 
+                BackgroundColor="{StaticResource WCPForeground1Color}" Padding="5">
+                        <Label Text="Send File" FontSize="Title" VerticalOptions="Center" Margin="5, 0"/>
+                    </Border>
+                </tk:Expander.Header>
+                <VerticalStackLayout Spacing="5">
+
+                </VerticalStackLayout>
+            </tk:Expander>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
