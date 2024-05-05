@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:ASiNet.App.WCP.VieweModels"
+             xmlns:models="clr-namespace:ASiNet.App.WCP.Models"
              x:Class="ASiNet.App.WCP.Viewe.RDAPage"
              x:DataType="{x:Type vm:RDAPageVieweModel}"
              x:Name="Root"
@@ -9,20 +10,20 @@
     <ContentPage.BindingContext>
         <vm:RDAPageVieweModel/>
     </ContentPage.BindingContext>
-    <Grid>
+    <Grid RowSpacing="5" ColumnSpacing="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <HorizontalStackLayout>
-            <Button Text="Refresh"/>
+        <HorizontalStackLayout Spacing="5">
+            <Button Text="Back" Command="{Binding UpDirectoriesCommand}"/>
         </HorizontalStackLayout>
-        <CollectionView>
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Directories}">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="{x:Type x:String}">
-                    <Label Text="{Binding .}">
+                <DataTemplate x:DataType="{x:Type models:FileSystemEntry}">
+                    <Label Text="{Binding Name}" FontSize="Title">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Path=ChildCommand, Source={x:Reference Root}}"/>
+                            <TapGestureRecognizer Command="{Binding Path=ChildCommand, Source={x:Reference Root}}" CommandParameter="{Binding Path}"/>
                         </Label.GestureRecognizers>
                     </Label>
                 </DataTemplate>

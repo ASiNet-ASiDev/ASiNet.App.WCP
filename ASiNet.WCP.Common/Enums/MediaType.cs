@@ -1,5 +1,5 @@
 ﻿namespace ASiNet.WCP.Common.Enums;
-public enum TransportDataType : byte
+public enum MediaType : byte
 {
     Text,
     Image,

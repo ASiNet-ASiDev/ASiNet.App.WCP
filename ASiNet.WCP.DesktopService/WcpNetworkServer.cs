@@ -51,7 +51,7 @@ public class WcpNetworkServer
                     if (tcpclient is null)
                         continue;
                     client?.Dispose();
-                    client = new(tcpclient, _virtualKeyboard, _virtualMouse, _keyboardLayout, _config);
+                    client = new(tcpclient, _virtualKeyboard, _virtualMouse, _keyboardLayout, _config);      
                 }
                 else
                     if (!client.Update())

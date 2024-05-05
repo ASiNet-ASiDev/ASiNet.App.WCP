@@ -7,58 +7,24 @@
              xmlns:model="clr-namespace:ASiNet.App.WCP.Models"
              x:Class="ASiNet.App.WCP.Viewe.SendDataPage"
              x:DataType="{x:Type vm:SendDataPageVieweModel}">
+    
     <ContentPage.BindingContext>
         <vm:SendDataPageVieweModel/>
     </ContentPage.BindingContext>
     <ScrollView Orientation="Vertical" Padding="5">
-        <VerticalStackLayout>
-            <tk:Expander>
-                <tk:Expander.Header>
-                    <Border StrokeThickness="0" 
-                            StrokeShape="{StaticResource UIElementsStrokeShape}" 
-                            HeightRequest="50" 
-                            BackgroundColor="{StaticResource WCPForeground1Color}" Padding="5">
-                        <Label Text="Send Text" FontSize="Title" VerticalOptions="Center" Margin="5, 0"/>
-                    </Border>
-                </tk:Expander.Header>
-                <VerticalStackLayout Spacing="5" Margin="0,5">
-                    <Editor HeightRequest="250" Placeholder="Enter your text:" VerticalOptions="StartAndExpand"/>
-                    <HorizontalStackLayout>
-                        <RadioButton Content="File" IsChecked="True"/>
-                        <RadioButton Content="Clipboard" IsEnabled="False"/>
-                    </HorizontalStackLayout>
-                    <VerticalStackLayout >
-                        <Entry Placeholder="Desktop File path:"/>
-                    </VerticalStackLayout>
-                    <Button Text="Send"/>
-                </VerticalStackLayout>
-            </tk:Expander>
-            <tk:Expander>
-                <tk:Expander.Header>
-                    <Border StrokeThickness="0" 
-                StrokeShape="{StaticResource UIElementsStrokeShape}" 
-                HeightRequest="50" 
-                BackgroundColor="{StaticResource WCPForeground1Color}" Padding="5">
-                        <Label Text="Send Image" FontSize="Title" VerticalOptions="Center" Margin="5, 0"/>
-                    </Border>
-                </tk:Expander.Header>
-                <VerticalStackLayout Spacing="5">
-
-                </VerticalStackLayout>
-            </tk:Expander>
-            <tk:Expander>
-                <tk:Expander.Header>
-                    <Border StrokeThickness="0" 
-                StrokeShape="{StaticResource UIElementsStrokeShape}" 
-                HeightRequest="50" 
-                BackgroundColor="{StaticResource WCPForeground1Color}" Padding="5">
-                        <Label Text="Send File" FontSize="Title" VerticalOptions="Center" Margin="5, 0"/>
-                    </Border>
-                </tk:Expander.Header>
-                <VerticalStackLayout Spacing="5">
-
-                </VerticalStackLayout>
-            </tk:Expander>
+        <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+            <HorizontalStackLayout Spacing="5">
+                <Entry Placeholder="File path" WidthRequest="400" Text="{Binding LocalFilePath}"/>
+                <Button Text="Select"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="5">
+                <Entry Placeholder="Remote file path" WidthRequest="400" Text="{Binding RemoteFilePath}"/>
+                <Button Text="Select"/>
+            </HorizontalStackLayout>
+            <Button Text="Send" Command="{Binding SendCommand}" IsEnabled="{Binding Unlocked}"/>
+            <Label Text="Fail" IsVisible="{Binding Fail}"/>
+            <Label Text="{Binding Status}"/>
+            <ProgressBar Progress="{Binding Progress}" ProgressColor="{StaticResource WCPForeground1Color}"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

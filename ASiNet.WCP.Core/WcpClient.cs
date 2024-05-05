@@ -15,9 +15,9 @@ public class WcpClient : IDisposable
     private TcpClient? _client;
     private NetworkStream? _stream;
 
-    private TransportEndPointsManadger? _transportEndPointsManadger;
-
     private List<Package> _buffer = [];
+
+    private MediaManager _mediaManager = new();
 
     private readonly object _lock = new();
 
@@ -33,10 +33,6 @@ public class WcpClient : IDisposable
                     _stream = _client.GetStream();
 
                     ConnectedStatusChandged?.Invoke(_client?.Connected ?? false);
-                    if (_client?.Connected ?? false)
-                    {
-                        _transportEndPointsManadger = new(this);
-                    }
                     return _client?.Connected ?? false;
                 }
             }
@@ -73,7 +69,6 @@ public class WcpClient : IDisposable
             lock (_lock)
                 _client?.Dispose();
             _client = null;
-            _transportEndPointsManadger?.Dispose();
             ConnectedStatusChandged?.Invoke(false);
         }
         catch (Exception)
@@ -144,17 +139,6 @@ public class WcpClient : IDisposable
         }
     }
 
-    internal bool SendTransportPackage(in TransportDataRequest input)
-    {
-        try
-        {
-            return Send(input);
-        }
-        catch
-        {
-            return false;
-        }
-    }
 
     public bool SendMouseMoveEvent(in MouseChangedEvent input)
     {
@@ -168,6 +152,40 @@ public class WcpClient : IDisposable
         }
     }
 
+    public async Task<MediaClient?> OpenMediaStream(string remotePath, string localPath, MediaAction action)
+    {
+        try
+        {
+            var request = new MediaStreamRequest()
+            { 
+                Action = action switch
+                { 
+                    MediaAction.Get => MediaAction.Post,
+                    MediaAction.Post => MediaAction.Get,
+                    _ => throw new NotImplementedException(),
+                },
+                Path = remotePath,
+            };
+            var response = await SendAndAccept<MediaStreamRequest, MediaStreamResponse>(request);
+            if(response is null)
+                return null;
+            if(response.Status == MediaStreamStatus.Ok)
+            {
+                return _mediaManager.RunNew(response.Address!, response.Port, localPath, action);
+            }
+            return null;
+        }
+        catch (Exception)
+        {
+            return null;
+        }
+    }
+
+
+    public IEnumerable<MediaTask> RefreshMediaTasks() => 
+        _mediaManager.Refresh();
+    public IEnumerable<MediaTask> GetMediaTasks() =>
+        _mediaManager.GetMediaTasks();
 
     public async Task<Taccept?> SendAndAccept<Tsend, Taccept>(Tsend message) where Taccept : Package where Tsend : Package
     {
@@ -221,10 +239,6 @@ public class WcpClient : IDisposable
                     if (_stream!.DataAvailable)
                     {
                         var package = BinarySerializer.Deserialize<Package>(_stream!);
-                        if (package is TransportDataResponse transport)
-                        {
-                            _transportEndPointsManadger?.Chandge(transport);
-                        }
                         return package as T;
                     }
                     Task.Delay(50).Wait();
@@ -239,33 +253,9 @@ public class WcpClient : IDisposable
         }
     }
 
-    internal async Task TransportUpdater(CancellationToken token)
-    {
-        await Task.Run(() =>
-        {
-            while (!token.IsCancellationRequested)
-            {
-                lock (_lock)
-                {
-                    if (_stream!.DataAvailable)
-                    {
-                        var package = BinarySerializer.Deserialize<Package>(_stream!);
-                        if (package is TransportDataResponse transport)
-                        {
-                            _transportEndPointsManadger?.Chandge(transport);
-                        }
-                        if (package is not null)
-                            _buffer.Add(package);
-                    }
-                }
-                Task.Delay(50).Wait();
-            }
-        });
-    }
-
     public void Dispose()
     {
-        _transportEndPointsManadger?.Dispose();
         _client?.Dispose();
+        _mediaManager?.Dispose();
     }
 }

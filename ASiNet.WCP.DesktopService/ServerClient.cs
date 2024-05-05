@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.Eventing.Reader;
+using System.Net;
 using System.Net.Sockets;
 using ASiNet.Data.Serialization;
 using ASiNet.WCP.Common.Enums;
@@ -8,22 +9,34 @@ using ASiNet.WCP.Common.Primitives;
 using ASiNet.WCP.Core.Primitives;
 
 namespace ASiNet.WCP.DesktopService;
-public class ServerClient(TcpClient client, IVirtualKeyboard keyboard, IVirtualMouse mouse, IVirtualKeyboardLayout layout, ServerConfig config) : IDisposable
+public class ServerClient : IDisposable
 {
+    public ServerClient(TcpClient client, IVirtualKeyboard keyboard, IVirtualMouse mouse, IVirtualKeyboardLayout layout, ServerConfig config)
+    {
+        _client = client;
+        _keyboard = keyboard;
+        _mouse = mouse;
+        _config = config;
+        _keyboardLayout = layout;
+        _stream = client.GetStream();
+        _mediaManager = new(this);
+    }
+
+    public string? Address => ((IPEndPoint?)_client.Client.LocalEndPoint)?.Address.ToString();
 
     public bool Connected => _client.Connected && IsConnectedCheck();
 
-    private IVirtualKeyboard _keyboard = keyboard;
-    private IVirtualMouse _mouse = mouse;
-    private IVirtualKeyboardLayout _keyboardLayout = layout;
+    private IVirtualKeyboard _keyboard;
+    private IVirtualMouse _mouse;
+    private IVirtualKeyboardLayout _keyboardLayout;
 
-    private ServerConfig _config = config;
+    private ServerConfig _config;
 
-    private TcpClient _client = client;
+    private TcpClient _client;
 
-    private NetworkStream _stream = client.GetStream();
+    private NetworkStream _stream;
 
-    private TransportEndPointsManadgerServer _transportEndPointsManadger = new();
+    private MediaManager _mediaManager;
 
     private RemoteDirectoryAccess _directoryAccess = new();
 
@@ -46,9 +59,8 @@ public class ServerClient(TcpClient client, IVirtualKeyboard keyboard, IVirtualM
                 GetLanguageCode(glr);
             else if(package is GetRemoteDirectoryRequest grd)
                 BinarySerializer.Serialize<Package>(_directoryAccess.GetDirectory(grd), _stream);
-            else if (package is TransportDataRequest tdr)
-                if(_transportEndPointsManadger?.Chandge(tdr) is TransportDataResponse tdrres)
-                    BinarySerializer.Serialize<Package>(tdr, _stream);
+            else if (package is MediaStreamRequest msr)
+                BinarySerializer.Serialize<Package>(_mediaManager.Change(msr), _stream);
             else if (package is DisconnectionRequest dc)
                 DisconectedRequest(dc);
 
@@ -128,6 +140,7 @@ public class ServerClient(TcpClient client, IVirtualKeyboard keyboard, IVirtualM
     {
         _stream.Dispose();
         _client.Dispose();
+        _mediaManager.Dispose();
         GC.SuppressFinalize(this);
     }
 }

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using ASiNet.App.WCP.Models;
 using ASiNet.WCP.Common.Enums;
 using ASiNet.WCP.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -20,11 +16,11 @@ public partial class RDAPageVieweModel : ObservableObject
 
     public RDAPageVieweModel(WcpClient client)
     {
-        _client  = client;
+        _client = client;
         _ = Init();
     }
 
-    public ObservableCollection<string> Directories { get; } = [];
+    public ObservableCollection<FileSystemEntry> Directories { get; } = [];
 
     [ObservableProperty]
     private string? _root;
@@ -32,15 +28,30 @@ public partial class RDAPageVieweModel : ObservableObject
     private WcpClient _client;
 
     [RelayCommand]
+    private async Task UpDirectories()
+    {
+        if (string.IsNullOrEmpty(Root))
+            return;
+        Root = Path.GetDirectoryName(Root);
+        var result = await _client.GetDirectories(Root);
+        if (result.Status == GetDirectiryStatus.Success)
+        {
+            Directories.Clear();
+            foreach (var item in result.Dirs!)
+                Directories.Add(GetEntry(item));
+        }
+    }
+
+    [RelayCommand]
     private async Task GetDirectories(string root)
     {
         var result = await _client.GetDirectories(root);
         Root = root;
-        if(result.Status == GetDirectiryStatus.Success)
+        if (result.Status == GetDirectiryStatus.Success)
         {
             Directories.Clear();
             foreach (var item in result.Dirs!)
-                Directories.Add(item);
+                Directories.Add(GetEntry(item));
         }
     }
 
@@ -51,8 +62,15 @@ public partial class RDAPageVieweModel : ObservableObject
         {
             Directories.Clear();
             foreach (var item in result.Dirs!)
-                Directories.Add(item);
+                Directories.Add(GetEntry(item));
         }
     }
 
+    private FileSystemEntry GetEntry(string path)
+    {
+        var name = Path.GetFileName(path);
+        if (string.IsNullOrEmpty(name))
+            name = path;
+        return new() { Name = name, Path = path };
+    }
 }
