@@ -1,4 +1,6 @@
-﻿using ASiNet.WCP.Core;
+﻿using ASiNet.App.WCP.Models;
+using ASiNet.App.WCP.Viewe;
+using ASiNet.WCP.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -8,93 +10,77 @@ public partial class SendDataPageVieweModel : ObservableObject
     public SendDataPageVieweModel()
     {
         _client = ((ShellVieweModel)Shell.Current.BindingContext).WcpClient;
-        Unlocked = true;
+        _manager = ((ShellVieweModel)Shell.Current.BindingContext).TaskManager;
+        _mediaManager = _client.MediaManager;
     }
 
+    [ObservableProperty]
+    private string? _localDirectory;
 
     [ObservableProperty]
-    private string? _localFilePath;
+    private string? _localFileName;
 
     [ObservableProperty]
-    private string? _remoteFilePath;
+    private string? _remoteFileName;
 
     [ObservableProperty]
     private bool _fail;
-    
+
     [ObservableProperty]
-    private bool _unlocked;
-    [ObservableProperty]
-    private long _totalSize;
-    [ObservableProperty]
-    private long _proccessingSize;
-    [ObservableProperty]
-    private double _progress;
-    [ObservableProperty]
-    private string? _status;
+    private TaskManagerVieweModel _manager;
 
     private WcpClient _client;
+    private MediaManager _mediaManager;
+
+    [RelayCommand]
+    private void SetLocalFilePath(FileSystemEntry? entry)
+    {
+        if (entry is null)
+        {
+            LocalDirectory = null;
+            LocalFileName = null;
+        }
+        else
+        {
+            if (entry.IsFile)
+            {
+                LocalDirectory = entry.Directory;
+                LocalFileName = entry.Name;
+                RemoteFileName = entry.Name;
+            }
+        }
+    }
 
     [RelayCommand]
     private async Task Send()
     {
         Fail = false;
-        if (LocalFilePath is null || RemoteFilePath is null)
+        if (LocalFileName is null || LocalDirectory is null || RemoteFileName is null)
         {
             Fail = true;
             return;
         }
-        Unlocked = false;
-        var result = await _client.OpenMediaStream(RemoteFilePath, LocalFilePath, ASiNet.WCP.Common.Enums.MediaAction.Post);
-        if(result is null)
+        var localFilePath = Path.Join(LocalDirectory, LocalFileName);
+        var result = _mediaManager.RunNew(null, RemoteFileName, localFilePath, ASiNet.WCP.Common.Enums.MediaAction.Post);
+        if(!result)
         {
             Fail = true;
-            Unlocked = true;
             return;
         }
-        result.Changed += OnChandged;
-        result.StatusChanged += OnStatusChandged;
         Fail = false;
     }
 
-
-    private void OnChandged(long total, long proccesing)
+    [RelayCommand]
+    private async Task SendFile(IEnumerable<FileSystemEntry> entrys)
     {
-        TotalSize = total;
-        ProccessingSize = proccesing;
-        Progress = (double)proccesing / (double)total;
-    }
-
-    private void OnStatusChandged(MediaClientStatus status)
-    {
-        switch (status)
+        await Task.Run(() =>
         {
-            case MediaClientStatus.StartOk:
-                Status = "Sending a file...";
-                break;
-            case MediaClientStatus.StartFailed:
-                Status = "The file could not be sent.";
-                break;
-            case MediaClientStatus.FinishOk:
-                Status = "The file was sent successfully.";
-                ProccessingSize = 0;
-                TotalSize = 0;
-                Progress = 0;
-                Unlocked = true;
-                break;
-            case MediaClientStatus.FinishFailed:
-                Status = "The file could not be sent.";
-                ProccessingSize = 0;
-                TotalSize = 0;
-                Progress = 0;
-                Unlocked = true;
-                break;
-            case MediaClientStatus.Failed:
-                Status = "The file could not be sent.";
-                ProccessingSize = 0;
-                TotalSize = 0;
-                Progress = 0;
-                Unlocked = true;
-                break;
-        }
+            foreach (var entry in entrys)
+            {
+                if (entry.Name is null || entry.Path is null)
+                    return;
+                _mediaManager.RunNew(null, entry.Name!, entry.Path!, ASiNet.WCP.Common.Enums.MediaAction.Post);
+            }
+        });
     }
 }

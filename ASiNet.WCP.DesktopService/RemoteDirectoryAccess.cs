@@ -4,49 +4,62 @@ using ASiNet.WCP.Common.Primitives;
 namespace ASiNet.WCP.DesktopService;
 public class RemoteDirectoryAccess
 {
-    public RemoteDirectoryAccess()
+    public RemoteDirectoryAccess(ServerConfig config)
     {
-        try
-        {
-            _roots = DriveInfo.GetDrives().Select(x => x.Name).ToArray();
-        }
-        catch { }
+        _roots = config.RemoteAccessRoots;
+        _ignores = config.IgnoreFiles;
     }
 
-    private string[]? _roots;
+    private RemoteAccessRoot[] _roots;
 
-    public GetRemoteDirectoryResponse GetDirectory(GetRemoteDirectoryRequest request)
+    private string[] _ignores;
+
+    public GetRemoteDirectoryResponse Change(GetRemoteDirectoryRequest request)
     {
         try
         {
-            if (request.RootPath is null)
+            if (request.GetRoots)
             {
                 return new()
                 {
-                    Status = _roots is null ? GetDirectiryStatus.AccessDenied : GetDirectiryStatus.Success, 
-                    Directories = _roots,
+                    Directories = _roots.Select(x => x.Path).ToArray(),
+                    Files = _roots.Select(x => x.Name).ToArray(),
+                    Status = GetDirectiryStatus.Success,
+                };
+            }
+            if (request.Root is null)
+                return new() { Status = GetDirectiryStatus.DirectoryNotFound };
+            else if (_roots.FirstOrDefault(x => x.Name == request.Root) is RemoteAccessRoot root)
+            {
+                var directories = Directory.GetDirectories(root.Path);
+                string[]? files = request.GetFiles ? Directory.GetFiles(root.Path).Where(x => !_ignores.Any(y => x.EndsWith(y))).ToArray() : null;
+                return new()
+                {
+                    Directories = directories,
+                    Files = files,
+                    Root = root.Path,
+                    Status = GetDirectiryStatus.Success
                 };
             }
             else
             {
-                if(!Directory.Exists(request.RootPath))
-                    return new() { Status = GetDirectiryStatus.DirectoryNotFound };
-                var dirs = Directory.GetDirectories(request.RootPath);
+                var directories = Directory.GetDirectories(request.Root);
+                string[]? files = request.GetFiles ? Directory.GetFiles(request.Root).Where(x => !_ignores.Any(y => x.EndsWith(y))).ToArray() : null;
                 return new()
-                { 
-                    Status = GetDirectiryStatus.Success,
-                    Directories =  dirs
+                {
+                    Directories = directories,
+                    Files = files,
+                    Root = request.Root,
+                    Status = GetDirectiryStatus.Success
                 };
             }
         }
-        catch 
+        catch (Exception)
         {
             return new()
             {
-                Status = GetDirectiryStatus.Failed,
-                Directories = null,
+                Status = GetDirectiryStatus.Failed
             };
         }
     }
-
 }

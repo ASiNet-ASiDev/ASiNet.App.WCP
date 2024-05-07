@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:str="clr-namespace:ASiNet.App.WCP.Resources.Localization"
+             xmlns:ads="clr-namespace:ASiNet.Yandex.Ads;assembly=ASiNet.Yandex.Ads"
              xmlns:local="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
              xmlns:vm="clr-namespace:ASiNet.App.WCP.VieweModels"
              xmlns:tk="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -18,8 +19,8 @@
         <vm:ConnectionPageVieweModel/>
     </ContentPage.BindingContext>
 
-    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" MinimumWidthRequest="200" Spacing="5">
-        <HorizontalStackLayout Spacing="5">
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Fill" MinimumWidthRequest="200" Spacing="5">
+        <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
             <Path Fill="Red"
                   WidthRequest="10" 
                   HeightRequest="10" 
@@ -39,7 +40,7 @@
             <Label Text="{x:Static str:AppResources.cn_connection_status_label}"/>
         </HorizontalStackLayout>
 
-        <VerticalStackLayout Spacing="5" IsVisible="{Binding AutoConnect}">
+        <VerticalStackLayout Spacing="5" IsVisible="{Binding AutoConnect}" HorizontalOptions="Center">
             <Label Text="{local:TranslateBinding AutoConnectAddress, TranslateFormat=cn_address_label}"/>
             <Label Text="{local:TranslateBinding AutoConnectPort, TranslateFormat=cn_port_label}"/>
             <ActivityIndicator IsRunning="{Binding AutoConnect}"/>
@@ -47,10 +48,11 @@
             <Label Text="{x:Static str:AppResources.cn_failed_label}" IsVisible="{Binding AutoConnectError}"/>
         </VerticalStackLayout>
 
-        <HorizontalStackLayout Spacing="5" IsVisible="{Binding AutoConnect, Converter={StaticResource Key=InvertConverter}}">
+        <HorizontalStackLayout Spacing="5" IsVisible="{Binding AutoConnect, Converter={StaticResource Key=InvertConverter}}" HorizontalOptions="Center">
             <Button Text="{x:Static str:AppResources.cn_connect_button}" Command="{Binding ConnectCommand}" IsEnabled="{Binding IsConnected, Converter={StaticResource Key=InvertConverter}}"/>
 
             <Button Text="{x:Static str:AppResources.cn_disconnect_button}" Command="{Binding DisconnectCommand}" IsEnabled="{Binding IsConnected}"/>
         </HorizontalStackLayout>
+        <ads:Banner AdUnitId="R-M-8009266-1" HorizontalOptions="Fill" VerticalOptions="End"/>
     </VerticalStackLayout>
 </ContentPage>

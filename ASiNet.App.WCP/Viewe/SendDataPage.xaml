@@ -6,25 +6,59 @@
              xmlns:vm="clr-namespace:ASiNet.App.WCP.VieweModels"
              xmlns:model="clr-namespace:ASiNet.App.WCP.Models"
              x:Class="ASiNet.App.WCP.Viewe.SendDataPage"
-             x:DataType="{x:Type vm:SendDataPageVieweModel}">
-    
+             x:DataType="{x:Type vm:SendDataPageVieweModel}"
+             Command="{Binding SetLocalFilePathCommand}"
+             SendFiles="{Binding SendFileCommand}"
+             x:Name="Root" 
+             Title="Send file">
+
     <ContentPage.BindingContext>
         <vm:SendDataPageVieweModel/>
     </ContentPage.BindingContext>
-    <ScrollView Orientation="Vertical" Padding="5">
-        <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
-            <HorizontalStackLayout Spacing="5">
-                <Entry Placeholder="File path" WidthRequest="400" Text="{Binding LocalFilePath}"/>
-                <Button Text="Select"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout Spacing="5">
-                <Entry Placeholder="Remote file path" WidthRequest="400" Text="{Binding RemoteFilePath}"/>
-                <Button Text="Select"/>
-            </HorizontalStackLayout>
-            <Button Text="Send" Command="{Binding SendCommand}" IsEnabled="{Binding Unlocked}"/>
-            <Label Text="Fail" IsVisible="{Binding Fail}"/>
-            <Label Text="{Binding Status}"/>
-            <ProgressBar Progress="{Binding Progress}" ProgressColor="{StaticResource WCPForeground1Color}"/>
-        </VerticalStackLayout>
-    </ScrollView>
+    <Grid RowSpacing="5" Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid ColumnSpacing="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Text="Select file" Pressed="Button_Pressed"/>
+            <Button Grid.Column="1" Text="Send" Command="{Binding SendCommand}"/>
+        </Grid>
+        <Label Grid.Row="1" Text="{Binding LocalFileName, StringFormat=File: {0}}" FontSize="Body" VerticalOptions="Center"/>
+        <Entry Grid.Row="2" Placeholder="Save file name" Text="{Binding RemoteFileName}" FontSize="Body" VerticalOptions="Center"/>
+
+        <Button Grid.Row="4" Text="Select and send files" Pressed="Button_Pressed_files"/>
+
+        <CollectionView Grid.Row="5" ItemsSource="{Binding Manager.Tasks}" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type vm:TaskVieweModel}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.ColumnSpan="2" Text="{Binding FileName}"/>
+                        <Label Grid.Row="1" Text="{Binding Status}"/>
+                        <!--<Label Grid.Row="1" Grid.Column="1" Text="{Binding Action}"/>-->
+                        <ProgressBar Grid.Row="2" Grid.ColumnSpan="2" Progress="{Binding Progress}" ProgressColor="{StaticResource WCPForeground1Color}"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="Clear logs" Grid.Row="6" Command="{Binding Manager.ClearRecordsCommand}" HorizontalOptions="End"/>
+    </Grid>
 </ContentPage>

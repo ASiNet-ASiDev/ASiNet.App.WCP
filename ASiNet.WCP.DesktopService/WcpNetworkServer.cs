@@ -30,7 +30,6 @@ public class WcpNetworkServer
         _keyboardLayout.LoadLanguage(LanguageCode.RussianRU);
         _keyboardLayout.LoadLanguage(LanguageCode.EnglishUS);
         _listener.Start();
-        var lep = _listener.Server;
     }
 
     public void Stop()

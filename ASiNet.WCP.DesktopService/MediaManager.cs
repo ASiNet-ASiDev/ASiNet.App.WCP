@@ -1,51 +1,111 @@
-﻿using ASiNet.WCP.Common.Enums;
+﻿using System.Diagnostics;
+using System.Net;
+using System.Net.Sockets;
+using System.Security.Principal;
+using ASiNet.WCP.Common.Enums;
 using ASiNet.WCP.Common.Primitives;
 using ASiNet.WCP.Core;
 
 namespace ASiNet.WCP.DesktopService;
-public class MediaManager(ServerClient client) : IDisposable
+public class MediaManager : IDisposable
 {
-    private ServerClient _client = client;
-    private int[] _ports = [44545];
+    public MediaManager(ServerClient client)
+    {
+        _client = client;
+        _port = client.Config.MediaPort;
+        _mediaClientsCount = client.Config.MediaClientCount;
+        _filesDirectory = client.Config.FilesDirectory;
+        _connectionTimeout = client.Config.MediaConnectionTimeout;
+        _mediaListener = new(IPAddress.Any, _port);
+        _mediaListener.Start();
+    }
+
+    private ServerClient _client;
+    private int _port;
+
+    private int _mediaClientsCount;
+
+    private int _connectionTimeout;
+
+    private string _filesDirectory;
 
     private List<MediaClient> _mediaClients = [];
 
-    public MediaStreamResponse Change(MediaStreamRequest request)
+    private readonly object _locker = new();
+
+    private TcpListener _mediaListener;
+
+    public MediaResponse Change(MediaRequest request)
     {
         FreeClients();
-        var freePort = GetFreePort();
-        if (!freePort.HasValue)
-            return new() { Status = MediaStreamStatus.Failed };
 
-        var mediaClient = new MediaClient(freePort.Value, request.Path!, request.Action);
-        _mediaClients.Add(mediaClient);
+        if(_mediaClients.Count >= _mediaClientsCount)
+        {
+            Debug.WriteLine($"Open media client request: Skip!");
+            return new() { Status = MediaStatus.WorkingAll };
+        }
+
+        var filePath = string.Empty;
+        if(request.DirectoryPath is null)
+        {
+            if (!Directory.Exists(_client.Config.FilesDirectory))
+                Directory.CreateDirectory(_client.Config.FilesDirectory);
+            filePath = Path.Join(_filesDirectory, request.FileName!);
+        }
+        else
+            filePath = Path.Join(request.DirectoryPath, request.FileName);
+
+
+        _ = WaitClient(filePath, request.Action);
 
         return new()
         {
-            Port = freePort.Value,
+            Port = _port,
             Address = _client.Address,
-            Status = MediaStreamStatus.Ok
+            Status = MediaStatus.Ok
         };
     }
 
-
-    private int? GetFreePort()
+    private async Task WaitClient(string path, MediaAction media)
     {
-        if (_mediaClients.Count == _ports.Length)
-            return null;
-        var freePort = _ports.FirstOrDefault(x => _mediaClients.FirstOrDefault(y => y.Port == x) is null);
-        return freePort;
+        var cts = new CancellationTokenSource();
+        cts.CancelAfter(_connectionTimeout);
+        try
+        {
+            Debug.WriteLine($"Wait media client");
+            var client = await _mediaListener.AcceptTcpClientAsync(cts.Token);
+            lock (_locker)
+            {
+                Debug.WriteLine($"New media client[index:{_mediaClients.Count}]");
+                var mediaClient = new MediaClient(client, _port, path, media);
+                _mediaClients.Add(mediaClient);
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            Debug.WriteLine($"Wait media client: Timeout!");
+        }
+        catch (Exception ex) 
+        {
+            Debug.WriteLine($"Wait media client: ex: {ex.Message}");
+        }
+        
     }
 
     private void FreeClients()
     {
         try
         {
-            var clients = _mediaClients.Where(x => x.Failed || !x.Connected && !x.Waiting && !x.Working).ToList();
-            foreach (var item in clients)
+            lock (_locker)
             {
-                item.Dispose();
-                _mediaClients.Remove(item);
+                var clients = _mediaClients.Where(x => x.Failed || x.Disposed).ToList();
+                foreach (var item in clients)
+                {
+                    Debug.WriteLine($"Remove media client: [connected: {item.Connected}, wainting: {item.Waiting}, working: {item.Working}, disposed: {item.Disposed}]");
+                    if (!item.Disposed)
+                        item.Dispose();
+                    _mediaClients.Remove(item);
+                }
             }
         }
         catch { }
@@ -53,6 +113,8 @@ public class MediaManager(ServerClient client) : IDisposable
 
     public void Dispose()
     {
+        _mediaListener.Stop();
+        _mediaListener.Dispose();
         foreach (var item in _mediaClients)
         {
             try

@@ -12,10 +12,10 @@
     <ContentPage.BindingContext>
         <vm:ComponentsPageVieweModel/>
     </ContentPage.BindingContext>
-
-    <VerticalStackLayout Margin="5">
+    
+    <VerticalStackLayout Margin="5" HorizontalOptions="Fill">
         <Label Text="{x:Static str:AppResources.cm_title_label}" FontSize="Title" HorizontalOptions="Center" Margin="5"/>
-        <CollectionView ItemsSource="{Binding Components}" SelectionMode="None">
+        <CollectionView ItemsSource="{Binding Components}" SelectionMode="None" HorizontalOptions="Center">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout ItemSpacing="5" Orientation="Vertical"/>
             </CollectionView.ItemsLayout>

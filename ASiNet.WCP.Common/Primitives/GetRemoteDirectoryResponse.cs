@@ -12,6 +12,9 @@ public class GetRemoteDirectoryResponse : Package
 
     public GetDirectiryStatus Status { get; set; }
 
+    public string? Root { get; set; }
+
     public string[]? Directories { get; set; }
 
+    public string[]? Files { get; set; }
 }

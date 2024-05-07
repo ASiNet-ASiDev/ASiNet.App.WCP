@@ -1,52 +1,170 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ASiNet.WCP.Common.Enums;
+﻿using ASiNet.WCP.Common.Enums;
+using ASiNet.WCP.Common.Primitives;
 
 namespace ASiNet.WCP.Core;
-public class MediaManager : IDisposable
+public class MediaManager(WcpClient client) : IDisposable
 {
+
+    internal class MediaTaskQueueItem(int id, string? remoteDir, string remoteFileName, string localPath, MediaAction action)
+    {
+        public int Id { get; set; } = id;
+
+        public string? RemoteDirectory { get; set; } = remoteDir;
+
+        public string RemoteFileName { get; set; } = remoteFileName;
+
+        public string LocalFilePath { get; set; } = localPath;
+
+        public MediaAction Action { get; set; } = action;
+    }
+
+    public event Action<MediaTask>? TaskChanged;
 
     private List<MediaClient> _mediaStreams = [];
 
-    public MediaClient? RunNew(string address, int port, string path, MediaAction action)
+    private WcpClient _client = client;
+
+    private Queue<MediaTaskQueueItem> _taskQueue = [];
+
+    private int _lastId;
+
+    private readonly object _idLocker = new();
+    private readonly object _autorunerLocker = new();
+
+    private bool _autorunerWork = false;
+
+    public bool RunNew(string? remoteDirectoryPath, string remoteFileName, string localPath, MediaAction action)
     {
         try
         {
-            var mediaClient = new MediaClient(address, port, path, action);
-            _mediaStreams.Add(mediaClient);
-            return mediaClient;
+            var taskId = 0;
+            lock (_idLocker)
+            {
+                _lastId++;
+                taskId = _lastId;
+            }
+            TaskChanged?.Invoke(new()
+            {
+                Id = taskId,
+                TaskAction = MediaTaskStatus.Waiting,
+                FileName = Path.GetFileName(localPath),
+                Action = action
+            });
+            lock (_autorunerLocker)
+            {
+                _taskQueue.Enqueue(new(taskId, remoteDirectoryPath, remoteFileName, localPath, action));
+                if (!_autorunerWork)
+                    _ = QuequAutoruner();
+            }
+            return true;
         }
         catch
         {
-            return null;
+            return false;
         }
     }
 
-    public IEnumerable<MediaTask> GetMediaTasks()
+    private async Task QuequAutoruner()
     {
-        return _mediaStreams.Select(x => new MediaTask() 
-        { 
-            Id = x.Port, 
-            TaskStatus = 
-                x.Working ? MediaTaskStatus.Working : 
-                x.Waiting ? MediaTaskStatus.Connecting : 
-                x.Failed ? MediaTaskStatus.Failed : MediaTaskStatus.Stopped,
+        lock (_autorunerLocker)
+            _autorunerWork = true;
+        try
+        {
+            while (_taskQueue.Count > 0)
+            {
+                var task = _taskQueue.Peek();
+                var request = new MediaRequest()
+                {
+                    Action = task.Action switch
+                    {
+                        MediaAction.Get => MediaAction.Post,
+                        MediaAction.Post => MediaAction.Get,
+                        _ => throw new NotImplementedException(),
+                    },
+                    DirectoryPath = task.RemoteDirectory,
+                    FileName = task.RemoteFileName,
+                };
+                var response = await _client.SendAndAccept<MediaRequest, MediaResponse>(request);
+                if (response is null)
+                    continue;
+                if (response.Status == MediaStatus.Ok)
+                {
+                    CreateTask(task.Id, response.Address!, response.Port, task.LocalFilePath, task.Action);
+                    lock (_autorunerLocker)
+                    {
+                        _taskQueue.Dequeue();
+                    }
+                }
+                else if (response.Status == MediaStatus.WorkingAll)
+                    await Task.Delay(500);
+                else
+                {
+                    lock (_autorunerLocker)
+                    {
+                        _taskQueue.Dequeue();
+                    }
+                }
+            }
+        }
+        catch { }
+        finally
+        {
+            lock (_autorunerLocker)
+                _autorunerWork = false;
+        }
+    }
+
+    private MediaClient CreateTask(int taskId, string address, int port, string localpath, MediaAction action)
+    {
+        var mediaClient = new MediaClient(taskId, this, address, port, localpath, action);
+        _mediaStreams.Add(mediaClient);
+        TaskChanged?.Invoke(new()
+        {
+            Id = mediaClient.Id,
+            TaskAction = MediaTaskStatus.Created,
+            FileName = Path.GetFileName(localpath),
+            Action = action
+        });
+        mediaClient.StatusChanged += OnClientStatusChanged;
+        mediaClient.Changed += OnClientChanged;
+        return mediaClient;
+    }
+
+    internal void ClosedClient(MediaClient client)
+    {
+        client.StatusChanged -= OnClientStatusChanged;
+        client.Changed -= OnClientChanged;
+        TaskChanged?.Invoke(new()
+        {
+            Id = client.Id,
+            FileName = Path.GetFileName(client.FilePath),
+            ClientStatus = client.Failed ? MediaClientStatus.FinishFailed : MediaClientStatus.FinishOk,
+            TaskAction = MediaTaskStatus.Removed
+        });
+        _mediaStreams.Remove(client);
+    }
+
+    private void OnClientChanged(MediaClient client, long total, long proc)
+    {
+        TaskChanged?.Invoke(new()
+        {
+            Id = client.Id,
+            TaskAction = MediaTaskStatus.Working, 
+            ClientStatus = MediaClientStatus.StartOk,
+            FileName = Path.GetFileName(client.FilePath),
+            Progress = (double)proc / (double)total,
         });
     }
 
-    public IEnumerable<MediaTask> Refresh()
+    private void OnClientStatusChanged(MediaClient client, MediaClientStatus status)
     {
-        var clients = _mediaStreams.Where(x => x.Failed || !x.Connected && !x.Waiting && !x.Working).ToList();
-        foreach (var item in clients)
+        TaskChanged?.Invoke(new()
         {
-            item.Dispose();
-            _mediaStreams.Remove(item);
-        }
-
-        return _mediaStreams.Select(x => new MediaTask() { Id = x.Port, TaskStatus = x.Working ? MediaTaskStatus.Working : MediaTaskStatus.Stopped });
+            Id = client.Id,
+            ClientStatus = status,
+            FileName = Path.GetFileName(client.FilePath),
+            TaskAction = MediaTaskStatus.Working
+        });
     }
 
     public void Dispose()
@@ -68,13 +186,24 @@ public class MediaManager : IDisposable
 public class MediaTask
 {
     public int Id { get; set; }
-    public MediaTaskStatus TaskStatus { get; set; }
+
+    public string? FileName { get; set; }
+
+
+    public MediaAction Action { get; set; }
+
+    public MediaTaskStatus TaskAction { get; set; }
+
+    public MediaClientStatus? ClientStatus { get; set; }
+
+    public double? Progress { get; set; }
 }
 
 public enum MediaTaskStatus
 {
-    Connecting,
+    Waiting,
+    Created,
     Working,
-    Stopped,
+    Removed,
     Failed,
 }

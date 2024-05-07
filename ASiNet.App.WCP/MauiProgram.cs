@@ -1,6 +1,7 @@
 ﻿using ASiNet.App.WCP.Resources.Localization;
 using CommunityToolkit.Maui;
 using LocalizationResourceManager.Maui;
+using ASiNet.Yandex.Ads;
 
 namespace ASiNet.App.WCP;
 public static class MauiProgram
@@ -11,6 +12,10 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+            .ConfigureMauiHandlers(handlers =>
+            {
+                handlers.RegisterYandexAds();
+            })
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

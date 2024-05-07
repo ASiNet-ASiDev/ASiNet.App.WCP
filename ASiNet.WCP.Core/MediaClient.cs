@@ -2,6 +2,7 @@
 using System.Net.Sockets;
 using System.Security.Cryptography;
 using ASiNet.Data.Serialization;
+using ASiNet.Data.Serialization.Attributes;
 using ASiNet.WCP.Common.Enums;
 
 namespace ASiNet.WCP.Core;
@@ -17,17 +18,21 @@ public enum MediaClientStatus
 
 public class MediaClient : IDisposable
 {
-    public MediaClient(string address, int port, string path, MediaAction action)
+    public MediaClient(int id, MediaManager manager, string address, int port, string path, MediaAction action)
     {
+        Id = id;
+        Port = port;
+        _manager = manager;
+        _action = action;
+        _path = path;
+        _tempPath = $"{path}{TEMP_FILE_EXE}";
+        _cts = new();
         try
         {
-            _action = action;
-            _path = path;
-            _tempPath = $"{path}{TEMP_FILE_EXE}";
             Waiting = true;
             _client = new(address, port);
             _stream = _client.GetStream();
-            _cts = new();
+            
             switch (action)
             {
                 case MediaAction.Post:
@@ -40,6 +45,8 @@ public class MediaClient : IDisposable
         }
         catch
         {
+            _client = null!;
+            _stream = null!;
             Failed = true;
             Dispose();
         }
@@ -49,13 +56,27 @@ public class MediaClient : IDisposable
         }
     }
 
-    public MediaClient(int port, string path, MediaAction action)
+    public MediaClient(TcpClient client, int port, string path, MediaAction action)
     {
+        Port = port;
         _action = action;
         _path = path;
         _tempPath = $"{path}{TEMP_FILE_EXE}";
-        _ = Wait(port, action);
+        _client = client;
+        _stream = _client.GetStream();
+        _cts = new();
+        switch (action)
+        {
+            case MediaAction.Post:
+                _ = Post();
+                break;
+            case MediaAction.Get:
+                _ = Get();
+                break;
+        }
     }
+
+    public int Id { get; }
 
     public int Port { get; set; }
 
@@ -65,9 +86,13 @@ public class MediaClient : IDisposable
 
     public bool Failed { get; private set; }
 
+    public bool Disposed { get; private set; }
+
     public bool Connected { get; private set; }
 
     public long TotalSize { get; private set; }
+
+    public string FilePath => _path;
 
     private const string TEMP_FILE_EXE = ".wcptemp";
 
@@ -77,65 +102,27 @@ public class MediaClient : IDisposable
         private set
         {
             _proccessingSize = value;
-            Changed?.Invoke(TotalSize, value);
+            Changed?.Invoke(this, TotalSize, value);
         }
     }
 
-    public event Action<long, long>? Changed;
-    public event Action<MediaClientStatus>? StatusChanged;
+    public event Action<MediaClient, long, long>? Changed;
+    public event Action<MediaClient, MediaClientStatus>? StatusChanged;
 
-    private string _path = null!;
-    private string _tempPath = null!;
+    private string _path;
+    private string _tempPath;
 
-    private TcpClient _client = null!;
-    private NetworkStream _stream = null!;
+    private TcpClient _client;
+    private NetworkStream _stream;
 
-    private CancellationTokenSource _cts = null!;
+    private CancellationTokenSource _cts;
 
     private string? _fileHash;
 
     private long _proccessingSize;
 
     private MediaAction _action;
-
-    private async Task Wait(int port, MediaAction action)
-    {
-        await Task.Run(async () =>
-        {
-            var cts = new CancellationTokenSource();
-            cts.CancelAfter(10_000);
-            try
-            {
-                Waiting = true;
-                var listener = new TcpListener(IPAddress.Any, port);
-                listener.Start();
-                var client = await listener.AcceptTcpClientAsync(cts.Token);
-                listener.Stop();
-
-                _client = client;
-
-                _stream = _client.GetStream();
-                _cts = new();
-                switch (action)
-                {
-                    case MediaAction.Post:
-                        _ = Post();
-                        break;
-                    case MediaAction.Get:
-                        _ = Get();
-                        break;
-                }
-            }
-            catch
-            {
-                Failed = true;
-            }
-            finally
-            {
-                Waiting = false;
-            }
-        });
-    }
+    private MediaManager? _manager;
 
     private async Task Post()
     {
@@ -147,15 +134,15 @@ public class MediaClient : IDisposable
                 if (!File.Exists(_path))
                 {
                     Send(new MediaPackage { Operation = OperationStatus.FinishFailed });
-                    StatusChanged?.Invoke(MediaClientStatus.StartFailed);
+                    StatusChanged?.Invoke(this, MediaClientStatus.StartFailed);
                     Failed = true;
                     return;
                 }
-                StatusChanged?.Invoke(MediaClientStatus.StartOk);
+                StatusChanged?.Invoke(this, MediaClientStatus.StartOk);
                 using (var hashStream = File.Open(_path, FileMode.Open))
                 {
                     TotalSize = hashStream.Length;
-                    var hash = SHA512.HashData(hashStream);
+                    var hash = SHA256.HashData(hashStream);
                     Send(new MediaPackage { Operation = OperationStatus.Start, Data = hash, TotalSize = hashStream.Length });
                 }
                 using (var data = File.Open(_path, FileMode.Open))
@@ -171,25 +158,24 @@ public class MediaClient : IDisposable
                             break;
                         }
                         Send(new MediaPackage { Operation = OperationStatus.Fragment, Data = buffer[..size] });
-                        Task.Delay(10).Wait();
                     }
                 }
                 var result = Accept();
                 if (result.Operation != OperationStatus.FinishOk)
                 {
                     Failed = true;
-                    StatusChanged?.Invoke(MediaClientStatus.FinishOk);
+                    StatusChanged?.Invoke(this, MediaClientStatus.FinishOk);
                 }
                 else
                 {
                     Failed = false;
-                    StatusChanged?.Invoke(MediaClientStatus.FinishFailed);
+                    StatusChanged?.Invoke(this, MediaClientStatus.FinishFailed);
                 }
             }
             catch
             {
                 Failed = true;
-                StatusChanged?.Invoke(MediaClientStatus.Failed);
+                StatusChanged?.Invoke(this, MediaClientStatus.Failed);
             }
             finally
             {
@@ -210,13 +196,13 @@ public class MediaClient : IDisposable
                     var start = Accept();
                     if (start.Operation != OperationStatus.Start)
                     {
-                        StatusChanged?.Invoke(MediaClientStatus.StartFailed);
+                        StatusChanged?.Invoke(this, MediaClientStatus.StartFailed);
                         throw new Exception();
                     }
                     TotalSize = start.TotalSize ?? 0;
                     _fileHash = Convert.ToHexString(start.Data!);
                 }
-                StatusChanged?.Invoke(MediaClientStatus.StartOk);
+                StatusChanged?.Invoke(this, MediaClientStatus.StartOk);
                 using (var data = File.Create(_tempPath))
                 {
                     while (!_cts.Token.IsCancellationRequested)
@@ -226,36 +212,35 @@ public class MediaClient : IDisposable
                             break;
                         data.Write(dataPack.Data!);
                         ProccessingSize += dataPack.Data!.Length;
-                        Task.Delay(10).Wait();
                     }
                 }
                 try
                 {
                     using (var hashStream = File.Open(_tempPath, FileMode.Open))
                     {
-                        var hash = Convert.ToHexString(SHA512.HashData(hashStream));
+                        var hash = Convert.ToHexString(SHA256.HashData(hashStream));
                         if (hash == _fileHash)
                         {
                             Send(new() { Operation = OperationStatus.FinishOk });
-                            StatusChanged?.Invoke(MediaClientStatus.FinishOk);
+                            StatusChanged?.Invoke(this, MediaClientStatus.FinishOk);
                         }
                         else
                         {
                             Send(new() { Operation = OperationStatus.FinishFailed });
-                            StatusChanged?.Invoke(MediaClientStatus.FinishFailed);
+                            StatusChanged?.Invoke(this, MediaClientStatus.FinishFailed);
                         }
                     }
                 }
                 catch
                 {
                     Send(new() { Operation = OperationStatus.FinishFailed });
-                    StatusChanged?.Invoke(MediaClientStatus.FinishFailed);
+                    StatusChanged?.Invoke(this, MediaClientStatus.FinishFailed);
                 }
             }
             catch
             {
                 Failed = true;
-                StatusChanged?.Invoke(MediaClientStatus.Failed);
+                StatusChanged?.Invoke(this, MediaClientStatus.Failed);
             }
             finally
             {
@@ -287,12 +272,14 @@ public class MediaClient : IDisposable
 
     public void Dispose()
     {
+        if(Disposed) 
+            return;
         try
         {
             _client?.Dispose();
             _stream?.Dispose();
             Changed = null;
-            StatusChanged?.Invoke(Failed ? MediaClientStatus.FinishFailed : MediaClientStatus.FinishOk);
+            StatusChanged?.Invoke(this, Failed ? MediaClientStatus.FinishFailed : MediaClientStatus.FinishOk);
             StatusChanged = null;
             if(_action == MediaAction.Get)
             {
@@ -302,17 +289,22 @@ public class MediaClient : IDisposable
                 }
                 else
                 {
+                    if(File.Exists(_path))
+                        File.Delete(_path);
                     File.Move(_tempPath, _path);
                 }
             }
         }
-        catch
+        catch { }
+        finally
         {
-
+            Disposed = true;
+            _manager?.ClosedClient(this);
         }
     }
 }
 
+[PreGenerate]
 public class MediaPackage
 {
     public long? TotalSize { get; set; }

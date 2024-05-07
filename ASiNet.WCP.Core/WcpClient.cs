@@ -8,7 +8,14 @@ using ASiNet.WCP.Core.Primitives;
 namespace ASiNet.WCP.Core;
 public class WcpClient : IDisposable
 {
+
+    public WcpClient()
+    {
+        _mediaManager = new(this);
+    }
     public event Action<bool>? ConnectedStatusChandged;
+
+    public MediaManager MediaManager => _mediaManager;
 
     public bool Connected => _client?.Connected ?? false;
 
@@ -17,7 +24,7 @@ public class WcpClient : IDisposable
 
     private List<Package> _buffer = [];
 
-    private MediaManager _mediaManager = new();
+    private MediaManager _mediaManager;
 
     private readonly object _lock = new();
 
@@ -124,12 +131,27 @@ public class WcpClient : IDisposable
         }
     }
 
-    public async Task<(string[]? Dirs, GetDirectiryStatus Status)> GetDirectories(string? root)
+    public async Task<(string[]? Dirs, string[]? Files, GetDirectiryStatus Status)> GetFileSystemEntris(string? root, bool getFiles = true)
     {
         try
         {
-            var response = await SendAndAccept<GetRemoteDirectoryRequest, GetRemoteDirectoryResponse>(new GetRemoteDirectoryRequest() { RootPath = root });
+            var response = await SendAndAccept<GetRemoteDirectoryRequest, GetRemoteDirectoryResponse>(new GetRemoteDirectoryRequest() { Root = root, GetFiles = getFiles, });
             if(response is null)
+                return (null, null, GetDirectiryStatus.Failed);
+            return (response.Directories, response.Files, response.Status);
+        }
+        catch
+        {
+            return (null, null, GetDirectiryStatus.Failed);
+        }
+    }
+
+    public async Task<(string[]? Dirs, GetDirectiryStatus Status)> GetFileSystemRoots()
+    {
+        try
+        {
+            var response = await SendAndAccept<GetRemoteDirectoryRequest, GetRemoteDirectoryResponse>(new GetRemoteDirectoryRequest() { GetFiles = false, GetRoots = true });
+            if (response is null)
                 return (null, GetDirectiryStatus.Failed);
             return (response.Directories, response.Status);
         }
@@ -151,41 +173,6 @@ public class WcpClient : IDisposable
             return false;
         }
     }
-
-    public async Task<MediaClient?> OpenMediaStream(string remotePath, string localPath, MediaAction action)
-    {
-        try
-        {
-            var request = new MediaStreamRequest()
-            { 
-                Action = action switch
-                { 
-                    MediaAction.Get => MediaAction.Post,
-                    MediaAction.Post => MediaAction.Get,
-                    _ => throw new NotImplementedException(),
-                },
-                Path = remotePath,
-            };
-            var response = await SendAndAccept<MediaStreamRequest, MediaStreamResponse>(request);
-            if(response is null)
-                return null;
-            if(response.Status == MediaStreamStatus.Ok)
-            {
-                return _mediaManager.RunNew(response.Address!, response.Port, localPath, action);
-            }
-            return null;
-        }
-        catch (Exception)
-        {
-            return null;
-        }
-    }
-
-
-    public IEnumerable<MediaTask> RefreshMediaTasks() => 
-        _mediaManager.Refresh();
-    public IEnumerable<MediaTask> GetMediaTasks() =>
-        _mediaManager.GetMediaTasks();
 
     public async Task<Taccept?> SendAndAccept<Tsend, Taccept>(Tsend message) where Taccept : Package where Tsend : Package
     {

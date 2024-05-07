@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsBindingProject>true</IsBindingProject>
+    <RootNamespace>Xamarin.YandexMetrikaPush.Core.Android</RootNamespace>
+    <AssemblyName>Xamarin.YandexMetrikaPush.Core.Android</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="1.7.10">
+    </PackageReference>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <LibraryProjectZip Include="..\lib\Android\appmetricapush-core-2.2.0.aar">
+      <Link>Jars\appmetricapush-core-2.2.0.aar</Link>
+    </LibraryProjectZip>
+  </ItemGroup>
+
+</Project>

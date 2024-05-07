@@ -26,17 +26,13 @@
              Icon="accept.png">
             <ShellContent ContentTemplate="{DataTemplate local:AcceptDataPage}"/>
         </Tab>
-        <Tab Title="{x:Static str:AppResources.shell_macros_title}"
+        <!--<Tab Title="{x:Static str:AppResources.shell_macros_title}"
              Icon="macros.png">
             <ShellContent ContentTemplate="{DataTemplate local:MacrosesPage}"/>
-        </Tab>
+        </Tab>-->
         <Tab Title="{x:Static str:AppResources.shell_settings_title}"
              Icon="settings.png">
             <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}"/>
-        </Tab>
-        <Tab Title="RDA TEST"
-             Icon="settings.png">
-            <ShellContent ContentTemplate="{DataTemplate local:RDAPage}"/>
         </Tab>
     </TabBar>
 

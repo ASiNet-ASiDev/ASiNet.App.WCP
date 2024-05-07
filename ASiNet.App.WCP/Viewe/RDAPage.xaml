@@ -2,32 +2,55 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:ASiNet.App.WCP.VieweModels"
+             xmlns:wcore="clr-namespace:ASiNet.WCP.Common.Enums;assembly=ASiNet.WCP.Common"
              xmlns:models="clr-namespace:ASiNet.App.WCP.Models"
              x:Class="ASiNet.App.WCP.Viewe.RDAPage"
              x:DataType="{x:Type vm:RDAPageVieweModel}"
              x:Name="Root"
              ChildCommand="{Binding GetDirectoriesCommand}">
-    <ContentPage.BindingContext>
-        <vm:RDAPageVieweModel/>
-    </ContentPage.BindingContext>
     <Grid RowSpacing="5" ColumnSpacing="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
+            <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
         <HorizontalStackLayout Spacing="5">
             <Button Text="Back" Command="{Binding UpDirectoriesCommand}"/>
+            <Button Text="Select" Command="{Binding SelectCommand}"/>
+            <Button Text="Close" Command="{Binding CloseCommand}"/>
         </HorizontalStackLayout>
-        <CollectionView Grid.Row="1" ItemsSource="{Binding Directories}">
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Entrys}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type models:FileSystemEntry}">
-                    <Label Text="{Binding Name}" FontSize="Title">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Path=ChildCommand, Source={x:Reference Root}}" CommandParameter="{Binding Path}"/>
-                        </Label.GestureRecognizers>
-                    </Label>
+                    <Grid HeightRequest="50" ColumnSpacing="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label IsVisible="{Binding IsDirectory}" FontFamily="A6_S" Text="" FontSize="Title"/>
+                        <Label IsVisible="{Binding IsFile}" FontFamily="A6_S" Text="" FontSize="Title"/>
+                        <Label Grid.Column="1" Text="{Binding Name}" FontSize="Title">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Path=ChildCommand, Source={x:Reference Root}}" CommandParameter="{Binding .}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label IsVisible="{Binding Root.IsDirectory,Mode=OneWay}" FontFamily="A6_S" Text="" FontSize="Title" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label IsVisible="{Binding Root.IsFile,Mode=OneWay}" FontFamily="A6_S" Text="" FontSize="Title" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label Grid.Column="1" Text="{Binding Root.Name, StringFormat=Name: {0},Mode=OneWay}" FontSize="Title" VerticalOptions="Center"/>
+            <Label Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding Root.Path, StringFormat=Path: {0},Mode=OneWay}" FontSize="Title" VerticalOptions="Center"/>
+        </Grid>
     </Grid>
 </ContentPage>

@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsBindingProject>true</IsBindingProject>
+    <RootNamespace>Xamarin.YandexAds.Android</RootNamespace>
+    <AssemblyName>Xamarin.YandexAds.Android</AssemblyName>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <LibraryProjectZip Include="..\lib\Android\mobileads-5.3.0.aar">
+      <Link>Jars\mobileads-5.3.0.aar</Link>
+    </LibraryProjectZip>
+  </ItemGroup>
+
+</Project>

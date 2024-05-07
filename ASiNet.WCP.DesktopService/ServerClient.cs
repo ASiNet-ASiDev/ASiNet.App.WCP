@@ -16,10 +16,11 @@ public class ServerClient : IDisposable
         _client = client;
         _keyboard = keyboard;
         _mouse = mouse;
-        _config = config;
+        Config = config;
         _keyboardLayout = layout;
         _stream = client.GetStream();
         _mediaManager = new(this);
+        _directoryAccess = new(config);
     }
 
     public string? Address => ((IPEndPoint?)_client.Client.LocalEndPoint)?.Address.ToString();
@@ -30,7 +31,7 @@ public class ServerClient : IDisposable
     private IVirtualMouse _mouse;
     private IVirtualKeyboardLayout _keyboardLayout;
 
-    private ServerConfig _config;
+    public ServerConfig Config;
 
     private TcpClient _client;
 
@@ -38,7 +39,7 @@ public class ServerClient : IDisposable
 
     private MediaManager _mediaManager;
 
-    private RemoteDirectoryAccess _directoryAccess = new();
+    private RemoteDirectoryAccess _directoryAccess;
 
     public bool Update()
     {
@@ -58,8 +59,8 @@ public class ServerClient : IDisposable
             else if (package is GetLanguageRequest glr)
                 GetLanguageCode(glr);
             else if(package is GetRemoteDirectoryRequest grd)
-                BinarySerializer.Serialize<Package>(_directoryAccess.GetDirectory(grd), _stream);
-            else if (package is MediaStreamRequest msr)
+                BinarySerializer.Serialize<Package>(_directoryAccess.Change(grd), _stream);
+            else if (package is MediaRequest msr)
                 BinarySerializer.Serialize<Package>(_mediaManager.Change(msr), _stream);
             else if (package is DisconnectionRequest dc)
                 DisconectedRequest(dc);

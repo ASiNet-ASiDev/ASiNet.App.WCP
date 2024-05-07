@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsBindingProject>true</IsBindingProject>
+    <RootNamespace>Xamarin.YandexMetrikaPush.Provider.Firebase.Android</RootNamespace>
+    <AssemblyName>Xamarin.YandexMetrikaPush.Provider.Firebase.Android</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Xamarin.YandexMetrikaPush.Core.Android\Xamarin.YandexMetrikaPush.Core.Android.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="1.9.23">
+    </PackageReference>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <LibraryProjectZip Include="..\lib\Android\appmetricapush-provider-firebase-2.2.0.aar">
+      <Link>Jars\appmetricapush-provider-firebase-2.2.0.aar</Link>
+    </LibraryProjectZip>
+  </ItemGroup>
+
+</Project>
