@@ -25,7 +25,11 @@ public class AppConfig
     public static AppConfig ReadOrEmpty()
     {
         if(!File.Exists(CnfPath))
-            return new() { Port = 44544 };
+        {
+            var cnf = new AppConfig() { Port = 44544 };
+            cnf.SaveOrUpdate();
+            return cnf;
+        }
 
         using var file = File.OpenRead(CnfPath);
         var data = JsonSerializer.Deserialize<AppConfig>(file);

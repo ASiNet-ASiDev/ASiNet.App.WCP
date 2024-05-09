@@ -17,7 +17,13 @@ public class WcpClient : IDisposable
 
     public MediaManager MediaManager => _mediaManager;
 
-    public bool Connected => _client?.Connected ?? false;
+    public bool Connected => IsConnectedCheck();
+
+    public int ProtocolVersion => WCPProtocolVersion.VERSION;
+
+    private int _lastPort;
+
+    private string? _lastAddress;
 
     private TcpClient? _client;
     private NetworkStream? _stream;
@@ -30,32 +36,38 @@ public class WcpClient : IDisposable
 
     public async Task<bool> Connect(string address, int port)
     {
-        return await Task.Run(() =>
+        try
         {
-            try
+            if(Connected)
+                return true;
+            lock (_lock)
             {
-                lock (_lock)
-                {
-                    _client = new TcpClient(address, port);
-                    _stream = _client.GetStream();
+                _client = new TcpClient();
+            }
+            using var cts = new CancellationTokenSource();
+            cts.CancelAfter(5000);
+            await _client.ConnectAsync(address, port, cts.Token);
+            _stream = _client.GetStream();
 
-                    ConnectedStatusChandged?.Invoke(_client?.Connected ?? false);
-                    return _client?.Connected ?? false;
-                }
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        });
+            _lastAddress = address;
+            _lastPort = port;
+            ConnectedStatusChandged?.Invoke(_client?.Connected ?? false);
+            return _client?.Connected ?? false;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 
-    public async Task<bool> Reconnect(string address, int port)
+    public async Task<bool> Reconnect()
     {
         try
         {
+            if(_lastPort == 0 || _lastAddress is null)
+                return false;
             await Disconnect();
-            return await Connect(address, port);
+            return await Connect(_lastAddress, _lastPort);
         }
         catch (Exception)
         {
@@ -67,7 +79,7 @@ public class WcpClient : IDisposable
     {
         try
         {
-            if (_client?.Connected ?? false)
+            if (Connected)
             {
                 var request = new DisconnectionRequest();
                 var response = await SendAndAccept<DisconnectionRequest, DisconectionResponce>(request);
@@ -193,6 +205,8 @@ public class WcpClient : IDisposable
     {
         try
         {
+            if(!Connected && !Reconnect().Result)
+                return false;
             lock (_lock)
             {
                 BinarySerializer.Serialize<Package>(message, _stream!);
@@ -237,6 +251,28 @@ public class WcpClient : IDisposable
         catch (Exception)
         {
             return null;
+        }
+    }
+
+    private bool IsConnectedCheck()
+    {
+        try
+        {
+            if (_client != null && _client.Client != null && _client.Client.Connected)
+            {
+                if (_client.Client.Poll(0, SelectMode.SelectRead))
+                {
+                    byte[] buff = new byte[1];
+                    if (_client.Client.Receive(buff, SocketFlags.Peek) == 0)
+                        return false;
+                }
+                return true;
+            }
+            return false;
+        }
+        catch
+        {
+            return false;
         }
     }
 

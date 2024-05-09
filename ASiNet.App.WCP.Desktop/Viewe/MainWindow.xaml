@@ -5,18 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ASiNet.App.WCP.Desktop"
         xmlns:vm="clr-namespace:ASiNet.App.WCP.Desktop.VieweModels"
-        mc:Ignorable="d"
-        Title="WCP Desktop" Height="450" Width="800" MinWidth="650" MinHeight="300">
+        mc:Ignorable="d" ResizeMode="NoResize"
+        Title="WCP Desktop" Height="230" Width="320">
     <Window.DataContext>
         <vm:MainWindowVieweModel/>
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="200" MaxWidth="500"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Border Grid.Row="1" Grid.Column="1" CornerRadius="5" BorderBrush="Black" BorderThickness="1" Padding="5" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -28,7 +26,8 @@
                     <Button Content="Stop service" Width="100" Margin="5" Command="{Binding StopServiceCommand}" ToolTip="Stop bacground service."/>
                     <Button Content="Update" Width="50" Margin="5" Command="{Binding UpdateServiceInfoCommand}" ToolTip="Update info."/>
                 </StackPanel>
-                <CheckBox Content="Autorun" IsChecked="{Binding Autorun}" Margin="5"/>
+                <CheckBox Content="Add to autorun" IsChecked="{Binding Autorun}" Margin="5"/>
+                <Button Content="Install service" Command="{Binding InstallOrReinstallServiceCommand}" ToolTip="Install or reinstall service."/>
             </StackPanel>
         </Border>
     </Grid>

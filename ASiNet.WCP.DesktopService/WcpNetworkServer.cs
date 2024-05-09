@@ -14,9 +14,12 @@ public class WcpNetworkServer
     {
         _config = ServerConfig.LoadOrEmpty();
         _listener = new(IPAddress.Any, _config.Port);
+        _multicastClient = new(44516, "230.44.5.16", _config.Port, WCPProtocolVersion.VERSION);
     }
     
     private TcpListener _listener;
+
+    private MulticastClient _multicastClient;
 
     private IVirtualKeyboardLayout _keyboardLayout = new KeyboardLayout();
     private IVirtualKeyboard _virtualKeyboard = new WindowsKeyboard();
@@ -24,6 +27,7 @@ public class WcpNetworkServer
 
     private ServerConfig _config;
 
+    private CancellationTokenSource? _multicastToken;
 
     public void Start()
     {
@@ -46,11 +50,13 @@ public class WcpNetworkServer
             {
                 if (client is null || !client.Connected)
                 {
+                    MulticastRun();
                     var tcpclient = WaitClient(token);
                     if (tcpclient is null)
                         continue;
                     client?.Dispose();
-                    client = new(tcpclient, _virtualKeyboard, _virtualMouse, _keyboardLayout, _config);      
+                    client = new(tcpclient, _virtualKeyboard, _virtualMouse, _keyboardLayout, _config); 
+                    MulticastStop();
                 }
                 else
                     if (!client.Update())
@@ -59,6 +65,42 @@ public class WcpNetworkServer
         });
     }
 
+    private void MulticastStop()
+    {
+        try
+        {
+            if(_multicastToken is null)
+                return;
+            _multicastToken.Cancel();
+            _multicastToken.Dispose();
+            _multicastToken = null;
+        }
+        catch { }
+    }
+
+    private void MulticastRun()
+    {
+        try
+        {
+            if(_multicastToken is not null)
+                return;
+            _multicastToken = new();
+            _ = Multicast(_multicastToken.Token);
+        }
+        catch { }
+    }
+
+    private async Task Multicast(CancellationToken token)
+    {
+        try
+        {
+            await _multicastClient.WaitUser(token);
+        }
+        catch (Exception)
+        {
+
+        }
+    }
 
     private TcpClient? WaitClient(CancellationToken token)
     {

@@ -28,7 +28,7 @@ public static class MauiProgram
                 settings.AddResource(AppResources.ResourceManager);
                 settings.RestoreLatestCulture(true);
             });
-
+        builder.Services.AddSingleton<IAlertService, AlertService>();
         //#if DEBUG
         //		builder.Logging.AddDebug();
         //#endif

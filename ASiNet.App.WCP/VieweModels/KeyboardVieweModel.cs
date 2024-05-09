@@ -25,7 +25,10 @@ public partial class KeyboardVieweModel : ObservableObject
         ChangeStatus(keyResult);
         _ = Task.Run(() =>
         {
-            _client.SendKeyEvent(keyResult);
+            if (!_client.SendKeyEvent(keyResult))
+            {
+                App.AlertSvc.ShowAlert(Resources.Localization.AppResources.alert_r_connecting_failed_title, Resources.Localization.AppResources.alert_r_connecting_failed_text);
+            }
         });
     }
 

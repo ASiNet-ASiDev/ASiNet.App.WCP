@@ -56,6 +56,19 @@ public partial class MainWindowVieweModel : ObservableObject
         }
     }
 
+    [RelayCommand]
+    private void InstallOrReinstallService()
+    {
+        try
+        {
+            ServiceContext.InstallOrReinstallService();
+        }
+        catch (Exception)
+        {
+
+        }
+    }
+
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         if(e.PropertyName == nameof(Autorun))

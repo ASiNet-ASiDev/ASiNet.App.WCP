@@ -22,18 +22,18 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<AssemblyName>WCP</AssemblyName>
 		<NeutralLanguage>en-US</NeutralLanguage>
-		<DefaultLanguage>en-us</DefaultLanguage>
+		<DefaultLanguage>en-US</DefaultLanguage>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
 	  <AndroidPackageFormat>apk</AndroidPackageFormat>
-	  <EnableLLVM>True</EnableLLVM>
-	  <DebugType>embedded</DebugType>
-	  <AndroidLinkTool>r8</AndroidLinkTool>
+
+	  <PublishTrimmed>True</PublishTrimmed>
+	  <RunAOTCompilation>True</RunAOTCompilation>
+	  <DebugSymbols>False</DebugSymbols>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
-	  <EnableLLVM>True</EnableLLVM>
 	  <DebugType>embedded</DebugType>
 	</PropertyGroup>
 
@@ -47,8 +47,8 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#309f57" />
-
+		<MauiIcon Include="Resources\AppIcon\appicon.png" BaseSize="128,128" />
+		
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#309f57" BaseSize="128,128" />
 
@@ -73,10 +73,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<TrimmerRootAssembly Include="CommunityToolkit.Mvvm" RootMode="All" />
+		<TrimmerRootAssembly Include="Xamarin.AndroidX.Core" RootMode="All" />
+		<TrimmerRootAssembly Include="Xamarin.Google.Android.Material" RootMode="All" />
+		<TrimmerRootAssembly Include="Xamarin.AndroidX.VectorDrawable.Animated" RootMode="All" />
+		<TrimmerRootAssembly Include="System.ComponentModel.TypeConverter" RootMode="All" />
+		<TrimmerRootAssembly Include="System.Net.Requests" RootMode="All" />
+		<TrimmerRootAssembly Include="Microsoft.Maui.Controls" RootMode="All" />
+	</ItemGroup>
+	
+	<ItemGroup>
 		
 		<PackageReference Include="CommunityToolkit.Maui" Version="8.0.1" />
 		
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="LocalizationResourceManager.Maui" Version="1.2.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.21" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.21" />
@@ -138,9 +148,6 @@
 	  <MauiXaml Update="Viewe\ConnectionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Viewe\ConnectPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Viewe\Controls\ComponentItem.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -181,5 +188,7 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
+
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadGenericExceptionInfoBarASiNetAppWCPHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

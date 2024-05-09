@@ -1,19 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.IO;
-using Microsoft.Win32;
-using System.Diagnostics;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Security.Cryptography;
+using System.Windows;
+using IWshRuntimeLibrary;
 
 namespace ASiNet.App.WCP.Desktop;
 public static class ServiceContext
 {
+    static ServiceContext()
+    {
+        if (!CheckActualService())
+            InstallOrReinstallService();
+    }
 
-    private static string _servicePath = Path.Join(Environment.CurrentDirectory, "service", "WCPService.exe");
+    private const string WCP_SERVICE_NAME = "WCPService.exe";
+    private const string WCP_SERVICE_LNK = "WCPService.lnk";
+
+    private static string _serviceDirectory = Path.Join(Environment.CurrentDirectory, "service");
+    private static string _cnfPath = Path.Join(Environment.CurrentDirectory, "configs", "config.cnf");
+    private static string _servicePath = Path.Join(_serviceDirectory, WCP_SERVICE_NAME);
 
     public static IEnumerable<string> IpAddresses => GetLocalIPv4(NetworkInterfaceType.Ethernet).Concat(GetLocalIPv4(NetworkInterfaceType.Wireless80211));
 
@@ -22,11 +29,14 @@ public static class ServiceContext
         get
         {
             // TODO add to autorun
-            return false;
+            return ExistAutorun();
         }
         set
         {
-            // TODO add to autorun
+            if (value)
+                CreateAutorun();
+            else
+                RemoveAutorun();
         }
     }
 
@@ -38,7 +48,7 @@ public static class ServiceContext
         {
             try
             {
-                if(IsRun)
+                if (IsRun)
                     return true;
                 var prc = Process.Start(_servicePath);
                 prc.Dispose();
@@ -97,7 +107,7 @@ public static class ServiceContext
 
     public static IEnumerable<string> GetLocalIPv4(NetworkInterfaceType _type)
     {
-        
+
         var ni = NetworkInterface.GetAllNetworkInterfaces();
         foreach (NetworkInterface item in NetworkInterface.GetAllNetworkInterfaces())
             if (item.NetworkInterfaceType == _type && item.OperationalStatus == OperationalStatus.Up)
@@ -110,5 +120,84 @@ public static class ServiceContext
                     }
                 }
             }
+    }
+
+
+    public static void CreateAutorun()
+    {
+        try
+        {
+            var autorunPath = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.Startup), WCP_SERVICE_LNK);
+            WshShell wshShell = new WshShell();
+
+            IWshShortcut Shortcut = (IWshShortcut)wshShell.
+                CreateShortcut(autorunPath);
+
+            Shortcut.TargetPath = _servicePath;
+
+            Shortcut.Save();
+        }
+        catch { }
+    }
+
+    public static bool ExistAutorun() => System.IO.File.Exists(Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.Startup), WCP_SERVICE_LNK));
+
+
+    public static void RemoveAutorun()
+    {
+        try
+        {
+            var autorunPath = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.Startup), WCP_SERVICE_LNK);
+            System.IO.File.Delete(autorunPath);
+        }
+        catch { }
+    }
+
+
+    public static bool InstallOrReinstallService()
+    {
+        try
+        {
+            if(IsRun)
+                return true;
+            if (!Directory.Exists(_serviceDirectory))
+                Directory.CreateDirectory(_serviceDirectory);
+            if(System.IO.File.Exists(_cnfPath))
+                System.IO.File.Delete(_cnfPath);
+            RemoveAutorun();
+            var uri = new Uri($"Service\\WCPService.exe", UriKind.Relative);
+            var streamInfo = Application.GetResourceStream(uri);
+            using var stream = streamInfo.Stream;
+            using var distFile = System.IO.File.Create(_servicePath);
+            stream.CopyTo(distFile);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public static bool CheckActualService()
+    {
+        try
+        {
+            if(System.IO.File.Exists(_servicePath))
+            {
+                var uri = new Uri($"Service\\WCPService.exe", UriKind.Relative);
+                var streamInfo = Application.GetResourceStream(uri);
+                using var stream = streamInfo.Stream;
+                using var distFile = System.IO.File.Open(_servicePath, FileMode.Open);
+                var a = Convert.ToHexString(SHA256.HashData(stream));
+                var b = Convert.ToHexString(SHA256.HashData(distFile));
+
+                return a == b;
+            }
+            return false;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }

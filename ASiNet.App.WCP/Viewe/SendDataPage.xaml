@@ -4,13 +4,16 @@
              xmlns:tk="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:e="clr-namespace:ASiNet.App.WCP.Models.Enums"
              xmlns:vm="clr-namespace:ASiNet.App.WCP.VieweModels"
+             xmlns:ads="clr-namespace:ASiNet.Yandex.Ads;assembly=ASiNet.Yandex.Ads"
              xmlns:model="clr-namespace:ASiNet.App.WCP.Models"
+             xmlns:local="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+             xmlns:str="clr-namespace:ASiNet.App.WCP.Resources.Localization"
              x:Class="ASiNet.App.WCP.Viewe.SendDataPage"
              x:DataType="{x:Type vm:SendDataPageVieweModel}"
              Command="{Binding SetLocalFilePathCommand}"
              SendFiles="{Binding SendFileCommand}"
              x:Name="Root" 
-             Title="Send file">
+             Title="{x:Static str:AppResources.sd_page_title}">
 
     <ContentPage.BindingContext>
         <vm:SendDataPageVieweModel/>
@@ -24,21 +27,35 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid ColumnSpacing="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Text="Select file" Pressed="Button_Pressed"/>
-            <Button Grid.Column="1" Text="Send" Command="{Binding SendCommand}"/>
+            <Button Text="{x:Static str:AppResources.sd_select_file_button}" 
+                    Pressed="Button_Pressed"/>
+            <Button Grid.Column="1" 
+                    Text="{x:Static str:AppResources.sd_send_file_button}" 
+                    Command="{Binding SendCommand}"/>
         </Grid>
-        <Label Grid.Row="1" Text="{Binding LocalFileName, StringFormat=File: {0}}" FontSize="Body" VerticalOptions="Center"/>
-        <Entry Grid.Row="2" Placeholder="Save file name" Text="{Binding RemoteFileName}" FontSize="Body" VerticalOptions="Center"/>
+        <Label Grid.Row="1" 
+               Text="{local:TranslateBinding LocalFileName, TranslateFormat=sd_file_name_label}" 
+               FontSize="Body" 
+               VerticalOptions="Center"/>
+        <Entry Grid.Row="2" 
+               Placeholder="{x:Static str:AppResources.sd_save_file_name_ph}" 
+               Text="{Binding RemoteFileName}" 
+               FontSize="Body" 
+               VerticalOptions="Center"/>
 
-        <Button Grid.Row="4" Text="Select and send files" Pressed="Button_Pressed_files"/>
+        <Button Grid.Row="4" 
+                Text="{x:Static str:AppResources.sd_select_and_send_button}" 
+                Pressed="Button_Pressed_files"/>
 
-        <CollectionView Grid.Row="5" ItemsSource="{Binding Manager.Tasks}" >
+        <CollectionView Grid.Row="5" 
+                        ItemsSource="{Binding Manager.Tasks}" >
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type vm:TaskVieweModel}">
                     <Grid>
@@ -51,14 +68,25 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Label Grid.ColumnSpan="2" Text="{Binding FileName}"/>
-                        <Label Grid.Row="1" Text="{Binding Status}"/>
+                        <Label Grid.ColumnSpan="2" 
+                               Text="{Binding FileName}"/>
+                        <Label Grid.Row="1" 
+                               Text="{Binding Status}"/>
                         <!--<Label Grid.Row="1" Grid.Column="1" Text="{Binding Action}"/>-->
-                        <ProgressBar Grid.Row="2" Grid.ColumnSpan="2" Progress="{Binding Progress}" ProgressColor="{StaticResource WCPForeground1Color}"/>
+                        <ProgressBar Grid.Row="2" 
+                                     Grid.ColumnSpan="2"
+                                     Progress="{Binding Progress}"
+                                     ProgressColor="{StaticResource WCPForeground1Color}"/>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Text="Clear logs" Grid.Row="6" Command="{Binding Manager.ClearRecordsCommand}" HorizontalOptions="End"/>
+        <Button Text="{x:Static str:AppResources.tm_clear_logs_button}" 
+                Grid.Row="6" 
+                Command="{Binding Manager.ClearRecordsCommand}" 
+                HorizontalOptions="End"/>
+        <ads:Banner AdUnitId="R-M-8009266-3" 
+                    Grid.Row="7" 
+                    HorizontalOptions="Fill"/>
     </Grid>
 </ContentPage>

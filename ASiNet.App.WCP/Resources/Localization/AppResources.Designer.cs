@@ -61,7 +61,79 @@ namespace ASiNet.App.WCP.Resources.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Components.
+        ///   Ищет локализованную строку, похожую на it was not possible to connect to the server, please check the Internet connection, the correctness of the connection data, as well as whether the WCP Service is running on your computer..
+        /// </summary>
+        internal static string alert_connection_failed_text {
+            get {
+                return ResourceManager.GetString("alert_connection_failed_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Failed to connect :(.
+        /// </summary>
+        internal static string alert_connection_failed_title {
+            get {
+                return ResourceManager.GetString("alert_connection_failed_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на It looks like your network configuration does not support broadcast packets, or another error has occurred..
+        /// </summary>
+        internal static string alert_find_server_failed_text {
+            get {
+                return ResourceManager.GetString("alert_find_server_failed_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Oops :(.
+        /// </summary>
+        internal static string alert_find_server_failed_title {
+            get {
+                return ResourceManager.GetString("alert_find_server_failed_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на It was not possible to reconnect to the server, check your Internet connection and the status of the server..
+        /// </summary>
+        internal static string alert_r_connecting_failed_text {
+            get {
+                return ResourceManager.GetString("alert_r_connecting_failed_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Reconnection error :(.
+        /// </summary>
+        internal static string alert_r_connecting_failed_title {
+            get {
+                return ResourceManager.GetString("alert_r_connecting_failed_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Save the current connection configuration to automatically connect to this server, you can always change this data in the settings..
+        /// </summary>
+        internal static string alert_save_cnf_text {
+            get {
+                return ResourceManager.GetString("alert_save_cnf_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Save the configuration?.
+        /// </summary>
+        internal static string alert_save_cnf_title {
+            get {
+                return ResourceManager.GetString("alert_save_cnf_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Controls.
         /// </summary>
         internal static string cm_title_label {
             get {
@@ -196,6 +268,15 @@ namespace ASiNet.App.WCP.Resources.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Show connect control.
+        /// </summary>
+        internal static string cn_connection_expander {
+            get {
+                return ResourceManager.GetString("cn_connection_expander", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Connection status..
         /// </summary>
         internal static string cn_connection_status_label {
@@ -214,6 +295,15 @@ namespace ASiNet.App.WCP.Resources.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Enter address.
+        /// </summary>
+        internal static string cn_enter_data_button {
+            get {
+                return ResourceManager.GetString("cn_enter_data_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Connect failed!.
         /// </summary>
         internal static string cn_failed_label {
@@ -223,11 +313,38 @@ namespace ASiNet.App.WCP.Resources.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Find server.
+        /// </summary>
+        internal static string cn_find_server_button {
+            get {
+                return ResourceManager.GetString("cn_find_server_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Connection.
+        /// </summary>
+        internal static string cn_page_title {
+            get {
+                return ResourceManager.GetString("cn_page_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Port: {0}.
         /// </summary>
         internal static string cn_port_label {
             get {
                 return ResourceManager.GetString("cn_port_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Warning: The server protocol version does not match the current one..
+        /// </summary>
+        internal static string cn_protocol_vesion_warn {
+            get {
+                return ResourceManager.GetString("cn_protocol_vesion_warn", resourceCulture);
             }
         }
         
@@ -300,6 +417,60 @@ namespace ASiNet.App.WCP.Resources.Localization {
         internal static string cnt_remember_data_check_box {
             get {
                 return ResourceManager.GetString("cnt_remember_data_check_box", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на File: {0}.
+        /// </summary>
+        internal static string sd_file_name_label {
+            get {
+                return ResourceManager.GetString("sd_file_name_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Send files.
+        /// </summary>
+        internal static string sd_page_title {
+            get {
+                return ResourceManager.GetString("sd_page_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Save file name.
+        /// </summary>
+        internal static string sd_save_file_name_ph {
+            get {
+                return ResourceManager.GetString("sd_save_file_name_ph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Select and send files.
+        /// </summary>
+        internal static string sd_select_and_send_button {
+            get {
+                return ResourceManager.GetString("sd_select_and_send_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Select file.
+        /// </summary>
+        internal static string sd_select_file_button {
+            get {
+                return ResourceManager.GetString("sd_select_file_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Send.
+        /// </summary>
+        internal static string sd_send_file_button {
+            get {
+                return ResourceManager.GetString("sd_send_file_button", resourceCulture);
             }
         }
         
@@ -426,6 +597,78 @@ namespace ASiNet.App.WCP.Resources.Localization {
         internal static string shell_settings_title {
             get {
                 return ResourceManager.GetString("shell_settings_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Clear logs.
+        /// </summary>
+        internal static string tm_clear_logs_button {
+            get {
+                return ResourceManager.GetString("tm_clear_logs_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Loading....
+        /// </summary>
+        internal static string tm_created {
+            get {
+                return ResourceManager.GetString("tm_created", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Operation failed..
+        /// </summary>
+        internal static string tm_status_failed {
+            get {
+                return ResourceManager.GetString("tm_status_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Operation failed..
+        /// </summary>
+        internal static string tm_status_finish_failed {
+            get {
+                return ResourceManager.GetString("tm_status_finish_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Operation Ok..
+        /// </summary>
+        internal static string tm_status_finish_ok {
+            get {
+                return ResourceManager.GetString("tm_status_finish_ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Operation failed..
+        /// </summary>
+        internal static string tm_status_start_failed {
+            get {
+                return ResourceManager.GetString("tm_status_start_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Working....
+        /// </summary>
+        internal static string tm_status_start_ok {
+            get {
+                return ResourceManager.GetString("tm_status_start_ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Waiting....
+        /// </summary>
+        internal static string tm_waiting {
+            get {
+                return ResourceManager.GetString("tm_waiting", resourceCulture);
             }
         }
     }

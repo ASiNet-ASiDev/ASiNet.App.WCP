@@ -1,7 +1,5 @@
-﻿using System.Diagnostics;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
-using System.Security.Principal;
 using ASiNet.WCP.Common.Enums;
 using ASiNet.WCP.Common.Primitives;
 using ASiNet.WCP.Core;
@@ -39,14 +37,13 @@ public class MediaManager : IDisposable
     {
         FreeClients();
 
-        if(_mediaClients.Count >= _mediaClientsCount)
+        if (_mediaClients.Count >= _mediaClientsCount)
         {
-            Debug.WriteLine($"Open media client request: Skip!");
             return new() { Status = MediaStatus.WorkingAll };
         }
 
         var filePath = string.Empty;
-        if(request.DirectoryPath is null)
+        if (request.DirectoryPath is null)
         {
             if (!Directory.Exists(_client.Config.FilesDirectory))
                 Directory.CreateDirectory(_client.Config.FilesDirectory);
@@ -72,24 +69,22 @@ public class MediaManager : IDisposable
         cts.CancelAfter(_connectionTimeout);
         try
         {
-            Debug.WriteLine($"Wait media client");
             var client = await _mediaListener.AcceptTcpClientAsync(cts.Token);
             lock (_locker)
             {
-                Debug.WriteLine($"New media client[index:{_mediaClients.Count}]");
                 var mediaClient = new MediaClient(client, _port, path, media);
                 _mediaClients.Add(mediaClient);
             }
         }
         catch (OperationCanceledException)
         {
-            Debug.WriteLine($"Wait media client: Timeout!");
+
         }
-        catch (Exception ex) 
+        catch (Exception ex)
         {
-            Debug.WriteLine($"Wait media client: ex: {ex.Message}");
+
         }
-        
+
     }
 
     private void FreeClients()
@@ -101,7 +96,6 @@ public class MediaManager : IDisposable
                 var clients = _mediaClients.Where(x => x.Failed || x.Disposed).ToList();
                 foreach (var item in clients)
                 {
-                    Debug.WriteLine($"Remove media client: [connected: {item.Connected}, wainting: {item.Waiting}, working: {item.Working}, disposed: {item.Disposed}]");
                     if (!item.Disposed)
                         item.Dispose();
                     _mediaClients.Remove(item);

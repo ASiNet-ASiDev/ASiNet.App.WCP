@@ -118,52 +118,52 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="alert_connection_failed_text" xml:space="preserve">
-    <value>it was not possible to connect to the server, please check the Internet connection, the correctness of the connection data, as well as whether the WCP Service is running on your computer.</value>
+    <value>не удалось подключиться к серверу, пожалуйста, проверьте подключение к Интернету, правильность данных для подключения, а также, запущена ли на вашем компьютере служба WCP.</value>
   </data>
   <data name="alert_connection_failed_title" xml:space="preserve">
-    <value>Failed to connect :(</value>
+    <value>Не удалось подключиться :(</value>
   </data>
   <data name="alert_find_server_failed_text" xml:space="preserve">
-    <value>It looks like your network configuration does not support broadcast packets, or another error has occurred.</value>
+    <value>Похоже, что конфигурация вашей сети не поддерживает широковещательные пакеты или произошла другая ошибка.</value>
   </data>
   <data name="alert_find_server_failed_title" xml:space="preserve">
     <value>Oops :(</value>
   </data>
   <data name="alert_r_connecting_failed_text" xml:space="preserve">
-    <value>It was not possible to reconnect to the server, check your Internet connection and the status of the server.</value>
+    <value>Не удалось повторно подключиться к серверу, проверить ваше интернет-соединение и состояние сервера.</value>
   </data>
   <data name="alert_r_connecting_failed_title" xml:space="preserve">
-    <value>Reconnection error :(</value>
+    <value>Ошибка повторного подключения :(</value>
   </data>
   <data name="alert_save_cnf_text" xml:space="preserve">
-    <value>Save the current connection configuration to automatically connect to this server, you can always change this data in the settings.</value>
+    <value>Сохраните текущую конфигурацию подключения, чтобы автоматически подключиться к этому серверу, вы всегда можете изменить эти данные в настройках.</value>
   </data>
   <data name="alert_save_cnf_title" xml:space="preserve">
-    <value>Save the configuration?</value>
+    <value>Сохранить конфигурацию?</value>
   </data>
   <data name="cmp_all_author_label" xml:space="preserve">
-    <value>Author: {0}</value>
+    <value>Автор: {0}</value>
   </data>
   <data name="cmp_all_show_button" xml:space="preserve">
-    <value>Show</value>
+    <value>Показать</value>
   </data>
   <data name="cmp_default_mouse_author" xml:space="preserve">
     <value>ASi</value>
   </data>
   <data name="cmp_default_mouse_description" xml:space="preserve">
-    <value>Control your PC-cursor use the joystick!</value>
+    <value>Управляй своим компьютером с помощью джостика!</value>
   </data>
   <data name="cmp_default_mouse_title" xml:space="preserve">
-    <value>Mouse joystick</value>
+    <value>Джостик для мышки</value>
   </data>
   <data name="cmp_default_ruen_keyboard_author" xml:space="preserve">
     <value>ASi</value>
   </data>
   <data name="cmp_default_ruen_keyboard_description" xml:space="preserve">
-    <value>Default QWERTY Ru-En keyboard</value>
+    <value>Обычная QWERTY Ru-En Клавиатура</value>
   </data>
   <data name="cmp_default_ruen_keyboard_title" xml:space="preserve">
-    <value>Russian QWERTY keyboard</value>
+    <value>Русско-Английская QWERTY клавиатура</value>
   </data>
   <data name="cmp_default_youtube_keyboard_author" xml:space="preserve">
     <value>DifolderyXXL</value>
@@ -175,150 +175,150 @@
     <value>YouTube keyboard</value>
   </data>
   <data name="cm_title_label" xml:space="preserve">
-    <value>Controls</value>
+    <value>Элементы управления</value>
   </data>
   <data name="cnt_address_entry_ph" xml:space="preserve">
-    <value>Address</value>
+    <value>Адрес</value>
   </data>
   <data name="cnt_auto_connect_check_box" xml:space="preserve">
-    <value>Auto connect</value>
+    <value>Автоматически подключатся</value>
   </data>
   <data name="cnt_connect_failed_label" xml:space="preserve">
-    <value>Connection failed!</value>
+    <value>Ошибка подключения!</value>
   </data>
   <data name="cnt_continue_button" xml:space="preserve">
-    <value>Continue</value>
+    <value>Продолжить</value>
   </data>
   <data name="cnt_incorrect_address_label" xml:space="preserve">
-    <value>Incorect address, Valid format: 255.255.255.255</value>
+    <value>Неверный адрес, Корректный формат: 255.255.255.255</value>
   </data>
   <data name="cnt_incorrect_port_label" xml:space="preserve">
-    <value>Incorect port, Valid format: 1-65535</value>
+    <value>Неверный порт, Корректный формат: 1-65535</value>
   </data>
   <data name="cnt_port_entry_ph" xml:space="preserve">
-    <value>Port</value>
+    <value>Порт</value>
   </data>
   <data name="cnt_remember_data_check_box" xml:space="preserve">
-    <value>Remember the data</value>
+    <value>Запомнить данные</value>
   </data>
   <data name="cn_address_label" xml:space="preserve">
-    <value>Address: {0}</value>
+    <value>Адрес: {0}</value>
   </data>
   <data name="cn_connecting_label" xml:space="preserve">
-    <value>Connecting...</value>
+    <value>Подключение...</value>
   </data>
   <data name="cn_connection_expander" xml:space="preserve">
-    <value>Show connect control</value>
+    <value>Параметры подключения</value>
   </data>
   <data name="cn_connection_status_label" xml:space="preserve">
-    <value>Connection status.</value>
+    <value>Статус подключения.</value>
   </data>
   <data name="cn_connect_button" xml:space="preserve">
-    <value>Connect</value>
+    <value>Подключится</value>
   </data>
   <data name="cn_disconnect_button" xml:space="preserve">
-    <value>Disconnect</value>
+    <value>Отключится</value>
   </data>
   <data name="cn_enter_data_button" xml:space="preserve">
-    <value>Enter address</value>
+    <value>Ввести адрес</value>
   </data>
   <data name="cn_failed_label" xml:space="preserve">
-    <value>Connect failed!</value>
+    <value>Ошибка подключения!</value>
   </data>
   <data name="cn_find_server_button" xml:space="preserve">
-    <value>Find server</value>
+    <value>Найти сервер</value>
   </data>
   <data name="cn_page_title" xml:space="preserve">
-    <value>Connection</value>
+    <value>Подключение</value>
   </data>
   <data name="cn_port_label" xml:space="preserve">
-    <value>Port: {0}</value>
+    <value>Порт: {0}</value>
   </data>
   <data name="cn_protocol_vesion_warn" xml:space="preserve">
-    <value>Warning: The server protocol version does not match the current one.</value>
+    <value>Предупреждение: Версия протокола на сервере не соответствует текущей.</value>
   </data>
   <data name="sd_file_name_label" xml:space="preserve">
-    <value>File: {0}</value>
+    <value>Файл: {0}</value>
   </data>
   <data name="sd_page_title" xml:space="preserve">
-    <value>Send files</value>
+    <value>Отправить файлы</value>
   </data>
   <data name="sd_save_file_name_ph" xml:space="preserve">
-    <value>Save file name</value>
+    <value>Имя файла</value>
   </data>
   <data name="sd_select_and_send_button" xml:space="preserve">
-    <value>Select and send files</value>
+    <value>Выбрать и отправить файлы</value>
   </data>
   <data name="sd_select_file_button" xml:space="preserve">
-    <value>Select file</value>
+    <value>Выбрать файл</value>
   </data>
   <data name="sd_send_file_button" xml:space="preserve">
-    <value>Send</value>
+    <value>Отправить</value>
   </data>
   <data name="set_adderss_label" xml:space="preserve">
-    <value>Address:</value>
+    <value>Адрес:</value>
   </data>
   <data name="set_addres_entry_ph" xml:space="preserve">
     <value>192.168.x.x</value>
   </data>
   <data name="set_auto_connect_label" xml:space="preserve">
-    <value>Auto connect:</value>
+    <value>Автоматически подключатся</value>
   </data>
   <data name="set_connection_settings_label" xml:space="preserve">
-    <value>Connection settings</value>
+    <value>Настройки подключения</value>
   </data>
   <data name="set_horizontation_orientation_label" xml:space="preserve">
-    <value>Horizontal orientation</value>
+    <value>Горизонтальная ориентация</value>
   </data>
   <data name="set_port_entry_ph" xml:space="preserve">
-    <value>Default: 44544</value>
+    <value>По умолчанию: 44544</value>
   </data>
   <data name="set_port_label" xml:space="preserve">
-    <value>Port:</value>
+    <value>Порт:</value>
   </data>
   <data name="set_reverse_label" xml:space="preserve">
-    <value>Reverse:</value>
+    <value>Реверс:</value>
   </data>
   <data name="shell_accept_label" xml:space="preserve">
-    <value>Accept</value>
+    <value>Принять</value>
   </data>
   <data name="shell_components_title" xml:space="preserve">
-    <value>Components</value>
+    <value>Управление</value>
   </data>
   <data name="shell_connection_title" xml:space="preserve">
-    <value>Connection</value>
+    <value>Подключение</value>
   </data>
   <data name="shell_macros_title" xml:space="preserve">
-    <value>Macros</value>
+    <value>Макросы</value>
   </data>
   <data name="shell_send_label" xml:space="preserve">
-    <value>Send</value>
+    <value>Отправить</value>
   </data>
   <data name="shell_settings_title" xml:space="preserve">
-    <value>Settings</value>
+    <value>Настройки</value>
   </data>
   <data name="tm_clear_logs_button" xml:space="preserve">
-    <value>Clear logs</value>
+    <value>Отчистить логи</value>
   </data>
   <data name="tm_created" xml:space="preserve">
-    <value>Loading...</value>
+    <value>Загрузка...</value>
   </data>
   <data name="tm_status_failed" xml:space="preserve">
-    <value>Operation failed.</value>
+    <value>Не удалось отправить файл.</value>
   </data>
   <data name="tm_status_finish_failed" xml:space="preserve">
-    <value>Operation failed.</value>
+    <value>Не удалось отправить файл.</value>
   </data>
   <data name="tm_status_finish_ok" xml:space="preserve">
-    <value>Operation Ok.</value>
+    <value>Файл отправлен.</value>
   </data>
   <data name="tm_status_start_failed" xml:space="preserve">
-    <value>Operation failed.</value>
+    <value>Не удалось отправить файл.</value>
   </data>
   <data name="tm_status_start_ok" xml:space="preserve">
-    <value>Working...</value>
+    <value>Отправка...</value>
   </data>
   <data name="tm_waiting" xml:space="preserve">
-    <value>Waiting...</value>
+    <value>Ожидает...</value>
   </data>
 </root>

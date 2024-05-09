@@ -22,10 +22,10 @@
              Icon="send.png">
             <ShellContent ContentTemplate="{DataTemplate local:SendDataPage}"/>
         </Tab>
-        <Tab Title="{x:Static str:AppResources.shell_accept_label}"
+        <!--<Tab Title="{x:Static str:AppResources.shell_accept_label}"
              Icon="accept.png">
             <ShellContent ContentTemplate="{DataTemplate local:AcceptDataPage}"/>
-        </Tab>
+        </Tab>-->
         <!--<Tab Title="{x:Static str:AppResources.shell_macros_title}"
              Icon="macros.png">
             <ShellContent ContentTemplate="{DataTemplate local:MacrosesPage}"/>

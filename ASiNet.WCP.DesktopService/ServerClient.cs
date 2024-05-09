@@ -131,7 +131,7 @@ public class ServerClient : IDisposable
             }
             return false;
         }
-        catch (Exception ex)
+        catch
         {
             return false;
         }

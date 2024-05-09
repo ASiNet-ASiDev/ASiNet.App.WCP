@@ -43,7 +43,10 @@ public partial class YouTubeKeyboardViewModel : ObservableObject
                     break;
 
                 default:
-                    _client.SendKeyEvent(keyResult);
+                    if (!_client.SendKeyEvent(keyResult))
+                    {
+                        App.AlertSvc.ShowAlert(Resources.Localization.AppResources.alert_r_connecting_failed_title, Resources.Localization.AppResources.alert_r_connecting_failed_text);
+                    }
                     break;
             }
         });
@@ -51,8 +54,11 @@ public partial class YouTubeKeyboardViewModel : ObservableObject
 
     private void SendWithPresssed(KeyCode pressedKey, KeyCode key)
     {
-        _client.SendKeyEvent(new() { Code = pressedKey, State = KeyState.Down });
-        _client.SendKeyEvent(new() { Code = key, State = KeyState.Click });
-        _client.SendKeyEvent(new() { Code = pressedKey, State = KeyState.Up });
+        if(!_client.SendKeyEvent(new() { Code = pressedKey, State = KeyState.Down }) &&
+           !_client.SendKeyEvent(new() { Code = key, State = KeyState.Click }) &&
+           !_client.SendKeyEvent(new() { Code = pressedKey, State = KeyState.Up }))
+        {
+            App.AlertSvc.ShowAlert(Resources.Localization.AppResources.alert_r_connecting_failed_title, Resources.Localization.AppResources.alert_r_connecting_failed_text);
+        }
     }
 }

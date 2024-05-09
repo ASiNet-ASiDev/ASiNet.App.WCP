@@ -37,11 +37,11 @@ public partial class TaskVieweModel : ObservableObject, IDisposable
         {
             case MediaTaskStatus.Waiting:
                 FileName = task.FileName;
-                Status = "Waiting...";
+                Status = Resources.Localization.AppResources.tm_waiting;
                 break;
             case MediaTaskStatus.Created:
                 FileName = task.FileName;
-                Status = "Loading...";
+                Status = Resources.Localization.AppResources.tm_created;
                 break;
             case MediaTaskStatus.Working:
                 if(task.Progress.HasValue)
@@ -51,19 +51,19 @@ public partial class TaskVieweModel : ObservableObject, IDisposable
                     switch (task.ClientStatus.Value)
                     {
                         case MediaClientStatus.StartOk:
-                            Status = "Working...";
+                            Status = Resources.Localization.AppResources.tm_status_start_ok;
                             break;
                         case MediaClientStatus.StartFailed:
-                            Status = "Operation failed.";
+                            Status = Resources.Localization.AppResources.tm_status_start_failed;
                             break;
                         case MediaClientStatus.FinishOk:
-                            Status = "Operation Ok.";
+                            Status = Resources.Localization.AppResources.tm_status_finish_ok;
                             break;
                         case MediaClientStatus.FinishFailed:
-                            Status = "Operation failed.";
+                            Status = Resources.Localization.AppResources.tm_status_finish_failed;
                             break;
                         case MediaClientStatus.Failed:
-                            Status = "Operation failed.";
+                            Status = Resources.Localization.AppResources.tm_status_failed;
                             break;
                     }
                 }

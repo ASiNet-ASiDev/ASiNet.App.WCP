@@ -8,15 +8,26 @@ public partial class SettingsPage : ContentPage
 	{
 		InitializeComponent();
         AutoConnectCheckBox.IsChecked = App.Config.AutoConnect;
+	}
+
+    protected override void OnAppearing()
+    {
         PortEntry.Text = App.Config.Port.ToString();
         AddressEntry.Text = App.Config.Address;
         ReverseCheckBox.IsChecked = App.Config.ReverseOrientation;
-	}
+        AutoConnectCheckBox.IsChecked = App.Config.AutoConnect;
+        base.OnAppearing();
+    }
+
+    protected override void OnDisappearing()
+    {
+        App.Config.SaveOrUpdate();
+        base.OnDisappearing();
+    }
 
     private void ReverseCheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         App.Config.ReverseOrientation = e.Value;
-        App.Config.SaveOrUpdate();
     }
 
     private void PortEntry_TextChanged(object sender, TextChangedEventArgs e)
@@ -24,22 +35,19 @@ public partial class SettingsPage : ContentPage
         if(int.TryParse(e.NewTextValue, out var port) || port == 0 || port > ushort.MaxValue)
         {
             App.Config.Port = port;
-            App.Config.SaveOrUpdate();
         }
     }
 
     private void AddressEntry_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if(ConnectPageVieweModel.AddresValidation().IsMatch(e.NewTextValue))
+        if(ConnectionPageVieweModel.AddresValidation().IsMatch(e.NewTextValue))
         {
             App.Config.Address = e.NewTextValue;
-            App.Config.SaveOrUpdate();
         }
     }
 
     private void AutoConnectCheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         App.Config.AutoConnect = e.Value;
-        App.Config.SaveOrUpdate();
     }
 }

@@ -30,13 +30,13 @@ public partial class ComponentsPageVieweModel : ObservableObject
         };
         Components.Add(youTubeKeyboard);
 
-        var joymouseKeyboard = new MouseItemVieweModel<MouseControl>(_mouseVM)
-        {
-            Title = Resources.Localization.AppResources.cmp_default_mouse_title,
-            Description = Resources.Localization.AppResources.cmp_default_mouse_description,
-            Author = Resources.Localization.AppResources.cmp_default_mouse_author,
-        };
-        Components.Add(joymouseKeyboard);
+        //var joymouseKeyboard = new MouseItemVieweModel<MouseControl>(_mouseVM)
+        //{
+        //    Title = Resources.Localization.AppResources.cmp_default_mouse_title,
+        //    Description = Resources.Localization.AppResources.cmp_default_mouse_description,
+        //    Author = Resources.Localization.AppResources.cmp_default_mouse_author,
+        //};
+        //Components.Add(joymouseKeyboard);
     }
 
     public ObservableCollection<ComponentVieweModel> Components { get; } = [];
