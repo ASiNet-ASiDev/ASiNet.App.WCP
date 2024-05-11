@@ -143,6 +143,18 @@ public class WcpClient : IDisposable
         }
     }
 
+    public bool SendNotifyChandgedEvent(NotificationEvent notificationEvent)
+    {
+        try
+        {
+            return Send(notificationEvent);
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
     public async Task<(string[]? Dirs, string[]? Files, GetDirectiryStatus Status)> GetFileSystemEntris(string? root, bool getFiles = true)
     {
         try
@@ -173,6 +185,29 @@ public class WcpClient : IDisposable
         }
     }
 
+    public async Task<GetHistoryResponse?> GetHistory(GetHistoryRequest request)
+    {
+        try
+        {
+            return await SendAndAccept<GetHistoryRequest, GetHistoryResponse>(request);
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    public async Task<long> PostHistory(PostHistoryRequest request)
+    {
+        try
+        {
+            return (await SendAndAccept<PostHistoryRequest, PostHistoryResponse>(request))?.Id ?? 0;
+        }
+        catch
+        {
+            return 0;
+        }
+    }
 
     public bool SendMouseMoveEvent(in MouseChangedEvent input)
     {
@@ -190,8 +225,8 @@ public class WcpClient : IDisposable
     {
         return await Task.Run(() =>
         {
-            if (!Connected)
-                throw new Exception();
+            if (!Connected && !Reconnect().Result)
+                return null;
             if (Send(message))
             {
                 return Accept<Taccept>();

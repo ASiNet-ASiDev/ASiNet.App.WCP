@@ -12,6 +12,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.5*"/>
@@ -65,5 +66,6 @@
                   HorizontalOptions="Start"
                   CheckedChanged="ReverseCheckBox_CheckedChanged"/>
 
+        <Button Grid.Row="6" Grid.ColumnSpan="2" HorizontalOptions="Fill" Margin="10,0" Text="Info &amp; FAQ" Pressed="Button_Pressed"/>
     </Grid>
 </ContentPage>

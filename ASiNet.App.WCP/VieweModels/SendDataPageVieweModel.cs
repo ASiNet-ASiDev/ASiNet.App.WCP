@@ -7,9 +7,9 @@ using CommunityToolkit.Mvvm.Input;
 namespace ASiNet.App.WCP.VieweModels;
 public partial class SendDataPageVieweModel : ObservableObject
 {
-    public SendDataPageVieweModel()
+    public SendDataPageVieweModel(WcpClient client)
     {
-        _client = ((ShellVieweModel)Shell.Current.BindingContext).WcpClient;
+        _client = client;
         _manager = ((ShellVieweModel)Shell.Current.BindingContext).TaskManager;
         _mediaManager = _client.MediaManager;
     }

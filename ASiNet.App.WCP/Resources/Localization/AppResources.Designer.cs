@@ -133,6 +133,33 @@ namespace ASiNet.App.WCP.Resources.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Load.
+        /// </summary>
+        internal static string char_page_load_button {
+            get {
+                return ResourceManager.GetString("char_page_load_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Enter text....
+        /// </summary>
+        internal static string chat_page_enter_text_ph {
+            get {
+                return ResourceManager.GetString("chat_page_enter_text_ph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Chat.
+        /// </summary>
+        internal static string chat_page_title {
+            get {
+                return ResourceManager.GetString("chat_page_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Controls.
         /// </summary>
         internal static string cm_title_label {
@@ -214,6 +241,33 @@ namespace ASiNet.App.WCP.Resources.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на ASi.
+        /// </summary>
+        internal static string cmp_default_send_clipboard_author {
+            get {
+                return ResourceManager.GetString("cmp_default_send_clipboard_author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Send text to your computer.
+        /// </summary>
+        internal static string cmp_default_send_clipboard_description {
+            get {
+                return ResourceManager.GetString("cmp_default_send_clipboard_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Send text .
+        /// </summary>
+        internal static string cmp_default_send_clipboard_Title {
+            get {
+                return ResourceManager.GetString("cmp_default_send_clipboard_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на DifolderyXXL.
         /// </summary>
         internal static string cmp_default_youtube_keyboard_author {
@@ -237,6 +291,33 @@ namespace ASiNet.App.WCP.Resources.Localization {
         internal static string cmp_default_youtube_keyboard_title {
             get {
                 return ResourceManager.GetString("cmp_default_youtube_keyboard_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ASi.
+        /// </summary>
+        internal static string cmp_send_file_author {
+            get {
+                return ResourceManager.GetString("cmp_send_file_author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Send one or several files at once.
+        /// </summary>
+        internal static string cmp_send_file_description {
+            get {
+                return ResourceManager.GetString("cmp_send_file_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Send files.
+        /// </summary>
+        internal static string cmp_send_file_title {
+            get {
+                return ResourceManager.GetString("cmp_send_file_title", resourceCulture);
             }
         }
         
@@ -421,6 +502,24 @@ namespace ASiNet.App.WCP.Resources.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Select action.
+        /// </summary>
+        internal static string msg_actions_title {
+            get {
+                return ResourceManager.GetString("msg_actions_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Send to desktop clipboard.
+        /// </summary>
+        internal static string msg_send_to_desktop {
+            get {
+                return ResourceManager.GetString("msg_send_to_desktop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на File: {0}.
         /// </summary>
         internal static string sd_file_name_label {
@@ -556,6 +655,15 @@ namespace ASiNet.App.WCP.Resources.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Chat.
+        /// </summary>
+        internal static string shell_chat_label {
+            get {
+                return ResourceManager.GetString("shell_chat_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Components.
         /// </summary>
         internal static string shell_components_title {
@@ -597,6 +705,53 @@ namespace ASiNet.App.WCP.Resources.Localization {
         internal static string shell_settings_title {
             get {
                 return ResourceManager.GetString("shell_settings_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Tools.
+        /// </summary>
+        internal static string shell_tools_label {
+            get {
+                return ResourceManager.GetString("shell_tools_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Insert text.
+        /// </summary>
+        internal static string stp_fill_button {
+            get {
+                return ResourceManager.GetString("stp_fill_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Send text.
+        /// </summary>
+        internal static string stp_send_button {
+            get {
+                return ResourceManager.GetString("stp_send_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Send clipboard.
+        /// </summary>
+        internal static string stp_send_clipboard_button {
+            get {
+                return ResourceManager.GetString("stp_send_clipboard_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Enter, and then click the &quot;send&quot; button to send the text to your computer.
+        ///
+        ///Important: Inserting text using the &quot;Paste text&quot; button replaces all already written text with text from the clipboard!.
+        /// </summary>
+        internal static string stp_text_ph {
+            get {
+                return ResourceManager.GetString("stp_text_ph", resourceCulture);
             }
         }
         

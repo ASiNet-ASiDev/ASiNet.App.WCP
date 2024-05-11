@@ -32,7 +32,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
@@ -116,7 +116,7 @@
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Label Text="{Binding Name}" VerticalOptions="Center"/>
@@ -127,7 +127,7 @@
                                     CommandParameter="{Binding .}"/>
                         <Label Grid.Row="1" Text="{Binding Address, StringFormat=Address: {0}}" VerticalOptions="Center"/>
                         <Label Grid.Row="1" Grid.Column="1" Text="{Binding Port, StringFormat=Port: {0}}" VerticalOptions="Center"/>
-                        <Label Grid.Row="3" Grid.ColumnSpan="2"  VerticalOptions="Center"
+                        <Label Grid.Row="3" Grid.ColumnSpan="2"  VerticalOptions="Center" FontSize="10"
                                    Text="Warning: Версия протокола не совпадает, возможно не все функции будут корректно работать!" 
                                    IsVisible="{Binding IncorrectProtocolVersion}"/>
                     </Grid>
@@ -165,7 +165,7 @@
 
         <ads:Banner Grid.ColumnSpan="4" 
                     Grid.Row="5" 
-                    AdUnitId="R-M-8009266-1" 
+                    AdUnitId="{StaticResource AdsIdConnectionPage}" 
                     HorizontalOptions="Fill" 
                     VerticalOptions="End"/>
     </Grid>

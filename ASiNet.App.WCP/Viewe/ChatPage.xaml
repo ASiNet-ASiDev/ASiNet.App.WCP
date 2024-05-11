@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ASiNet.App.WCP.VieweModels"
+             xmlns:str="clr-namespace:ASiNet.App.WCP.Resources.Localization"
+             xmlns:tk="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:ctr="clr-namespace:ASiNet.App.WCP.Viewe.Messages"
+             xmlns:ads="clr-namespace:ASiNet.Yandex.Ads;assembly=ASiNet.Yandex.Ads"
+             x:Class="ASiNet.App.WCP.Viewe.ChatPage"
+             Shell.TabBarIsVisible="False"
+             x:DataType="{x:Type vm:ChatPageVieweModel}"
+             SendMessageCommand="{Binding SendMessageCommand}"
+             LoadMessagesCommand="{Binding LoadMessagesCommand}"
+             x:Name="Root">
+    <Shell.TitleView>
+        <Grid ColumnDefinitions="50,*" ColumnSpacing="5">
+            <Button Text="" FontFamily="A6_S" FontAttributes="Bold" Command="{Binding BackCommand}" BackgroundColor="#00000000"/>
+            <Label Text="{x:Static str:AppResources.chat_page_title}" Grid.Column="1" FontSize="Body" VerticalOptions="Center"/>
+        </Grid>
+    </Shell.TitleView>
+    <ContentPage.BindingContext>
+        <vm:ChatPageVieweModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <tk:InvertedBoolConverter x:Key="InvertConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="50,*"
+          ColumnDefinitions="*,50" 
+          VerticalOptions="Fill" 
+          HorizontalOptions="Fill">
+
+        <ads:Banner AdUnitId="{StaticResource AdsIdSendTextPage}" HorizontalOptions="Fill" Grid.ColumnSpan="2" AdHeight="50"/>
+        
+        <CollectionView Grid.Row="1" 
+                        Grid.ColumnSpan="2"
+                        x:Name="Messages" 
+                        ItemsSource="{Binding Messages}" 
+                        SelectionMode="None" VerticalOptions="EndAndExpand"
+                        IsGrouped="True">
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate x:DataType="{x:Type vm:ChatMessagesGroup}">
+                    <Label Text="{Binding Time, StringFormat='{0:D}'}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+            <CollectionView.Header>
+                <Grid>
+                    <ActivityIndicator IsVisible="{Binding Loading}" IsRunning="{Binding Loading}"/>
+                    <Button Text="{x:Static str:AppResources.char_page_load_button}" IsVisible="{Binding Loading, Converter={StaticResource Key=InvertConverter}}" HorizontalOptions="Center" VerticalOptions="Center"
+                            Pressed="LoadNew"/>
+                </Grid>
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type vm:ChatMessageVieweModel}">
+                    <ctr:ChatTextMessage HorizontalOptions="End"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Editor x:Name="TextInputEditor"  
+                Placeholder="{x:Static str:AppResources.chat_page_enter_text_ph}"
+                Grid.Row="1"
+                MaximumHeightRequest="150"
+                VerticalOptions="End" 
+                AutoSize="TextChanges"
+                HorizontalOptions="Fill"/>
+        <Button Grid.Column="1" 
+                Grid.Row="1" 
+                Text="" 
+                FontFamily="A6_S" 
+                HeightRequest="50" 
+                VerticalOptions="End" 
+                Pressed="SentTextPressed"/>
+    </Grid>
+</ContentPage>

@@ -1,4 +1,6 @@
+using ASiNet.WCP.History;
 using ASiNet.WCP.Server;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace ASiNet.WCP.DesktopService;
 
@@ -17,6 +19,11 @@ public class WCPWindowsBacgroundService : BackgroundService
     {
         _wcpServer = new();
         _wcpServer.Start();
+        using (var context = new HistoryContext())
+            context.Database.EnsureCreated();
+
+        new ToastContentBuilder().AddText("WCP Service started.")
+            .Show();
         return base.StartAsync(cancellationToken);
     }
 

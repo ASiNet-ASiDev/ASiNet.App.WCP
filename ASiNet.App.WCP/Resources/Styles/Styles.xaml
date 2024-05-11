@@ -18,8 +18,9 @@
 
     <Style TargetType="Border">
         <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource WCPBacgroundLightColor}, Dark={StaticResource WCPBacgroundDarkColor}}"/>
         <Setter Property="StrokeShape" Value="Rectangle"/>
-        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="StrokeThickness" Value="0"/>
     </Style>
 
     <Style TargetType="BoxView">
@@ -29,7 +30,7 @@
     <Style TargetType="controls:Key">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource WCPForeground1Color}, Dark={StaticResource WCPForeground1Color}}"/>
         <Setter Property="UpBakgroundColor" Value="{AppThemeBinding Light={StaticResource WCPForeground1Color}, Dark={StaticResource WCPForeground1Color}}"/>
-        <Setter Property="PressedBakgroundColor" Value="{AppThemeBinding Light={StaticResource WCPDisabledColor}, Dark={StaticResource WCPDisabledColor}}"/>
+        <Setter Property="PressedBakgroundColor" Value="{AppThemeBinding Light={StaticResource WCPBacgroundLightColor}, Dark={StaticResource WCPBacgroundDarkColor}}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="CornerRadius" Value="{StaticResource UIElementsStrokeShape}"/>
         <Setter Property="MinimumHeightRequest" Value="44"/>
@@ -42,7 +43,7 @@
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="BorderWidth" Value="0"/>
-        <Setter Property="CornerRadius" Value="{StaticResource UIElementsStrokeShape}"/>
+        <Setter Property="CornerRadius" Value="8"/>
         <Setter Property="Padding" Value="14,10"/>
         <Setter Property="MinimumHeightRequest" Value="44"/>
         <Setter Property="MinimumWidthRequest" Value="44"/>
@@ -52,8 +53,8 @@
                     <VisualState x:Name="Normal" />
                     <VisualState x:Name="Disabled">
                         <VisualState.Setters>
-                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource WCPDisabledTextColor}, Dark={StaticResource WCPDisabledTextColor}}" />
-                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource WCPDisabledColor}, Dark={StaticResource WCPDisabledColor}}" />
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource WCPDisabledWhiteColor}, Dark={StaticResource WCPDisabledDarkColor}}" />
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource WCPBacgroundLightColor}, Dark={StaticResource WCPBacgroundDarkColor}}" />
                         </VisualState.Setters>
                     </VisualState>
                     <VisualState x:Name="PointerOver" />
@@ -63,7 +64,7 @@
     </Style>
 
     <Style TargetType="CheckBox">
-        <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+        <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource WCPForeground1Color}, Dark={StaticResource White}}" />
         <Setter Property="MinimumHeightRequest" Value="44"/>
         <Setter Property="MinimumWidthRequest" Value="44"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
@@ -72,7 +73,7 @@
                     <VisualState x:Name="Normal" />
                     <VisualState x:Name="Disabled">
                         <VisualState.Setters>
-                            <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                            <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource WCPBacgroundLightColor}, Dark={StaticResource WCPBacgroundDarkColor}}" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>
@@ -414,12 +415,12 @@
         <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
         <Setter Property="Shell.ForegroundColor" Value="{OnPlatform WinUI={StaticResource WCPForeground1Color}, Default={StaticResource White}}" />
         <Setter Property="Shell.TitleColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource WCPDefaultTextColor}}" />
-        <Setter Property="Shell.DisabledColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
+        <Setter Property="Shell.DisabledColor" Value="{AppThemeBinding Light={StaticResource WCPDisabledWhiteColor}, Dark={StaticResource Gray950}}" />
         <Setter Property="Shell.UnselectedColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray200}}" />
         <Setter Property="Shell.NavBarHasShadow" Value="False" />
         <Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
         <Setter Property="Shell.TabBarForegroundColor" Value="{AppThemeBinding Light={StaticResource WCPForeground1Color}, Dark={StaticResource White}}" />
-        <Setter Property="Shell.TabBarTitleColor" Value="{AppThemeBinding Light={StaticResource WCPDefaultTextColor}, Dark={StaticResource White}}" />
+        <Setter Property="Shell.TabBarTitleColor" Value="{AppThemeBinding Light={StaticResource WCPForeground1Color}, Dark={StaticResource White}}" />
         <Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
     </Style>
 

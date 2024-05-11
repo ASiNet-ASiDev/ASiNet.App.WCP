@@ -20,7 +20,6 @@ public static class MauiProgram
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                fonts.AddFont("Awesome6-Regular.otf", "A6_R");
                 fonts.AddFont("Awesome6-Solid.otf", "A6_S");
             })
             .UseLocalizationResourceManager(settings =>

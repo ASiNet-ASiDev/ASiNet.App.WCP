@@ -54,9 +54,10 @@ public partial class YouTubeKeyboardViewModel : ObservableObject
 
     private void SendWithPresssed(KeyCode pressedKey, KeyCode key)
     {
-        if(!_client.SendKeyEvent(new() { Code = pressedKey, State = KeyState.Down }) &&
-           !_client.SendKeyEvent(new() { Code = key, State = KeyState.Click }) &&
-           !_client.SendKeyEvent(new() { Code = pressedKey, State = KeyState.Up }))
+        var a = _client.SendKeyEvent(new() { Code = pressedKey, State = KeyState.Down });
+        var b = _client.SendKeyEvent(new() { Code = key, State = KeyState.Click });
+        var c = _client.SendKeyEvent(new() { Code = pressedKey, State = KeyState.Up });
+        if (!a && !b && !c)
         {
             App.AlertSvc.ShowAlert(Resources.Localization.AppResources.alert_r_connecting_failed_title, Resources.Localization.AppResources.alert_r_connecting_failed_text);
         }

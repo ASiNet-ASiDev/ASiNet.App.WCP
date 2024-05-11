@@ -5,30 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ASiNet.App.WCP.Desktop"
         xmlns:vm="clr-namespace:ASiNet.App.WCP.Desktop.VieweModels"
-        mc:Ignorable="d" ResizeMode="NoResize"
-        Title="WCP Desktop" Height="230" Width="320">
+        AllowsTransparency="True" Padding="0"
+        mc:Ignorable="d" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" ShowInTaskbar="False" Background="#00000000"
+         
+        Height="200" Width="320">
     <Window.DataContext>
         <vm:MainWindowVieweModel/>
     </Window.DataContext>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Border Grid.Row="1" Grid.Column="1" CornerRadius="5" BorderBrush="Black" BorderThickness="1" Padding="5" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Margin="5" Text="{Binding IsServiseRunText, StringFormat=Service Status: {0}}" Foreground="Black"/>
-                <TextBlock Text="{Binding PcIpAddress, StringFormat=IP Addresses: {0}}" Margin="5"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Button Content="Run service" Width="100" Margin="5" Command="{Binding RunServiceCommand}" ToolTip="Start bacground service."/>
-                    <Button Content="Stop service" Width="100" Margin="5" Command="{Binding StopServiceCommand}" ToolTip="Stop bacground service."/>
-                    <Button Content="Update" Width="50" Margin="5" Command="{Binding UpdateServiceInfoCommand}" ToolTip="Update info."/>
-                </StackPanel>
-                <CheckBox Content="Add to autorun" IsChecked="{Binding Autorun}" Margin="5"/>
-                <Button Content="Install service" Command="{Binding InstallOrReinstallServiceCommand}" ToolTip="Install or reinstall service."/>
+
+    <Border CornerRadius="5"
+            BorderBrush="#309f57" BorderThickness="2"
+            Background="#212121"
+            Padding="5" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" Height="200" Width="320">
+        <StackPanel Orientation="Vertical">
+            <Grid>
+                <TextBlock Text="WCP Desktop" Foreground="#309f57" FontSize="16" Background="Transparent" MouseDown="TextBlock_MouseDown"/>
+                <Button Content="X" Width="30" HorizontalAlignment="Right" Click="Button_Click"/>
+            </Grid>
+            <TextBlock Margin="5" Text="{Binding IsServiseRunText, StringFormat=Service Status: {0}}" FontSize="16" Foreground="White"/>
+            <TextBlock Text="{Binding PcIpAddress, StringFormat=IP Address: {0}}" Margin="5" FontSize="16" Foreground="White"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Content="Run service" FontSize="16"
+                        Width="100" 
+                        Margin="5" 
+                        Command="{Binding RunServiceCommand}" 
+                        ToolTip="Start bacground service."/>
+                <Button Content="Stop service" Width="100" Margin="5" FontSize="16" Command="{Binding StopServiceCommand}" ToolTip="Stop bacground service."/>
+                <Button Content="Update" Width="70" Margin="5" FontSize="16" Command="{Binding UpdateServiceInfoCommand}" ToolTip="Update info."/>
             </StackPanel>
-        </Border>
-    </Grid>
+            <CheckBox Content="Add to autorun" FontSize="16" IsChecked="{Binding Autorun}" Margin="5"/>
+        </StackPanel>
+    </Border>
 </Window>

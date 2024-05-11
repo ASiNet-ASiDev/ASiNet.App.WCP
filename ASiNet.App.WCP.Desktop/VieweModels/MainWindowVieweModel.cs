@@ -43,8 +43,8 @@ public partial class MainWindowVieweModel : ObservableObject
     {
         try
         {
-            ServiceContext.Autorun = Autorun;
-            PcIpAddress = $"\n{string.Join('\n', ServiceContext.IpAddresses.Select(x => x.ToString()))}";
+            Autorun = ServiceContext.Autorun;
+            PcIpAddress = $"\n{ServiceContext.IpAddresses.Select(x => x.ToString()).FirstOrDefault()}";
             if (ServiceContext.IsRun)
                 IsServiseRunText = "Running";
             else

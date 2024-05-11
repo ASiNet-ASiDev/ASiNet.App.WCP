@@ -141,6 +141,15 @@
   <data name="alert_save_cnf_title" xml:space="preserve">
     <value>Сохранить конфигурацию?</value>
   </data>
+  <data name="char_page_load_button" xml:space="preserve">
+    <value>Загрузить</value>
+  </data>
+  <data name="chat_page_enter_text_ph" xml:space="preserve">
+    <value>Введите текст...</value>
+  </data>
+  <data name="chat_page_title" xml:space="preserve">
+    <value>Чат</value>
+  </data>
   <data name="cmp_all_author_label" xml:space="preserve">
     <value>Автор: {0}</value>
   </data>
@@ -165,6 +174,15 @@
   <data name="cmp_default_ruen_keyboard_title" xml:space="preserve">
     <value>Русско-Английская QWERTY клавиатура</value>
   </data>
+  <data name="cmp_default_send_clipboard_author" xml:space="preserve">
+    <value>ASi</value>
+  </data>
+  <data name="cmp_default_send_clipboard_description" xml:space="preserve">
+    <value>Отправляйте текст на ваш компьютер</value>
+  </data>
+  <data name="cmp_default_send_clipboard_Title" xml:space="preserve">
+    <value>Отправить текст</value>
+  </data>
   <data name="cmp_default_youtube_keyboard_author" xml:space="preserve">
     <value>DifolderyXXL</value>
   </data>
@@ -173,6 +191,15 @@
   </data>
   <data name="cmp_default_youtube_keyboard_title" xml:space="preserve">
     <value>YouTube keyboard</value>
+  </data>
+  <data name="cmp_send_file_author" xml:space="preserve">
+    <value>ASi</value>
+  </data>
+  <data name="cmp_send_file_description" xml:space="preserve">
+    <value>Отправляйте один, или сразу несколько файлов</value>
+  </data>
+  <data name="cmp_send_file_title" xml:space="preserve">
+    <value>Отправить файлы</value>
   </data>
   <data name="cm_title_label" xml:space="preserve">
     <value>Элементы управления</value>
@@ -237,6 +264,12 @@
   <data name="cn_protocol_vesion_warn" xml:space="preserve">
     <value>Предупреждение: Версия протокола на сервере не соответствует текущей.</value>
   </data>
+  <data name="msg_actions_title" xml:space="preserve">
+    <value>Выберите действие</value>
+  </data>
+  <data name="msg_send_to_desktop" xml:space="preserve">
+    <value>Отправить в буфер обмена компьютера</value>
+  </data>
   <data name="sd_file_name_label" xml:space="preserve">
     <value>Файл: {0}</value>
   </data>
@@ -282,6 +315,9 @@
   <data name="shell_accept_label" xml:space="preserve">
     <value>Принять</value>
   </data>
+  <data name="shell_chat_label" xml:space="preserve">
+    <value>Чат</value>
+  </data>
   <data name="shell_components_title" xml:space="preserve">
     <value>Управление</value>
   </data>
@@ -296,6 +332,23 @@
   </data>
   <data name="shell_settings_title" xml:space="preserve">
     <value>Настройки</value>
+  </data>
+  <data name="shell_tools_label" xml:space="preserve">
+    <value>Инструменты</value>
+  </data>
+  <data name="stp_fill_button" xml:space="preserve">
+    <value>Вставить текст</value>
+  </data>
+  <data name="stp_send_button" xml:space="preserve">
+    <value>Отправить текст</value>
+  </data>
+  <data name="stp_send_clipboard_button" xml:space="preserve">
+    <value>Отправить буфер обмена</value>
+  </data>
+  <data name="stp_text_ph" xml:space="preserve">
+    <value>Введите, а после нажмите кнопку "отправить", что бы отправить текст на ваш компьютер.
+
+Важно: Вставка текста с помощью кнопки "Вставить текст" заменяет весь уже написанный текст текстом из буфера обмена!</value>
   </data>
   <data name="tm_clear_logs_button" xml:space="preserve">
     <value>Отчистить логи</value>

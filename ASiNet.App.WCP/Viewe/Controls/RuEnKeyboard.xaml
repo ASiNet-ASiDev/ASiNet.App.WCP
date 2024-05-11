@@ -104,7 +104,7 @@
         <controls:Key Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="0" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Ctrl}" KeyVisualStatus="{Binding KcStatus}"/>
         <controls:Key Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="4" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Win}" KeyVisualStatus="{Binding KcStatus}"/>
         <controls:Key Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="6" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Alt}" KeyVisualStatus="{Binding KcStatus}"/>
-        <controls:Key Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="8" Command="{Binding SwitchLanguageCommand}" KeyResult="{StaticResource SwitchLanguage}" KeyVisualStatus="{Binding KcStatus}" FontFamily="A6_R"/>
+        <controls:Key Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="8" Command="{Binding SwitchLanguageCommand}" KeyResult="{StaticResource SwitchLanguage}" KeyVisualStatus="{Binding KcStatus}" FontFamily="A6_S"/>
         <controls:Key Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="10" Command="{Binding ReverseCommand}" KeyResult="{StaticResource Reverse}" KeyVisualStatus="{Binding KcStatus}" FontFamily="A6_S"/>
         <controls:Key Grid.Row="4" Grid.ColumnSpan="8" Grid.Column="12" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Space}" KeyVisualStatus="{Binding KcStatus}"/>
         <controls:Key Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="20" Command="{Binding PressedKeyCommand}" KeyResult="{StaticResource Backspace}" KeyVisualStatus="{Binding KcStatus}"/>

@@ -21,7 +21,8 @@ public class BannerHandler : ViewHandler<Banner, BannerAdView>
     protected override BannerAdView CreatePlatformView()
     {
         var bannerAd = new BannerAdView(Context);
-        bannerAd.SetAdSize(AdSize.FlexibleSize((int)VirtualView.Width, (int)VirtualView.Height));
+        
+        bannerAd.SetAdSize(AdSize.FlexibleSize((int)VirtualView.Width, VirtualView.AdHeight == -1 ? (int)VirtualView.Height : VirtualView.AdHeight));
         bannerAd.SetMinimumHeight(50);
         bannerAd.SetMinimumWidth(320);
 

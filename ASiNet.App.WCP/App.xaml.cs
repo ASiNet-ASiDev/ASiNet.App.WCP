@@ -12,7 +12,6 @@ public partial class App : Application
         AlertSvc = Services.GetService<IAlertService>()!;
 
         MainPage = new AppShell();
-
     }
 
     public static IServiceProvider Services { get; private set; } = null!;

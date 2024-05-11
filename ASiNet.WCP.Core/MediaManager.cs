@@ -1,5 +1,7 @@
-﻿using ASiNet.WCP.Common.Enums;
+﻿using System;
+using ASiNet.WCP.Common.Enums;
 using ASiNet.WCP.Common.Primitives;
+using static System.Collections.Specialized.BitVector32;
 
 namespace ASiNet.WCP.Core;
 public class MediaManager(WcpClient client) : IDisposable
@@ -86,7 +88,17 @@ public class MediaManager(WcpClient client) : IDisposable
                 };
                 var response = await _client.SendAndAccept<MediaRequest, MediaResponse>(request);
                 if (response is null)
+                {
+                    var r = _taskQueue.Dequeue();
+                    TaskChanged?.Invoke(new()
+                    {
+                        Id = r.Id,
+                        TaskAction = MediaTaskStatus.Failed,
+                        FileName = Path.GetFileName(r.LocalFilePath),
+                        Action = r.Action
+                    });
                     continue;
+                }
                 if (response.Status == MediaStatus.Ok)
                 {
                     CreateTask(task.Id, response.Address!, response.Port, task.LocalFilePath, task.Action);
@@ -101,12 +113,34 @@ public class MediaManager(WcpClient client) : IDisposable
                 {
                     lock (_autorunerLocker)
                     {
-                        _taskQueue.Dequeue();
+                        var r =_taskQueue.Dequeue();
+                        TaskChanged?.Invoke(new()
+                        {
+                            Id = r.Id,
+                            TaskAction = MediaTaskStatus.Failed,
+                            FileName = Path.GetFileName(r.LocalFilePath),
+                            Action = r.Action
+                        });
                     }
                 }
             }
         }
-        catch { }
+        catch
+        {
+            lock (_autorunerLocker)
+            {
+                foreach (var item in _taskQueue)
+                {
+                    TaskChanged?.Invoke(new()
+                    {
+                        Id = item.Id,
+                        TaskAction = MediaTaskStatus.Failed,
+                        FileName = Path.GetFileName(item.LocalFilePath),
+                        Action = item.Action
+                    });
+                }
+            }
+        }
         finally
         {
             lock (_autorunerLocker)

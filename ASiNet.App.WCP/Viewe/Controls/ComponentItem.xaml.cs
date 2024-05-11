@@ -1,8 +1,8 @@
 namespace ASiNet.App.WCP.Viewe.Controls;
 
-public partial class ComponentItem : ContentView
+public partial class ToolItem : ContentView
 {
-    public ComponentItem()
+    public ToolItem()
 	{
 		InitializeComponent();
 	}

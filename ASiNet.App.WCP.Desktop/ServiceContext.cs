@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Security.Cryptography;
@@ -140,8 +141,10 @@ public static class ServiceContext
         catch { }
     }
 
-    public static bool ExistAutorun() => System.IO.File.Exists(Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.Startup), WCP_SERVICE_LNK));
-
+    public static bool ExistAutorun()
+    {
+        return System.IO.File.Exists(Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.Startup), WCP_SERVICE_LNK));
+    }
 
     public static void RemoveAutorun()
     {
@@ -165,11 +168,11 @@ public static class ServiceContext
             if(System.IO.File.Exists(_cnfPath))
                 System.IO.File.Delete(_cnfPath);
             RemoveAutorun();
-            var uri = new Uri($"Service\\WCPService.exe", UriKind.Relative);
+            var uri = new Uri($"Service\\service.zip", UriKind.Relative);
             var streamInfo = Application.GetResourceStream(uri);
             using var stream = streamInfo.Stream;
-            using var distFile = System.IO.File.Create(_servicePath);
-            stream.CopyTo(distFile);
+            using var zip = new ZipArchive(stream);
+            zip.ExtractToDirectory(_serviceDirectory);
             return true;
         }
         catch
@@ -184,14 +187,7 @@ public static class ServiceContext
         {
             if(System.IO.File.Exists(_servicePath))
             {
-                var uri = new Uri($"Service\\WCPService.exe", UriKind.Relative);
-                var streamInfo = Application.GetResourceStream(uri);
-                using var stream = streamInfo.Stream;
-                using var distFile = System.IO.File.Open(_servicePath, FileMode.Open);
-                var a = Convert.ToHexString(SHA256.HashData(stream));
-                var b = Convert.ToHexString(SHA256.HashData(distFile));
-
-                return a == b;
+                return true;
             }
             return false;
         }

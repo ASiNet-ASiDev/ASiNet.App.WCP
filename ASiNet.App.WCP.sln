@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASiNet.WCP.Macroses.Core", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ADS_Android", "ADS_Android", "{631DEE6A-0575-46DD-B518-0B26A677273C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASiNet.Yandex.Ads", "ASiNet.Yandex.Ads\ASiNet.Yandex.Ads.csproj", "{99887960-2C65-4734-A57C-FD5344A5F67F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASiNet.Yandex.Ads", "ASiNet.Yandex.Ads\ASiNet.Yandex.Ads.csproj", "{99887960-2C65-4734-A57C-FD5344A5F67F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xamarin.YandexAds.Android", "Xamarin.YandexAds.Android\Xamarin.YandexAds.Android.csproj", "{7609EA5C-7F60-4A8C-A581-AB5D7A61E413}"
 EndProject
@@ -36,6 +36,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xamarin.YandexMetrikaPush.Core.Android", "Xamarin.YandexMetrikaPush.Core.Android\Xamarin.YandexMetrikaPush.Core.Android.csproj", "{0A03F1F0-E13F-499C-9BD1-69E798C3E91F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xamarin.YandexMetrikaPush.Provider.Firebase.Android", "Xamarin.YandexMetrikaPush.Provider.Firebase.Android\Xamarin.YandexMetrikaPush.Provider.Firebase.Android.csproj", "{516ADBFA-197A-42A4-878B-C97147C1814C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASiNet.WCP.History", "ASiNet.WCP.History\ASiNet.WCP.History.csproj", "{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -249,6 +251,22 @@ Global
 		{516ADBFA-197A-42A4-878B-C97147C1814C}.Release|x64.Build.0 = Release|Any CPU
 		{516ADBFA-197A-42A4-878B-C97147C1814C}.Release|x86.ActiveCfg = Release|Any CPU
 		{516ADBFA-197A-42A4-878B-C97147C1814C}.Release|x86.Build.0 = Release|Any CPU
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}.Debug|x64.Build.0 = Debug|Any CPU
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}.Debug|x86.Build.0 = Debug|Any CPU
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}.Release|ARM64.Build.0 = Release|Any CPU
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}.Release|x64.ActiveCfg = Release|Any CPU
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}.Release|x64.Build.0 = Release|Any CPU
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}.Release|x86.ActiveCfg = Release|Any CPU
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -267,6 +285,7 @@ Global
 		{8E74FFC2-5B3E-4436-A634-466479F9C188} = {631DEE6A-0575-46DD-B518-0B26A677273C}
 		{0A03F1F0-E13F-499C-9BD1-69E798C3E91F} = {631DEE6A-0575-46DD-B518-0B26A677273C}
 		{516ADBFA-197A-42A4-878B-C97147C1814C} = {631DEE6A-0575-46DD-B518-0B26A677273C}
+		{61DF5746-BDE6-4B10-B1AC-8C5DB0635ACB} = {2A9A15D8-DC4E-4B6A-AB4B-2C52942DB614}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {348087A8-444D-44CE-9A16-F1EE29553976}

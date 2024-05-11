@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>net8.0-windows10.0.22621.0</TargetFrameworks>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>dotnet-ASiNet.WCP.DesktopService-43b38b96-1138-4c50-8a5b-4e8b176d3cea</UserSecretsId>
@@ -14,6 +14,10 @@
 	<PropertyGroup>
 		<ServerGarbageCollection>true</ServerGarbageCollection>
 		<AssemblyName>WCPService</AssemblyName>
+		<ApplicationIcon>appicon_d.ico</ApplicationIcon>
+		<Authors>ASiDev</Authors>
+		<Copyright>MIT</Copyright>
+		<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -25,11 +29,18 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Include="appicon_d.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ASiNet.WCP.Core\ASiNet.WCP.Core.csproj" />
+    <ProjectReference Include="..\ASiNet.WCP.History\ASiNet.WCP.History.csproj" />
     <ProjectReference Include="..\ASiNet.WCP.WinApi\ASiNet.WCP.WinApi.csproj" />
   </ItemGroup>
 </Project>

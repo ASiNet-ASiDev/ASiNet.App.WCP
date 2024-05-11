@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.asinet.wcp" android:versionName="1.0.00-beta" android:versionCode="1000">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.asinet.wcp" android:versionName="1.0.30" android:versionCode="1030">
 	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:supportsRtl="true" android:label="WCP"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />

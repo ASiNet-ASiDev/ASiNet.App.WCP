@@ -14,10 +14,6 @@
              SendFiles="{Binding SendFileCommand}"
              x:Name="Root" 
              Title="{x:Static str:AppResources.sd_page_title}">
-
-    <ContentPage.BindingContext>
-        <vm:SendDataPageVieweModel/>
-    </ContentPage.BindingContext>
     <Grid RowSpacing="5" Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -85,7 +81,7 @@
                 Grid.Row="6" 
                 Command="{Binding Manager.ClearRecordsCommand}" 
                 HorizontalOptions="End"/>
-        <ads:Banner AdUnitId="R-M-8009266-3" 
+        <ads:Banner AdUnitId="{StaticResource AdsIdSendFilePage}" AdHeight="50"
                     Grid.Row="7" 
                     HorizontalOptions="Fill"/>
     </Grid>

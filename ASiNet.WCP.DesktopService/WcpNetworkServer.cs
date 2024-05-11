@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using ASiNet.WCP.Common.Enums;
 using ASiNet.WCP.Common.Interfaces;
@@ -16,7 +15,7 @@ public class WcpNetworkServer
         _listener = new(IPAddress.Any, _config.Port);
         _multicastClient = new(44516, "230.44.5.16", _config.Port, WCPProtocolVersion.VERSION);
     }
-    
+
     private TcpListener _listener;
 
     private MulticastClient _multicastClient;
@@ -24,6 +23,7 @@ public class WcpNetworkServer
     private IVirtualKeyboardLayout _keyboardLayout = new KeyboardLayout();
     private IVirtualKeyboard _virtualKeyboard = new WindowsKeyboard();
     private IVirtualMouse _virtualMouse = new WindowsMouse();
+    private Notifications _notifications = new Notifications();
 
     private ServerConfig _config;
 
@@ -55,7 +55,7 @@ public class WcpNetworkServer
                     if (tcpclient is null)
                         continue;
                     client?.Dispose();
-                    client = new(tcpclient, _virtualKeyboard, _virtualMouse, _keyboardLayout, _config); 
+                    client = new(tcpclient, _virtualKeyboard, _virtualMouse, _keyboardLayout, _config, _notifications);
                     MulticastStop();
                 }
                 else
@@ -69,7 +69,7 @@ public class WcpNetworkServer
     {
         try
         {
-            if(_multicastToken is null)
+            if (_multicastToken is null)
                 return;
             _multicastToken.Cancel();
             _multicastToken.Dispose();
@@ -82,7 +82,7 @@ public class WcpNetworkServer
     {
         try
         {
-            if(_multicastToken is not null)
+            if (_multicastToken is not null)
                 return;
             _multicastToken = new();
             _ = Multicast(_multicastToken.Token);

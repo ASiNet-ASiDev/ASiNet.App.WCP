@@ -50,4 +50,9 @@ public partial class SettingsPage : ContentPage
     {
         App.Config.AutoConnect = e.Value;
     }
+
+    private async void Button_Pressed(object sender, EventArgs e)
+    {
+        await Navigation.PushModalAsync(new InfoPage());
+    }
 }

@@ -2,6 +2,8 @@
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ASiNet.App.WCP"
+             xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+             android:Application.WindowSoftInputModeAdjust="Resize"
              x:Class="ASiNet.App.WCP.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -9,6 +11,17 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <x:String x:Key="AdsIdConnectionPage">R-M-8009266-1</x:String>
+            <x:String x:Key="AdsIdSendFilePage">R-M-8009266-2</x:String>
+            <x:String x:Key="AdsIdSendTextPage">R-M-8009266-3</x:String>
+            <x:String x:Key="AdsIdControlsPage">R-M-8009266-5</x:String>
+            <x:String x:Key="AdsIdYoutubeKeyboard">R-M-8009266-7</x:String>
+
+            <!--<x:String x:Key="AdsIdConnectionPage">demo-banner-yandex</x:String>
+            <x:String x:Key="AdsIdSendFilePage">demo-banner-yandex</x:String>
+            <x:String x:Key="AdsIdSendTextPage">demo-banner-yandex</x:String>
+            <x:String x:Key="AdsIdControlsPage">demo-banner-yandex</x:String>
+            <x:String x:Key="AdsIdYoutubeKeyboard">demo-banner-yandex</x:String>-->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

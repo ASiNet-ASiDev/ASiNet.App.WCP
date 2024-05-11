@@ -47,10 +47,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.png" BaseSize="128,128" />
+		<MauiIcon Include="Resources\AppIcon\appicon.png" BaseSize="128,128" Color="#309f57" />
 		
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#309f57" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\AppIcon\appicon.png" Color="#309f57" BaseSize="256,256" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" BaseSize="128,128" />
@@ -63,13 +63,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Fonts\Awesome6-Regular.otf" />
 	  <None Remove="Resources\Fonts\Awesome6-Solid.otf" />
 	  <None Remove="Resources\Images\accept.svg" />
+	  <None Remove="Resources\Images\back.svg" />
+	  <None Remove="Resources\Images\chat.svg" />
 	  <None Remove="Resources\Images\components.svg" />
 	  <None Remove="Resources\Images\connection.svg" />
 	  <None Remove="Resources\Images\macros.svg" />
 	  <None Remove="Resources\Images\settings.svg" />
+	  <None Remove="Resources\Images\tools.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -126,9 +128,6 @@
 	  <Compile Update="Viewe\Controls\RuEnKeyboard.xaml.cs">
 	    <DependentUpon>RuEnKeyboard.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Viewe\ComponentsPage.xaml.cs">
-	    <DependentUpon>ComponentsPage.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Viewe\MacrosesPage.xaml.cs">
 	    <DependentUpon>MacrosesPage.xaml</DependentUpon>
 	  </Compile>
@@ -143,6 +142,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Viewe\AcceptDataPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Viewe\ChatPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Viewe\ConnectionPage.xaml">
@@ -172,10 +174,16 @@
 	  <MauiXaml Update="Viewe\Controls\YouTubeKeyboardResources.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Viewe\InfoPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Viewe\MacrosBuilder.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Viewe\MacrosesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Viewe\Messages\ChatTextMessage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Viewe\RDAPage.xaml">
@@ -184,7 +192,13 @@
 	  <MauiXaml Update="Viewe\SendDataPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Viewe\SendTextPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Viewe\SettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Viewe\ToolsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

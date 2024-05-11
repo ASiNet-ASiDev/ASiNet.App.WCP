@@ -141,6 +141,15 @@
   <data name="alert_save_cnf_title" xml:space="preserve">
     <value>Save the configuration?</value>
   </data>
+  <data name="char_page_load_button" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="chat_page_enter_text_ph" xml:space="preserve">
+    <value>Enter text...</value>
+  </data>
+  <data name="chat_page_title" xml:space="preserve">
+    <value>Chat</value>
+  </data>
   <data name="cmp_all_author_label" xml:space="preserve">
     <value>Author: {0}</value>
   </data>
@@ -165,6 +174,15 @@
   <data name="cmp_default_ruen_keyboard_title" xml:space="preserve">
     <value>Russian QWERTY keyboard</value>
   </data>
+  <data name="cmp_default_send_clipboard_author" xml:space="preserve">
+    <value>ASi</value>
+  </data>
+  <data name="cmp_default_send_clipboard_description" xml:space="preserve">
+    <value>Send text to your computer</value>
+  </data>
+  <data name="cmp_default_send_clipboard_Title" xml:space="preserve">
+    <value>Send text </value>
+  </data>
   <data name="cmp_default_youtube_keyboard_author" xml:space="preserve">
     <value>DifolderyXXL</value>
   </data>
@@ -173,6 +191,15 @@
   </data>
   <data name="cmp_default_youtube_keyboard_title" xml:space="preserve">
     <value>YouTube keyboard</value>
+  </data>
+  <data name="cmp_send_file_author" xml:space="preserve">
+    <value>ASi</value>
+  </data>
+  <data name="cmp_send_file_description" xml:space="preserve">
+    <value>Send one or several files at once</value>
+  </data>
+  <data name="cmp_send_file_title" xml:space="preserve">
+    <value>Send files</value>
   </data>
   <data name="cm_title_label" xml:space="preserve">
     <value>Controls</value>
@@ -237,6 +264,12 @@
   <data name="cn_protocol_vesion_warn" xml:space="preserve">
     <value>Warning: The server protocol version does not match the current one.</value>
   </data>
+  <data name="msg_actions_title" xml:space="preserve">
+    <value>Select action</value>
+  </data>
+  <data name="msg_send_to_desktop" xml:space="preserve">
+    <value>Send to desktop clipboard</value>
+  </data>
   <data name="sd_file_name_label" xml:space="preserve">
     <value>File: {0}</value>
   </data>
@@ -282,6 +315,9 @@
   <data name="shell_accept_label" xml:space="preserve">
     <value>Accept</value>
   </data>
+  <data name="shell_chat_label" xml:space="preserve">
+    <value>Chat</value>
+  </data>
   <data name="shell_components_title" xml:space="preserve">
     <value>Components</value>
   </data>
@@ -296,6 +332,23 @@
   </data>
   <data name="shell_settings_title" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="shell_tools_label" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="stp_fill_button" xml:space="preserve">
+    <value>Insert text</value>
+  </data>
+  <data name="stp_send_button" xml:space="preserve">
+    <value>Send text</value>
+  </data>
+  <data name="stp_send_clipboard_button" xml:space="preserve">
+    <value>Send clipboard</value>
+  </data>
+  <data name="stp_text_ph" xml:space="preserve">
+    <value>Enter, and then click the "send" button to send the text to your computer.
+
+Important: Inserting text using the "Paste text" button replaces all already written text with text from the clipboard!</value>
   </data>
   <data name="tm_clear_logs_button" xml:space="preserve">
     <value>Clear logs</value>

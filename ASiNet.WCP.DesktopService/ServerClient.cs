@@ -7,17 +7,20 @@ using ASiNet.WCP.Common.Interfaces;
 using ASiNet.WCP.Common.Network;
 using ASiNet.WCP.Common.Primitives;
 using ASiNet.WCP.Core.Primitives;
+using ASiNet.WCP.History;
 
 namespace ASiNet.WCP.DesktopService;
 public class ServerClient : IDisposable
 {
-    public ServerClient(TcpClient client, IVirtualKeyboard keyboard, IVirtualMouse mouse, IVirtualKeyboardLayout layout, ServerConfig config)
+    public ServerClient(TcpClient client, IVirtualKeyboard keyboard, IVirtualMouse mouse, IVirtualKeyboardLayout layout, ServerConfig config, Notifications notify)
     {
+        _history = new();
         _client = client;
         _keyboard = keyboard;
         _mouse = mouse;
         Config = config;
         _keyboardLayout = layout;
+        _notifications = notify;
         _stream = client.GetStream();
         _mediaManager = new(this);
         _directoryAccess = new(config);
@@ -30,12 +33,15 @@ public class ServerClient : IDisposable
     private IVirtualKeyboard _keyboard;
     private IVirtualMouse _mouse;
     private IVirtualKeyboardLayout _keyboardLayout;
+    private Notifications _notifications;
 
     public ServerConfig Config;
 
     private TcpClient _client;
 
     private NetworkStream _stream;
+
+    private WCPHistory _history;
 
     private MediaManager _mediaManager;
 
@@ -54,10 +60,16 @@ public class ServerClient : IDisposable
                 KeyChandgedEvent(keyEvent);
             else if (package is MouseChangedEvent mouseEvent)
                 MouseChandgedEvent(mouseEvent);
+            else if(package is NotificationEvent ne)
+                _notifications.Chandge(ne);
             else if (package is SetLanguageRequest slr)
                 SetLanguageCode(slr);
             else if (package is GetLanguageRequest glr)
                 GetLanguageCode(glr);
+            else if(package is GetHistoryRequest ghr)
+                BinarySerializer.Serialize<Package>(_history.GetHistory(ghr), _stream);
+            else if (package is PostHistoryRequest phr)
+                BinarySerializer.Serialize<Package>(_history.PostHistory(phr), _stream);
             else if(package is GetRemoteDirectoryRequest grd)
                 BinarySerializer.Serialize<Package>(_directoryAccess.Change(grd), _stream);
             else if (package is MediaRequest msr)

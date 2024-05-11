@@ -1,4 +1,6 @@
-﻿using ASiNet.App.WCP.VieweModels;
+﻿using Android.Content;
+using Android.Views.InputMethods;
+using ASiNet.App.WCP.VieweModels;
 
 namespace ASiNet.App.WCP;
 
@@ -8,6 +10,6 @@ public partial class AppShell : Shell
     {
         InitializeComponent();
         BindingContext = new ShellVieweModel();
-    }
 
+    }
 }

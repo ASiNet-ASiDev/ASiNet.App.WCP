@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ASiNet.App.WCP.Viewe.InfoPage"
+             Title="Info Page">
+    <ScrollView Orientation="Vertical" Margin="5, 5">
+        <VerticalStackLayout Spacing="5">
+            <Label Text="Для работы приложения требуется:" TextColor="{StaticResource WCPForeground1Color}"
+                   VerticalOptions="Center" Margin="0,20,0,5"
+                   HorizontalOptions="Center" FontSize="Medium"/>
+            <Label Text="1. Подключение к интернету, а именно к той же локальной сети что и ваш компьютер."/>
+            <Label Text="2. Установленный и запущенный на компьютер WCP Service."/>
+
+            <Label Text="Безопасность:" TextColor="{StaticResource WCPForeground1Color}"
+                   VerticalOptions="Center" Margin="0,20,0,5"
+                   HorizontalOptions="Center" FontSize="Medium"/>
+            <Label Text="1. Трафик между устройствами на данный момент не шифруется, будьте осторожны с публичными сетями!"/>
+            <Label Text="2. С нашей стороны не ведётся отслеживание никаких передаваемых вами данных между устройствами."/>
+            <Label Text="3. Приложение не ведёт логирование ваших действий."/>
+
+            <Label Text=" НАСТОЯТЕЛЬНО НЕ РЕКОМЕНДУЕМ:" TextColor="{StaticResource WCPForeground1Color}"
+                   VerticalOptions="Center" Margin="0,20,0,5"
+                   HorizontalOptions="Center" FontSize="Medium"/>
+            <Label Text="1. Использовать наше приложение в общественных сетях."/>
+            <Label Text="2. Использовать вне вашей домашней локальной сети."/>
+
+            <Label Text="Нашли ошибку, или есть предложение по улучшению приложения?" TextColor="{StaticResource WCPForeground1Color}"
+                   VerticalOptions="Center" Margin="0,20,0,5"
+                   HorizontalOptions="Center" FontSize="Medium"/>
+            <Label Text="* Свяжитесь со мной любым удобным для вас способом"/>
+
+            <Label Text="Возможные проблемы:" TextColor="{StaticResource WCPForeground1Color}"
+                   VerticalOptions="Center" Margin="0,20,0,5"
+                   HorizontalOptions="Center" FontSize="Medium"/>
+            <Label Text="* Не подключается к серверу?" Margin="0,10,0,5" FontSize="Body" TextColor="{StaticResource WCPForeground1Color}"/>
+            <Label Text="1. Проверьте подключение к интернету"/>
+            <Label Text="2. Проверьте правильно ли вы указали адрес и порт подключения"/>
+            <Label Text="2. Проверьте запущен ли WCP Service на вашем компьютере"/>
+            <Label Text="3. Проверьте находится ли ваш компьютер и мобильное устройство в 1 локальной сети"/>
+            <Label Text="4. Проверьте настройки маршрутизатора, возможно он блокирует подключения в локальной сети"/>
+            <Label Text="5. Проверьте настройки брандмауэра Windows, возможно он блокирует сервису доступ в интернет"/>
+
+            <Label Text="* Не передаётся файл?" Margin="0,10,0,5" FontSize="Body" TextColor="{StaticResource WCPForeground1Color}"/>
+            <Label Text="1. Вы закрыли приложение, на данный момент для передачи файла приложение должно быть всегда активно."/>
+            <Label Text="2. При передачи файла возникли проблемы, например пропало интернет подключение."/>
+
+            <Label Text="* Не работает клавиатура?" Margin="0,10,0,5" FontSize="Body" TextColor="{StaticResource WCPForeground1Color}"/>
+            <Label Text="1. Возможно изменились комбинации клавиш на сервисе для которого предназначена клавиатура, пожалуйста сообщите нам о проблемме"/>
+            <Label Text="2. Что то мешает сервису имитировать клавиатуру"/>
+
+            <Label Text="* Версия протокола не соответствует текущей?" Margin="0,10,0,5" FontSize="Body" TextColor="{StaticResource WCPForeground1Color}"/>
+            <Label Text="1. Обновите оба приложения до последней версии"/>
+            <Label Text="2. Проигнорируйте это сообщение, если не возникает никаких проблем при работе приложения"/>
+
+            <Label Text="* Не работает локализация?" Margin="0,10,0,5" FontSize="Body" TextColor="{StaticResource WCPForeground1Color}"/>
+            <Label Text="1. Возможно на вашем устройстве установлен регион отличный от 'Россия'"/>
+            <Label Text="2. Приложение пока не переведено на ваш язык"/>
+
+            <Label Text="* Приложение зависает?" Margin="0,10,0,5" FontSize="Body" TextColor="{StaticResource WCPForeground1Color}"/>
+            <Label Text="1. При первом запуске возможны подлагивания, это нормально"/>
+            <Label Text="2. Приложению нужно время что бы скомпилировать весь код(обычно это не вызывает проблем)"/>
+
+            <Label Text="* Приложение вылетает?" Margin="0,10,0,5" FontSize="Body" TextColor="{StaticResource WCPForeground1Color}"/>
+            <Label Text="1. Свяжитесь со мной любым удобным вам способом"/>
+
+
+            <Label Text="Ничего не помогает?" TextColor="{StaticResource WCPForeground1Color}"
+                   VerticalOptions="Center" Margin="0,20,0,5"
+                   HorizontalOptions="Center" FontSize="Body"/>
+            <Label Text="* Свяжитесь со мной любым удобным вам способом, попробуем вместе разобраться :)"/>
+
+            <Label Text="Полезные ссылки:"
+                   VerticalOptions="Center" Margin="0,20,0,5" TextColor="{StaticResource WCPForeground1Color}"
+                   HorizontalOptions="Center" FontSize="Medium"/>
+            <Label Text="* Сайт разработчика" TextColor="{StaticResource WCPPressedTextColor}" FontSize="Body" Margin="0,20,0,5">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_OpenWebsite"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Text="* Политика конфиденциальности" TextColor="{StaticResource WCPPressedTextColor}" FontSize="Body" Margin="0,20,0,5">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_OpenPP"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Text="* GitHub" TextColor="{StaticResource WCPPressedTextColor}" FontSize="Body" Margin="0,20,0,20">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_OpenGitHub"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

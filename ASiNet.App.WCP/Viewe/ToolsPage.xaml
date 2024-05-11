@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ASiNet.App.WCP.VieweModels"
+             xmlns:ads="clr-namespace:ASiNet.Yandex.Ads;assembly=ASiNet.Yandex.Ads"
+             xmlns:controls="clr-namespace:ASiNet.App.WCP.Viewe.Controls"
+             x:Class="ASiNet.App.WCP.Viewe.ToolsPage"
+             Title="Tools">
+    <ContentPage.BindingContext>
+        <vm:ToolsPageVieweModel/>
+    </ContentPage.BindingContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <CollectionView ItemsSource="{Binding Tools}" SelectionMode="None" HorizontalOptions="Center" Margin="5">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="5" Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type vm:ToolVieweModel}">
+                    <controls:ToolItem/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <ads:Banner AdUnitId="{StaticResource AdsIdControlsPage}" Grid.Row="1" AdHeight="50"/>
+    </Grid>
+</ContentPage>

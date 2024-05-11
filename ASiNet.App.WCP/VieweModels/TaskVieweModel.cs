@@ -68,8 +68,11 @@ public partial class TaskVieweModel : ObservableObject, IDisposable
                     }
                 }
                 break;
+            case MediaTaskStatus.Failed:
+                Status = Resources.Localization.AppResources.tm_status_failed;
+                _mediaManager.TaskChanged -= OnTaskChanged;
+                break;
             case MediaTaskStatus.Removed:
-
                 _mediaManager.TaskChanged -= OnTaskChanged;
                 break;
         }

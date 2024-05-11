@@ -10,6 +10,8 @@ public interface IAlertService
 
     void ShowConfirmation(string title, string message, Action<bool> callback,
                           string accept = "Yes", string cancel = "No");
+
+    Task<string> ShowActionSheet(string title, string? cancel, string? destruct, params string[] buttons);
 }
 
 internal class AlertService : IAlertService
@@ -40,5 +42,10 @@ internal class AlertService : IAlertService
             bool answer = await ShowConfirmationAsync(title, message, accept, cancel);
             callback(answer);
         });
+    }
+
+    public Task<string> ShowActionSheet(string title, string? cancel, string? destruct, params string[] buttons)
+    {
+        return Application.Current!.MainPage!.DisplayActionSheet(title, cancel, destruct, buttons);
     }
 }

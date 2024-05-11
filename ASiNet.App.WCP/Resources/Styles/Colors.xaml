@@ -30,6 +30,8 @@
 
     <Color x:Key="WCPBacground">#212121</Color>
     <Color x:Key="WCPDisabledColor">#505050</Color>
+    <Color x:Key="WCPBorderUIColor">#505050</Color>
+    <Color x:Key="WCPBorderUILigthColor">#ACACAC</Color>
     <Color x:Key="WCPDefaultTextColor">#f1f1f1</Color>
     <Color x:Key="WCPPressedTextColor">#cdcdcd</Color>
     <Color x:Key="WCPDisabledTextColor">#a7a7a7</Color>
@@ -37,6 +39,12 @@
     <Color x:Key="WCPForeground2Color">#2b934f</Color>
     <Color x:Key="WCPForeground3Color">#2b7a47</Color>
 
+    <Color x:Key="WCPBacgroundDarkColor">#404040</Color>
+    <Color x:Key="WCPBacgroundLightColor">#C8C8C8</Color>
+
+    <Color x:Key="WCPDisabledDarkColor">#6E6E6E</Color>
+    <Color x:Key="WCPDisabledWhiteColor">#6E6E6E</Color>
+    
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>

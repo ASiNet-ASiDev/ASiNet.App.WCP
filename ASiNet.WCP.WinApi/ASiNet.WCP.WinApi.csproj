@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <Authors>ASiDev</Authors>
     <Copyright>MIT</Copyright>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
